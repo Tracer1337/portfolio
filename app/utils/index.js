@@ -1,4 +1,17 @@
 const jwt = require("jsonwebtoken")
+const fs = require("fs")
+const path = require("path")
+const { v4: uuid } = require("uuid")
+const util = require("util")
+const sharp = require("sharp")
+
+const config = require("../../config")
+
+const writeFileAsync = util.promisify(fs.writeFile)
+const unlinkAsync = util.promisify(fs.unlink)
+
+const ROOT_DIR = path.join(__dirname, "..", "..")
+const TEMP_DIR = path.join(ROOT_DIR, "temp")
 
 // Generate JSON Web Token
 function generateJWT(input) {
@@ -28,8 +41,42 @@ function quotedList(array) {
     return `(${array.map(element => `'${element}'`).join(",")})`
 }
 
+// Create file in /temp folder
+async function createTempFile(buffer, extension) {
+    const filename = `${uuid()}.${extension}`
+    const filepath = path.join(TEMP_DIR, filename)
+
+    await writeFileAsync(filepath, buffer)
+
+    return {
+        filename,
+        path: filepath,
+        delete: async () => await unlinkAsync(filepath)
+    }
+}
+
+// Extract file extension from filename
+function getFileExtension(filename) {
+    const match = filename.match(/[^.]+$/)
+    return match ? match[0] : null
+}
+
+// Resize image to given width
+async function compressImage(buffer) {
+    const image = sharp(buffer)
+    const metadata = await image.metadata()
+
+    return await image
+            .resize(metadata.width < config.maxImageWidth ? metadata.width : config.maxImageWidth)
+            .toFormat(config.imageFormat)
+            .toBuffer()
+}
+
 module.exports = {
     generateJWT,
     queryAsync,
-    quotedList
+    quotedList,
+    createTempFile,
+    getFileExtension,
+    compressImage
 }

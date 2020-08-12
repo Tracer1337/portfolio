@@ -2,6 +2,49 @@
 
 ## Database
 
+### projects
+
+All projects
+
+```
+id varchar NOT NULL UNIQUE
+name varchar NOT NULL UNIQUE
+website varchar
+description varchar
+```
+
+### assets
+
+Store references to assets (images) of each project
+
+```
+id varchar NOT NULL UNIQUE
+project_id varchar NOT NULL FOREIGN_KEY(projects.id)
+type varchar NOT NULL
+filename varchar NOT NULL UNIQUE
+url varchar NOT NULL UNIQUE
+```
+
+### techstack_entries
+
+Available techstack entries
+
+```
+id varchar NOT NULL UNIQUE
+project_id varchar NOT NULL FOREIGN_KEY(projects.id)
+name NOT NULL UNIQUE
+```
+
+### techstack_entry_images
+
+Images for techstack entries
+
+```
+id varchar NOT NULL UNIQUE
+image_url varchar(255) NOT NULL
+for_name varchar(255) NOT NULL UNIQUE
+```
+
 ## Pages
 
 ### Homepage
@@ -14,50 +57,63 @@
 
 ### Projects
 
-* List all projects as cards
+* All projects as cards
 
-* Show most important information
+* Most important information
 
-* Display the thumbnail
+* Thumbnail
 
 * When clicking on the card => Redirect to project page
 
 * Make different types of projects
     * For every type
-        * Show lines of code (GitHub API)
-        * Show amount of hours, if available (Activity Analyzer API)
+        * Lines of code (GitHub API)
+        * Amount of hours, if available (Activity Analyzer API)
 
     * Web-App
-        * Show amount of users per month (Google Analytics API)
+        * Amount of users per month (Google Analytics API)
 
     * Android App
-        * Show amount of downloads (Google Play API)
+        * Amount of downloads (Google Play API)
 
     * npm Package
-        * Show amount of downloads (npm API)
+        * Amount of downloads (npm API)
 
-### Project Page
+    * Update these statistics at 00:00 every day
+    * Alternative to all API calls: Web scraping
 
-* Show Readme file of project
+### Project
 
-* Show all images from gallery in a carousel
+* Readme file of project
+
+* all images from gallery in a carousel
+
+### About Me
+
+* Biography
+
+* Links (LinkedIn, GitHub)
 
 ## Projects
 
 ### Project declaration
 
-* Create a new project by creating a .portfolio folder inside a GitHub repository
+* Create a new project by creating a .project folder inside a GitHub repository
 
 * When a commit to a GitHub repository is made (WebHooks):
     * Clear projects table
-    * Scan all repositories for a .portfolio folder
+    * Scan all repositories for a .project folder
     * Insert all detected projects into the database
+    * Convert images (thumbnail, gallery) to jpeg and store in S3 Bucket
+    * Store README as html in database
 
-### .portfolio Folder
+    * Show on the projects page when the projects got updated last
+
+### .project Folder
 
 ```
-|-- .portfolio
-|  |-- .project
+|-- .project
+|  |-- project.json
 |  |-- thumbnail.jpg
 |  |-- galery
 |  |  |-- 001.jpg
@@ -65,7 +121,7 @@
 |  |  |-- ...
 ```
 
-* .project
+* project.json
     * JSON format
 
     ```js
@@ -88,7 +144,7 @@
     ```
 
 * thumbnail.jpg
-    * An image shown in the project's card on the projects page
+    * An image shown in the project's card
 
 * galery
-    * Screenshots or other images which show the project
+    * Screenshots or other images which portray the project

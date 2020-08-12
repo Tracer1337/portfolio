@@ -11,13 +11,16 @@
     "setup-db": "npm run migrate && npm run seed",
     "migrate": "node ./scripts/migrate.js",
     "seed": "node ./scripts/seed.js",
-    "deploy": "node scripts/deploy.js -b"
+    "deploy": "node scripts/deploy.js -b",
+    "create-bucket": "node ./scripts/create-bucket.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@m.moelter/task-runner": "^1.0.1",
+    "@octokit/rest": "^18.0.3",
+    "aws-sdk": "^2.731.0",
     "bcrypt": "^5.0.0",
     "chalk": "^4.1.0",
     "cli-progress": "^3.8.2",
@@ -28,9 +31,11 @@
     "http-proxy-middleware": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "node-ssh": "^10.0.2",
     "open": "^7.1.0",
+    "sharp": "^0.25.4",
     "uuid": "^8.2.0",
     "xlsx": "^0.16.4"
   },
