@@ -8,6 +8,7 @@ const Storage = require("../Facades/StorageFacade.js")
 const Collection = require("../../lib/Collection.js")
 const { createTempFile, compressImage } = require("../utils")
 const APIServiceProvider = require("./APIServiceProvider.js")
+const { removeAllProjects } = require("../Services/ProjectServiceProvider.js")
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -90,26 +91,28 @@ async function getAssetsFromContents(contents, project) {
  * Fetch readme from git repository
  */
 async function getReadmeFromRepo(repo) {
-    const { data: readme } = await octokit.repos.getReadme({
-        owner: repo.owner.login,
-        repo: repo.name,
-        mediaType: {
-            format: "html"
-        }
-    })
-    
-    return readme
+    try {
+        const { data: readme } = await octokit.repos.getReadme({
+            owner: repo.owner.login,
+            repo: repo.name,
+            mediaType: {
+                format: "html"
+            }
+        })
+        
+        return readme
+    } catch { }
 }
 
 /**
  * Fetch API Data from apis defined in project.json { apis: ... }
  */
 async function fetchAPIData(project) {
-    if (!project.apis) {
-        return
-    }
-
     const result = {}
+    
+    if (!project.apis) {
+        return result
+    }
 
     await Promise.all(Object.entries(project.apis).map(async ([api, data]) => {
         if (!APIServiceProvider.apis[api]) {
@@ -165,14 +168,14 @@ async function createProjectFromRepo(repo) {
     const assets = await getAssetsFromContents(contents, project)
     
     // Set project's dependencies
-    project.setTechstack(projectFileContents.techstack)
-    project.setAssets(assets)
+    project.setTechstack(projectFileContents.techstack || [])
+    project.setAssets(assets || [])
     
     return project
 }
 
 /**
- * Filter projects out of all git repositories
+ * Create projects from git repositories with .project folder
  */
 async function fetchProjects() {
     // Get user's repositories
@@ -193,4 +196,22 @@ async function fetchProjects() {
     return projects
 }
 
-module.exports = { fetchProjects }
+/**
+ * Delete all projects and re-fetch them from github
+ */
+async function loadProjects() {
+    console.log("Load projects")
+
+    // Remove all projects
+    await removeAllProjects()
+
+    // Get all projects from user's GitHub account
+    const projects = await fetchProjects()
+
+    // Store projects to database
+    await projects.mapAsync(async project => await project.store())
+
+    console.log("Load Projects Done")
+}
+
+module.exports = { loadProjects }

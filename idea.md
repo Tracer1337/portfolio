@@ -178,3 +178,13 @@ for_name varchar(255) NOT NULL UNIQUE
 
 * galery
     * Screenshots or other images which portray the project
+
+## Webhooks
+
+### Push
+
+* Apply to every repository
+
+* Check if .project folder got changed
+
+    * If true -> Re-Fetch the respository
