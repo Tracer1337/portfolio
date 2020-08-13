@@ -7,6 +7,7 @@ const Asset = require("../Models/Asset.js")
 const Storage = require("../Facades/StorageFacade.js")
 const Collection = require("../../lib/Collection.js")
 const { createTempFile, compressImage } = require("../utils")
+const APIServiceProvider = require("./APIServiceProvider.js")
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -101,9 +102,35 @@ async function getReadmeFromRepo(repo) {
 }
 
 /**
+ * Fetch API Data from apis defined in project.json { apis: ... }
+ */
+async function fetchAPIData(project) {
+    if (!project.apis) {
+        return
+    }
+
+    const result = {}
+
+    await Promise.all(Object.entries(project.apis).map(async ([api, data]) => {
+        if (!APIServiceProvider.apis[api]) {
+            return
+        }
+
+        const response = await APIServiceProvider.apis[api](data)
+
+        result[api] = {
+            ...data,
+            data: response
+        }
+    }))
+
+    return result
+}
+
+/**
  * Convert git repository to project model
  */
-async function getProjectFromRepo(repo) {
+async function createProjectFromRepo(repo) {
     // Fetch .project folder
     const contentsUrl = repo.contents_url.replace("{+path}", config.github.projectFolder)
     const { data: contents } = await octokit.request(contentsUrl)
@@ -116,12 +143,19 @@ async function getProjectFromRepo(repo) {
     // Fetch readme
     const readme = await getReadmeFromRepo(repo)
     
+    // Fetch API Data
+    const apiData = await fetchAPIData(projectFileContents)
+
+    // return
+
     // Create project model
     const project = new Project({
         id: uuid(),
         name: projectFileContents.name,
         website: projectFileContents.website,
         description: projectFileContents.description,
+        type: projectFileContents.type,
+        apis: apiData,
         readme
     })
 
@@ -147,7 +181,7 @@ async function fetchProjects() {
 
     await Promise.all(repos.map(async (repo) => {
         try {
-            const project = await getProjectFromRepo(repo)
+            const project = await createProjectFromRepo(repo)
             projects.push(project)
         } catch {
             return

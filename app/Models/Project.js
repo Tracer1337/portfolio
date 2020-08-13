@@ -35,6 +35,8 @@ class Project extends Model {
     async init() {
         this.techstack = await TechstackEntry.findAllBy("project_id", this.id)
         this.assets = await Asset.findAllBy("project_id", this.id)
+
+        this.apis = typeof this.apis === "string" ? JSON.parse(this.apis) : this.apis
     }
 
     async store() {
@@ -56,8 +58,10 @@ class Project extends Model {
             id: this.id,
             name: this.name,
             website: this.website,
+            type: this.type,
             description: this.description,
-            readme: this.readme
+            readme: this.readme,
+            apis: this.apis
         }
     }
 }
