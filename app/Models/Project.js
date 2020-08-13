@@ -13,7 +13,7 @@ class Project extends Model {
     constructor(values) {
         super({
             table: "projects",
-            columns: ["id", "name", "website", "description", "readme"],
+            columns: ["id", "name", "website", "type", "description", "readme", "apis"],
             ...values
         })
     }

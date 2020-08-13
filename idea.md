@@ -10,7 +10,10 @@ All projects
 id varchar NOT NULL UNIQUE
 name varchar NOT NULL UNIQUE
 website varchar
-description varchar
+type varchar
+description text
+readme mediumttext
+apis text
 ```
 
 ### assets
@@ -59,28 +62,13 @@ for_name varchar(255) NOT NULL UNIQUE
 
 * All projects as cards
 
-* Most important information
+* Techstack as horizonzal scrollable
 
 * Thumbnail
 
 * When clicking on the card => Redirect to project page
 
-* Make different types of projects
-    * For every type
-        * Lines of code (GitHub API)
-        * Amount of hours, if available (Activity Analyzer API)
-
-    * Web-App
-        * Amount of users per month (Google Analytics API)
-
-    * Android App
-        * Amount of downloads (Google Play API)
-
-    * npm Package
-        * Amount of downloads (npm API)
-
-    * Update these statistics at 00:00 every day
-    * Alternative to all API calls: Web scraping
+* Type specific information
 
 ### Project
 
@@ -108,6 +96,22 @@ for_name varchar(255) NOT NULL UNIQUE
     * Store README as html in database
 
     * Show on the projects page when the projects got updated last
+
+* Make different types of projects
+    * For every type
+        * Amount of hours, if available (Activity Analyzer API)
+
+    * Web-App (web-app)
+        * Amount of users per month (Google Analytics API)
+
+    * Android App (android-app)
+        * Amount of downloads (Google Play API)
+
+    * npm Package (npm-package)
+        * Amount of downloads (npm API)
+
+    * Update these statistics at 00:00 every day
+    * Alternative to all API calls: Web scraping
 
 ### .project Folder
 
@@ -139,7 +143,34 @@ for_name varchar(255) NOT NULL UNIQUE
         "techstack": Array<{
             "image_url": String,
             "name": String
-        }>
+        }>,
+
+        // The type of project
+        "type": String,
+
+        // API access information
+        "apis": {
+            // Activity analyzer
+            "activity_analyzer": {
+                "activity_id": String,
+            },
+
+            // Google Analytics
+            "google_analytics": {
+                "view_id": String
+            },
+
+            // Google Play
+            "google_play": {
+                "app_id": String
+            },
+
+            // npm
+            "npm": {
+                "package_name": String,
+                "package_scope": String
+            }
+        }
     }
     ```
 
