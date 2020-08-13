@@ -115,12 +115,16 @@ async function fetchAPIData(project) {
         if (!APIServiceProvider.apis[api]) {
             return
         }
+        
+        try {
+            const response = await APIServiceProvider.apis[api](data)
 
-        const response = await APIServiceProvider.apis[api](data)
-
-        result[api] = {
-            ...data,
-            data: response
+            result[api] = {
+                ...data,
+                data: response
+            }
+        } catch(error) {
+            console.error(error)
         }
     }))
 
@@ -139,15 +143,13 @@ async function createProjectFromRepo(repo) {
     const projectFileMeta = contents.find(file => file.name === config.github.projectFilename)
     const { data } = await octokit.request(projectFileMeta.download_url)
     const projectFileContents = JSON.parse(data)
-
+    
     // Fetch readme
     const readme = await getReadmeFromRepo(repo)
     
     // Fetch API Data
     const apiData = await fetchAPIData(projectFileContents)
-
-    // return
-
+    
     // Create project model
     const project = new Project({
         id: uuid(),
@@ -158,7 +160,7 @@ async function createProjectFromRepo(repo) {
         apis: apiData,
         readme
     })
-
+    
     // Create assets from images
     const assets = await getAssetsFromContents(contents, project)
     

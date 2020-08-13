@@ -66,12 +66,12 @@ async function fetchGooglePlay({ app_id }) {
     }
 
     // Fetch google play entry page
-    const { data: html } = await axios.get("https://play.google.com/store/apps/details?id=" + app_id)
+    const { data: html } = await axios.get(config.api.googlePlay.routes.appDetails + app_id)
 
     // Scrape amount of downloads from page
     const $ = cheerio.load(html)
-
-    const span = $("main > c-wiz:last-child > div > div:last-child > div > div:nth-child(3) > span > div > span").get(0)
+    
+    const span = $(config.api.googlePlay.downloadsSelector).get(0)
 
     const downloads = span.children[0].data
 
@@ -83,8 +83,18 @@ async function fetchGooglePlay({ app_id }) {
 /**
  * Fetch last month's downloads
  */
-async function fetchNpm() {
+async function fetchNpm({ package_name }) {
+    if (!package_name) {
+        return
+    }
 
+    const url = config.api.npm.routes.downloadsLastMonth + "/" + package_name
+
+    const { data: { downloads } } = await axios.get(url)
+
+    return {
+        downloads
+    }
 }
 
 /**

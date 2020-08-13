@@ -167,8 +167,7 @@ for_name varchar(255) NOT NULL UNIQUE
 
             // npm
             "npm": {
-                "package_name": String,
-                "package_scope": String
+                "package_name": String
             }
         }
     }

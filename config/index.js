@@ -45,26 +45,26 @@ module.exports = {
         },
 
         googleAnalytics: {
-            name: "google_analytics",
-
-            routes: {
-                base: ""
-            }
+            name: "google_analytics"
         },
 
         googlePlay: {
             name: "google_play",
 
             routes: {
-                base: ""
-            }
+                base: "https://play.google.com",
+                appDetails: "https://play.google.com/store/apps/details?id="
+            },
+
+            downloadsSelector: "main > c-wiz:last-child > div > div:last-child > div > div:nth-child(3) > span > div > span"
         },
 
         npm: {
             name: "npm",
 
             routes: {
-                base: ""
+                base: "https://api.npmjs.org",
+                downloadsLastMonth: "https://api.npmjs.org/downloads/point/last-month"
             }
         }
     }
