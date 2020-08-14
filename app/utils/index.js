@@ -1,22 +1,18 @@
-const jwt = require("jsonwebtoken")
 const fs = require("fs")
 const path = require("path")
 const { v4: uuid } = require("uuid")
 const util = require("util")
 const sharp = require("sharp")
+const multer = require("multer")
 
 const config = require("../../config")
 
+const readFileAsync = util.promisify(fs.readFile)
 const writeFileAsync = util.promisify(fs.writeFile)
 const unlinkAsync = util.promisify(fs.unlink)
 
 const ROOT_DIR = path.join(__dirname, "..", "..")
-const TEMP_DIR = path.join(ROOT_DIR, "temp")
-
-// Generate JSON Web Token
-function generateJWT(input) {
-    return jwt.sign(input, process.env.JWT_SECRET)
-}
+const TEMP_DIR = path.join(ROOT_DIR, config.tempDir)
 
 // Run db.query promise-based
 function queryAsync(query) {
@@ -72,11 +68,26 @@ async function compressImage(buffer) {
             .toBuffer()
 }
 
+// Create configured multer instance
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, callback) => {
+            callback(null, TEMP_DIR)
+        },
+
+        filename: (req, file, callback) => {
+            const filename = uuid() + "." + getFileExtension(file.originalname)
+            callback(null, filename)
+        }
+    })
+})
+
 module.exports = {
-    generateJWT,
     queryAsync,
     quotedList,
     createTempFile,
     getFileExtension,
-    compressImage
+    compressImage,
+    upload,
+    readFileAsync, writeFileAsync, unlinkAsync
 }

@@ -50,6 +50,12 @@ for_name varchar(255) NOT NULL UNIQUE
 
 ## Pages
 
+### For every page
+
+* Update status top left ("Updated 7 Hours ago")
+
+* For admins: "Trigger Reload" button next to update status
+
 ### Homepage
 
 * My name

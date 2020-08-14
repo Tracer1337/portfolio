@@ -8,24 +8,26 @@ const WebhookServiceProvider = require("../Services/WebhookServiceProvider.js")
 const webhooks = new Set()
 
 async function loadProjects(req, res) {
-    const repo = req.body.repository.name
-
-    if (!webhooks.has(repo)) {
-        webhooks.add(repo)
-        return res.end()
+    if (req.body.repository) {
+        const repo = req.body.repository.name
+    
+        if (!webhooks.has(repo)) {
+            webhooks.add(repo)
+            return res.end()
+        }
     }
-
-    res.end()
     
     await GitHubServiceProvider.loadProjects()
+    
+    res.end()
 }
 
 async function updateWebhooks(req, res) {
     webhooks.clear()
 
-    res.end()
-    
     await WebhookServiceProvider.registerWebhooks({ update: true })
+    
+    res.end()
 }
 
 module.exports = { loadProjects, updateWebhooks }

@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 const { google } = require("googleapis")
 const path = require("path")
 
@@ -32,7 +30,7 @@ module.exports = {
 
     // Used for image compression
     maxImageWidth: 512,
-    imageFormat: "jpeg",
+    imageFormat: "webp",
 
     api: {
         activityAnalyzer: {
@@ -67,5 +65,7 @@ module.exports = {
                 downloadsLastMonth: "https://api.npmjs.org/downloads/point/last-month"
             }
         }
-    }
+    },
+
+    tempDir: "temp"
 }
