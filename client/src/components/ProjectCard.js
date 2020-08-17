@@ -1,8 +1,10 @@
 import React from "react"
-import { Typography, Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import googlePlayIcon from "../assets/images/google_play.webp"
+import placeholderImage from "../assets/images/placeholder-image.png"
 
 /**
  * Assign icons / elements to every type
@@ -41,6 +43,14 @@ const useStyles = makeStyles(theme => ({
 
     image: {
         paddingTop: 350 * 9 / 16 // 16:9
+    },
+
+    content: {
+        height: 450 - (64 + 196 + 46) // Expand to full height
+    },
+
+    link: {
+        textDecoration: "none"
     }
 }))
 
@@ -48,8 +58,6 @@ function ProjectCard({ data }) {
     const classes = useStyles()
 
     const thumbnail = data.assets?.find(asset => asset.type === "thumbnail")
-
-    console.log(data)
 
     return (
         <Card className={classes.container}>
@@ -67,15 +75,19 @@ function ProjectCard({ data }) {
                 }}
             />
 
-            { thumbnail && (
-                <CardMedia
-                    image={window.origin + thumbnail.path}
-                    className={classes.image}
-                />
-            ) }
+            <CardMedia
+                image={thumbnail ? window.origin + thumbnail.path : placeholderImage}
+                className={classes.image}
+            />
 
-            <CardContent>
+            <CardContent className={classes.content}>
                 <Grid container spacing={2}>
+                    <Grid xs={12} item>
+                        <Typography variant="body2" gutterBottom noWrap>
+                            { data.description }
+                        </Typography>
+                    </Grid>
+
                     { Object.entries(apiLabelMap).map(([api, label]) => data.apis[api] && (
                         <React.Fragment key={api}>
                             <Grid item xs={6}>
@@ -91,9 +103,11 @@ function ProjectCard({ data }) {
             </CardContent>
 
             <CardActions>
-                <Button size="small" color="primary">
-                    Details
-                </Button>
+                <Link to={"/project/" + data.id} className={classes.link}>
+                    <Button size="small" color="primary">
+                        Details
+                    </Button>
+                </Link>
 
                 <Button size="small" color="primary" href={data.website} target="_blank">
                     Visit

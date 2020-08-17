@@ -65,14 +65,15 @@ makeRunnable(async () => {
         const projects = require(path.join(PROJECTS_DIR, "projects.json"))
 
         // Create new projects
-        await Promise.all(projects.map(async data => {
+        await Promise.all(projects.map(async (data, index) => {
             // Fetch data from given endpoints
             const apiData = await fetchMultipleAPIData(data.apis)
             
             const project = new Project({
                 ...data,
                 id: uuid(),
-                apis: apiData
+                apis: apiData,
+                position: index
             })
 
             // Handle project's assets

@@ -13,7 +13,7 @@ class Project extends Model {
     constructor(values) {
         super({
             table: "projects",
-            columns: ["id", "name", "website", "type", "description", "readme", "apis"],
+            columns: ["id", "name", "website", "type", "description", "readme", "apis", "position"],
             ...values
         })
     }
@@ -72,7 +72,8 @@ class Project extends Model {
             description: this.description,
             readme: this.readme,
             apis: this.apis,
-            assets: this.assets
+            assets: this.assets,
+            position: this.position
         }
     }
 }

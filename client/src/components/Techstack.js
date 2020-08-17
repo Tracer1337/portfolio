@@ -19,13 +19,13 @@ const useStyles = makeStyles(theme => ({
     iconWrapper: {
         width: theme.spacing(8),
         height: theme.spacing(8),
-        padding: theme.spacing(1),
+        padding: theme.spacing(1.5),
         display: "flex",
         alignItems: "center"
     },
 
     icon: {
-        fontSize: theme.spacing(6)
+        fontSize: theme.spacing(5)
     },
 
     caption: {

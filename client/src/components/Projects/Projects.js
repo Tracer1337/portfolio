@@ -1,5 +1,5 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { Typography, Grid } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -22,16 +22,23 @@ function Projects() {
         <div>
             <Typography variant="h3" className={classes.title}>Projects</Typography>
 
-            { isLoading ? (
-                Array(6).fill(0).map((_, i) => (
-                    <Skeleton
-                        variant="rect"
-                        key={i}
-                        width={350}
-                        height={450}
-                    />
-                ))
-            ) : data.map(project => <ProjectCard data={project} key={project.id}/>)}
+            <Grid container spacing={4}>
+                { isLoading ? (
+                    Array(6).fill(0).map((_, i) => (
+                        <Grid item xs container justify="center" key={i}>
+                            <Skeleton
+                                variant="rect"
+                                width={350}
+                                height={450}
+                            />
+                        </Grid>
+                    ))
+                ) : data.sort((a, b) => a.position - b.position).map((project, i) => (
+                    <Grid item xs container justify="center" key={i}>
+                        <ProjectCard data={project}/>
+                    </Grid>
+                ))}
+            </Grid>
         </div>
     )
 }
