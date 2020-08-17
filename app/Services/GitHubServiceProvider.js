@@ -35,10 +35,10 @@ async function createAssetFromBuffer(buffer, { project, type }) {
     // Create asset
     const asset = new Asset({
         id: uuid(),
-        project_id: project.id,
+        model_id: project.id,
         type,
         filename: tempFile.filename,
-        url: publicUrl
+        path: publicUrl
     })
 
     return asset

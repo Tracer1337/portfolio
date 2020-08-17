@@ -64,6 +64,8 @@ for_name varchar(255) NOT NULL UNIQUE
 
 * "Get in contact" button
 
+* Complete Techstack (Summary of all projects)
+
 ### Projects
 
 * All projects as cards

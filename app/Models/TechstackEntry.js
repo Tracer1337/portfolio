@@ -1,8 +1,10 @@
 const Model = require("../../lib/Model.js")
+const Asset = require("../Models/Asset.js")
 
 class TechstackEntry extends Model {
     static findBy = Model.findBy.bind({ model: TechstackEntry, table: "techstack_entries" })
     static findAllBy = Model.findAllBy.bind({ model: TechstackEntry, table: "techstack_entries" })
+    static findDistinct = Model.findDistinct.bind({ model: TechstackEntry, table: "techstack_entries" })
     static where = Model.where.bind({ model: TechstackEntry, table: "techstack_entries" })
 
     constructor(values) {
@@ -13,12 +15,17 @@ class TechstackEntry extends Model {
         })
     }
 
+    async init() {
+        // Get icon
+        this.icon = await Asset.findBy("model_id", this.id)
+    }
+
     toJSON() {
         return {
             id: this.id,
             name: this.name,
             project_id: this.project_id,
-            image_url: this.image_url
+            icon: this.icon
         }
     }
 }
