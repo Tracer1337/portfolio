@@ -17,7 +17,7 @@ class TechstackEntry extends Model {
 
     async init() {
         // Get icon
-        this.icon = await Asset.findBy("model_id", this.id)
+        this.icon = await Asset.findBy("model_ref", this.name)
     }
 
     toJSON() {

@@ -94,17 +94,6 @@ for_name varchar(255) NOT NULL UNIQUE
 
 ### Project declaration
 
-* Create a new project by creating a .project folder inside a GitHub repository
-
-* When a commit to a GitHub repository is made (WebHooks):
-    * Clear projects table
-    * Scan all repositories for a .project folder
-    * Insert all detected projects into the database
-    * Convert images (thumbnail, gallery) to jpeg and store in S3 Bucket
-    * Store README as html in database
-
-    * Show on the projects page when the projects got updated last
-
 * Make different types of projects
     * For every type
         * Amount of hours, if available (Activity Analyzer API)
@@ -117,9 +106,6 @@ for_name varchar(255) NOT NULL UNIQUE
 
     * npm Package (npm-package)
         * Amount of downloads (npm API)
-
-    * Update these statistics at 00:00 every day
-    * Alternative to all API calls: Web scraping
 
 ### .project Folder
 
@@ -186,13 +172,3 @@ for_name varchar(255) NOT NULL UNIQUE
 
 * galery
     * Screenshots or other images which portray the project
-
-## Webhooks
-
-### Push
-
-* Apply to every repository
-
-* Check if .project folder got changed
-
-    * If true -> Re-Fetch the respository

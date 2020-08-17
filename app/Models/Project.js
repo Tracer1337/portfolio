@@ -34,7 +34,7 @@ class Project extends Model {
 
     async init() {
         this.techstack = await TechstackEntry.findAllBy("project_id", this.id)
-        this.assets = await Asset.findAllBy("model_id", this.id)
+        this.assets = await Asset.findAllBy("model_ref", this.id)
 
         this.apis = typeof this.apis === "string" ? JSON.parse(this.apis) : this.apis
     }
@@ -42,13 +42,23 @@ class Project extends Model {
     async store() {
         await super.store()
         
-        await this.techstack.store()
-        await this.assets.store()
+        if (this.techstack) {
+            await this.techstack.store()
+        }
+
+        if (this.assets) {
+            await this.assets.store()
+        }
     }
 
     async delete() {
-        await this.assets.delete()
-        await this.techstack.delete()
+        if (this.assets) {
+            await this.assets.delete()
+        }
+
+        if (this.techstack) {
+            await this.techstack.delete()
+        }
         
         await super.delete()
     }

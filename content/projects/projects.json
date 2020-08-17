@@ -1,0 +1,75 @@
+[
+    {
+        "name": "Easy Meme",
+        "website": "https://www.easymeme69.com/",
+        "description": "Meme-Generator as web- and android app",
+        "techstack": [
+            "Javascript",
+            "NodeJS",
+            "React",
+            "Material UI",
+            "Express",
+            "SQL",
+            "AWS",
+            "Apache"
+        ],
+        "type": "android-app",
+        "apis": {
+            "__activity_analyzer": {
+                "activity_id": "e1a2ebfb-7842-4369-bb92-70977e9117b6"
+            },
+            "google_play": {
+                "app_id": "com.easymeme69.memegenerator"
+            },
+            "google_analytics": {
+                "view_id": 220774653
+            }
+        },
+        "assets-folder": "easymeme"
+    },
+
+    {
+        "name": "Yet Another Blog",
+        "website": "https://www.yet-another-blog.com/",
+        "description": "Pretty ugly blog with some posts",
+        "techstack": [
+            "Javascript",
+            "NodeJS",
+            "PHP",
+            "Laravel",
+            "React",
+            "Express",
+            "SQL",
+            "AWS",
+            "Apache"
+        ],
+        "type": "website",
+        "apis": {
+            "__activity_analyzer": {
+                "activity_id": "5b1aa523-14c3-4d60-8475-4713dfeee90a"
+            },
+            "google_analytics": {
+                "view_id": 215340054
+            }
+        }
+    },
+
+    {
+        "name": "React Mui Boilerplate",
+        "website": "https://www.npmjs.com/package/react-mui-boilerplate",
+        "description": "Personal react / express boilerplate",
+        "techstack": [
+            "Javascript",
+            "NodeJS",
+            "React",
+            "Express",
+            "SQL"
+        ],
+        "type": "website",
+        "apis": {
+            "npm": {
+                "package_name": "react-mui-boilerplate"
+            }
+        }
+    }
+]

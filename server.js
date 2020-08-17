@@ -6,9 +6,6 @@ require("./app/utils")
 const { createConnection } = require("./database")
 const routes = require("./routes")
 
-const { registerWebhooks } = require("./app/Services/WebhookServiceProvider.js")
-const { loadProjects } = require("./app/Services/GitHubServiceProvider.js")
-
 // Connect to database
 global.db = createConnection()
 
@@ -31,18 +28,6 @@ app.listen(process.env.PORT, async () => {
 
     // Startup
     if (process.env.NODE_ENV !== "development") {
-        // Initial webhook registering
-        await registerWebhooks({ update: true })
-
-        // Look for new projects at 00:00
-        new CronJob("0 0 * * *", async () =>  {
-
-            /**
-             * TODO: CLEAR WEBHOOKS SET IN WEBHOOKSCONTROLLER
-             */
-
-            await registerWebhooks()
-            await loadProjects()
-        }, null, true, "Europe/Berlin").start()
+        
     }
 })

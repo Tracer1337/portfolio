@@ -9,7 +9,7 @@ class Asset extends Model {
     constructor(values) {
         super({
             table: "assets",
-            columns: ["id", "model_id", "type", "filename", "path"],
+            columns: ["id", "model_ref", "type", "filename", "path"],
             ...values
         })
     }
@@ -25,7 +25,6 @@ class Asset extends Model {
     toJSON() {
         return {
             id: this.id,
-            model_id: this.model_id,
             type: this.type,
             filename: this.filename,
             path: this.path

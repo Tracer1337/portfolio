@@ -60,7 +60,7 @@ async function storeFile(req, res) {
         // Create asset and store it to the database
         asset = new Asset({
             id: uuid(),
-            model_id: techstackEntry.id,
+            model_ref: techstackEntry.id,
             type: "techstack_entry_icon",
             filename,
             path: `/storage/${filename}`

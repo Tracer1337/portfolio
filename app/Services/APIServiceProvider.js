@@ -99,4 +99,30 @@ const apis = {
     [config.api.npm.name]: fetchNpm,
 }
 
-module.exports = { apis }
+/**
+ * Fetch api data for apis object
+ */
+async function fetchMultipleAPIData(apiDataMap) {
+    const result = {}
+
+    await Promise.all(Object.entries(apiDataMap).map(async ([api, data]) => {
+        if (!apis[api]) {
+            return
+        }
+
+        try {
+            const response = await apis[api](data)
+
+            result[api] = {
+                ...data,
+                data: response
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }))
+
+    return result
+}
+
+module.exports = { apis, fetchMultipleAPIData }

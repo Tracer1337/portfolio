@@ -12,16 +12,10 @@ const auth = new google.auth.GoogleAuth({
 google.options({ auth })
 
 module.exports = {
-    github: {
-        projectFolder: ".project",
-        projectFilename: "project.json",
-        thumbnailFilename: "thumbnail",
-        galleryFoldername: "gallery"
-    },
-
     assetTypes: {
         thumbnail: "thumbnail",
-        gallery: "gallery"
+        gallery: "gallery",
+        techstackIcon: "techstack-icon"
     },
 
     routes: {
