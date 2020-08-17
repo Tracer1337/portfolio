@@ -57,7 +57,7 @@ function ProjectCard({ data }) {
                 title={data.name}
                 action={
                     <div className={classes.headerIconWrapper}>
-                        { React.createElement(projectTypeElementMap[data.type], {
+                        { projectTypeElementMap[data.type] && React.createElement(projectTypeElementMap[data.type], {
                             className: classes.headerIcon
                         }) }
                     </div>

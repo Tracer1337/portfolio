@@ -1,5 +1,5 @@
 const Model = require("../../lib/Model.js")
-const Asset = require("../Models/Asset.js")
+const Icon = require("./Icon.js")
 
 class TechstackEntry extends Model {
     static findBy = Model.findBy.bind({ model: TechstackEntry, table: "techstack_entries" })
@@ -17,7 +17,7 @@ class TechstackEntry extends Model {
 
     async init() {
         // Get icon
-        this.icon = await Asset.findBy("model_ref", this.name)
+        this.icon = await Icon.findBy("for_name", this.name)
     }
 
     toJSON() {

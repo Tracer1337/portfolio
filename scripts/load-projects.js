@@ -9,6 +9,7 @@ const Storage = require("../app/Facades/StorageFacade")
 const Project = require("../app/Models/Project.js")
 const Asset = require("../app/Models/Asset.js")
 const TechstackEntry = require("../app/Models/TechstackEntry.js")
+const Icon = require("../app/Models/Icon.js")
 const { fetchMultipleAPIData } = require("../app/Services/APIServiceProvider.js")
 const { createConnectionAsync } = require("../database/index.js")
 const { compressImage, readdirAsync, readFileAsync, createTempFile } = require("../app/utils")
@@ -47,11 +48,10 @@ makeRunnable(async () => {
 
     // Delete all models
     await run(async () => {
-        const projects = await Project.where("id = id")
-        const techstackEntries = await TechstackEntry.where("id = id")
-        const assets = await Asset.where("id = id")
+        const classes = [Project, TechstackEntry, Asset, Icon]
+        const models = (await Promise.all(classes.map(async Model => await Model.where("id = id")))).flat()
 
-        await Promise.all([...projects, ...techstackEntries, ...assets].map(async model => {
+        await Promise.all(models.map(async model => {
             if (model.init) {
                 await model.init()
             }
@@ -121,20 +121,20 @@ makeRunnable(async () => {
             await project.store()
         }))
 
-        // Handle techstack entries' assets
+        // Handle techstack entry icons
         await (async () => {
-            const techstackFolder = path.join(ROOT_DIR, "content", "techstack")
-
-            const files = await readdirAsync(techstackFolder)
+            const content = (await readFileAsync(path.join(ROOT_DIR, "content", "techstack-icons.json"))).toString()
+            const iconMap = JSON.parse(content)
 
             // Create and store assets for all techstack-icons
-            await Promise.all(files.map(async filename => {
-                const storeImage = storeImageForModel.bind({
-                    model_ref: filename.match(/^[^.]+/)[0],
-                    rootFolder: techstackFolder
+            await Promise.all(Object.entries(iconMap).map(async ([forName, icon]) => {
+                const model = new Icon({
+                    id: uuid(),
+                    for_name: forName,
+                    icon
                 })
 
-                await storeImage(filename, config.assetTypes.techstackIcon)
+                await model.store()
             }))
         })()
     }, "Creating models")

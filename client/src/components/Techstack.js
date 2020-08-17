@@ -1,4 +1,5 @@
 import React from "react"
+import clsx from "clsx"
 import { Typography } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
@@ -16,17 +17,15 @@ const useStyles = makeStyles(theme => ({
     },
 
     iconWrapper: {
-        width: 64,
-        height: 64,
+        width: theme.spacing(8),
+        height: theme.spacing(8),
+        padding: theme.spacing(1),
         display: "flex",
         alignItems: "center"
     },
 
     icon: {
-        maxWidth: "100%",
-        maxHeight: "100%",
-        "-webkit-filter": "grayscale(1)",
-        "filter": "grayscale(1)"
+        fontSize: theme.spacing(6)
     },
 
     caption: {
@@ -56,9 +55,7 @@ function Techstack({ data, isLoading }) {
                 data.map((entry, i) => (
                     <div key={i} className={classes.item}>
                         <div className={classes.iconWrapper}>
-                            { entry.icon && (
-                                    <img alt="icon" src={window.location.origin + entry.icon.path} className={classes.icon}/>
-                            ) }
+                            <i className={clsx(entry.icon || `devicon-${entry.name.toLowerCase()}-plain`, classes.icon)}/>
                         </div>
 
                         <Typography variant="body2" className={classes.caption}>
