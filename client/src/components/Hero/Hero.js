@@ -1,8 +1,10 @@
 import React from "react"
+import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import Text from "./Text.js"
-import Techstack from "./Techstack.js"
+import Techstack from "../Techstack.js"
+import useAPIData from "../../utils/useAPIData.js"
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -18,11 +20,19 @@ const useStyles = makeStyles(theme => ({
     secondary: {
         width: "50%",
         paddingLeft: theme.spacing(3)
+    },
+
+    techstackTitle: {
+        fontWeight: 200,
+        textAlign: "center",
+        marginBottom: theme.spacing(4)
     }
 }))
 
 function Hero() {
     const classes = useStyles()
+
+    const { data, isLoading } = useAPIData("getTotalTechstack")
 
     return (
         <div className={classes.container}>
@@ -31,7 +41,8 @@ function Hero() {
             </div>
 
             <div className={classes.secondary}>
-                <Techstack/>
+                <Typography variant="h4" className={classes.techstackTitle}>My Techstack</Typography>
+                <Techstack data={data} isLoading={isLoading} />
             </div>
         </div>
     )

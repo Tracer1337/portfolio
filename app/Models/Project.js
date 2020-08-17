@@ -61,7 +61,8 @@ class Project extends Model {
             type: this.type,
             description: this.description,
             readme: this.readme,
-            apis: this.apis
+            apis: this.apis,
+            assets: this.assets
         }
     }
 }

@@ -15,4 +15,5 @@ function url(path) {
     return API_BASE_URL + path
 }
 
-export const getTotalTechstack = () => axios.get(url("/techstack"))
+export const getTotalTechstack = () => axios.get(url("/resources/techstack"))
+export const getProjects = () => axios.get(url("/resources/projects"))

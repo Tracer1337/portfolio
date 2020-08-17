@@ -21,9 +21,7 @@ async function fetchActivityAnalyzer({ activity_id }) {
             }
         })
 
-        const response = {
-            duration: data.total_duration / 1000 / 3600 // Convert total_duration from milliseconds to hours
-        }
+        const response = data.total_duration / 1000 / 3600 // Convert total_duration from milliseconds to hours
 
         return response
     } catch(error) {
@@ -49,9 +47,7 @@ async function fetchGoogleAnalytics({ view_id }) {
         
         const pageviews = response.data.totalsForAllResults["ga:pageviews"]
 
-        return {
-            pageviews
-        }
+        return pageviews
     } catch(error) {
         console.log(error)
     }
@@ -75,9 +71,7 @@ async function fetchGooglePlay({ app_id }) {
 
     const downloads = span.children[0].data
 
-    return {
-        downloads
-    }
+    return downloads
 }
 
 /**
@@ -92,9 +86,7 @@ async function fetchNpm({ package_name }) {
 
     const { data: { downloads } } = await axios.get(url)
 
-    return {
-        downloads
-    }
+    return downloads
 }
 
 /**

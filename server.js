@@ -36,6 +36,11 @@ app.listen(process.env.PORT, async () => {
 
         // Look for new projects at 00:00
         new CronJob("0 0 * * *", async () =>  {
+
+            /**
+             * TODO: CLEAR WEBHOOKS SET IN WEBHOOKSCONTROLLER
+             */
+
             await registerWebhooks()
             await loadProjects()
         }, null, true, "Europe/Berlin").start()
