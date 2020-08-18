@@ -5,7 +5,7 @@ const { performance } = require("perf_hooks")
 const chalk = require("chalk")
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") })
 
-const { createConnectionAsync } = require("../database")
+const { createConnection } = require("../database")
 
 const SEEDERS_DIR = path.join(__dirname, "..", "database", "seeders")
 
@@ -23,7 +23,7 @@ function asyncQuery(query) {
 
 ;(async () => {
     // Connect to database
-    db = await createConnectionAsync()
+    db = await createConnection()
 
     try {
         await run()

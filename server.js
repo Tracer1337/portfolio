@@ -1,13 +1,8 @@
 require("dotenv").config()
-const express = require("express")
-const CronJob = require("cron").CronJob
-
 require("./app/utils")
-const { createConnection } = require("./database")
+const express = require("express")
 const routes = require("./routes")
-
-// Connect to database
-global.db = createConnection()
+const boot = require("./app/Boot")
 
 const app = express()
 
@@ -22,12 +17,14 @@ app.use(express.json())
 // Use Routes
 app.use("/", routes)
 
-// Start server on port specified in .env
-app.listen(process.env.PORT, async () => {
-    console.log("Server is running on port", process.env.PORT)
-
+;(async () => {
     // Startup
-    if (process.env.NODE_ENV !== "development") {
-        
+    if (process.env.NODE_ENV !== "development" || true) {
+        await boot()
     }
-})
+    
+    // Start server on port specified in .env
+    app.listen(process.env.PORT, () => {
+        console.log("Server is running on port", process.env.PORT)
+    })
+})()

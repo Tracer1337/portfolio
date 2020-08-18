@@ -11,7 +11,7 @@ const Asset = require("../app/Models/Asset.js")
 const TechstackEntry = require("../app/Models/TechstackEntry.js")
 const Icon = require("../app/Models/Icon.js")
 const { fetchMultipleAPIData } = require("../app/Services/APIServiceProvider.js")
-const { createConnectionAsync } = require("../database/index.js")
+const { createConnection } = require("../database/index.js")
 const { compressImage, readdirAsync, readFileAsync, createTempFile } = require("../app/utils")
 
 const ROOT_DIR = path.join(__dirname, "..")
@@ -43,8 +43,8 @@ async function storeImageForModel(filename, type) {
     await asset.store()
 }
 
-makeRunnable(async () => {
-    global.db = await createConnectionAsync()
+const runnable = makeRunnable(async () => {
+    global.db = await createConnection()
 
     // Delete all models
     await run(async () => {
@@ -141,4 +141,11 @@ makeRunnable(async () => {
     }, "Creating models")
 
     db.end()
-})()
+})
+
+// Run script if called throug command line
+if (require.main === module) {
+    runnable()
+}
+
+module.exports = runnable
