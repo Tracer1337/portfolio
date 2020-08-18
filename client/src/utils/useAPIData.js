@@ -10,12 +10,12 @@ function useAPIData(props) {
         useCache: true,
         ...(typeof props === "object" ? props : {})
     }
+    
+    if (!props.method) {
+        throw new Error("API Method not found")
+    }
 
     const method = API[props.method].bind(null, props.data)
-
-    if (!method) {
-        throw new Error("API Method " + (props.method || props) + " not found")
-    }
 
     const [isLoading, setIsLoading] = useState(!(props.defaultValue || cache.get(props.method)))
     const [error, setError] = useState()

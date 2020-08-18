@@ -60,10 +60,6 @@ function Header({ title, backButton }) {
                 <a href="#about-me">
                     <Typography variant="h5">About Me</Typography>
                 </a>
-
-                <a href="#contact">
-                    <Typography variant="h5">Contact</Typography>
-                </a>
             </nav>
         </header>
     )

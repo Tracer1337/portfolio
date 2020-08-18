@@ -70,7 +70,7 @@ function ImageGrid({ images, isLoading }) {
                 ))}
             </Grid>
         ))
-    ), [amountOfRows])
+    ), [amountOfRows, classes.card])
 
     // Arrange images
     useEffect(() => {

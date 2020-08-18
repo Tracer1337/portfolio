@@ -1,5 +1,10 @@
+const path = require("path")
+
 const TechstackEntry = require("../Models/TechstackEntry.js")
 const Project = require("../Models/Project.js")
+const { readFileAsync } = require("../utils")
+
+const CONTENT_DIR = path.join(__dirname, "..", "..", "content")
 
 async function getTotalTechstack(req, res) {
     // Get distinct techstack entries
@@ -15,4 +20,11 @@ async function getProjects(req, res) {
     res.send(projects)
 }
 
-module.exports = { getTotalTechstack, getProjects }
+async function getAboutMe(req, res) {
+    // Get content of "aboutme.md"
+    const content = (await readFileAsync(path.join(CONTENT_DIR, "ABOUTME.md"))).toString()
+
+    res.send(content)
+}
+
+module.exports = { getTotalTechstack, getProjects, getAboutMe }

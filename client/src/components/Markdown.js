@@ -1,6 +1,7 @@
 import React from "react"
 import ReactMarkdown from "react-markdown"
 import hljs from "highlight.js/lib/core"
+import { makeStyles } from "@material-ui/core/styles"
 
 import javascript from "highlight.js/lib/languages/javascript"
 import scss from "highlight.js/lib/languages/scss"
@@ -35,19 +36,28 @@ const renderers = {
 
     tableCell: ({ isHeader, children }) => {
         if (isHeader) {
-            return children.length == 0 ? null : <th>{children}</th>
+            return children.length === 0 ? null : <th>{children}</th>
         }
 
         return <td>{children}</td>
     }
 }
 
+const useStyles = makeStyles(theme => ({
+    container: {
+        fontSize: theme.typography.body1.fontSize
+    }
+}))
+
 function Markdown(props) {
+    const classes = useStyles()
+
     return (
         <ReactMarkdown
             {...props}
             renderers={renderers}
             escapeHtml={false}
+            className={classes.container}
         />
     )
 }
