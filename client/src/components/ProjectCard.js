@@ -103,7 +103,7 @@ function ProjectCard({ data }) {
             </CardContent>
 
             <CardActions>
-                <Link to={"/project/" + data.id} className={classes.link}>
+                <Link to={"/project/" + data.slug} className={classes.link}>
                     <Button size="small" color="primary">
                         Details
                     </Button>

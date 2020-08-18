@@ -2,20 +2,33 @@ import { useState, useEffect, useReducer } from "react"
 
 import * as API from "../config/api.js"
 
+const cache = new Map()
+
 function useAPIData(props) {
-    const method = typeof props === "string" ? API[props] : API[props.method].bind(null, props.data)
+    props = {
+        method: typeof props === "string" ? props : props.method,
+        useCache: true,
+        ...(typeof props === "object" ? props : {})
+    }
+
+    const method = API[props.method].bind(null, props.data)
 
     if (!method) {
         throw new Error("API Method " + (props.method || props) + " not found")
     }
 
-    const [isLoading, setIsLoading] = useState(!props.defaultValue)
-    const [data, setData] = useState(props.defaultValue)
+    const [isLoading, setIsLoading] = useState(!(props.defaultValue || cache.get(props.method)))
     const [error, setError] = useState()
-    const [reloadKey, reload] = useReducer((key) => key + 1, 0)
+
+    const [data, setData] = useReducer((state, newValue) => {
+        cache.set(props.method, newValue)
+        return newValue
+    }, props.defaultValue || (props.useCache && cache.get(props.method)))
+
+    const [version, reload] = useReducer((key) => key + 1, 0)
 
     useEffect(() => {
-        if (props.defaultValue && reloadKey === 0) {
+        if (data && version === 0) {
             return
         }
 
@@ -37,7 +50,7 @@ function useAPIData(props) {
                 setIsLoading(false)
             })
         // eslint-disable-next-line
-    }, [reloadKey])
+    }, [version])
 
     return {
         isLoading,

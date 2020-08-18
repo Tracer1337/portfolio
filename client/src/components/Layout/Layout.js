@@ -1,24 +1,24 @@
 import React from "react"
+import { Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import Header from "./Header.js"
 
 const useStyles = makeStyles(theme => ({
     container: {
-        maxWidth: 1220,
-        margin: `${theme.spacing(8)}px auto 0 auto`
+        marginTop: theme.spacing(8)
     }
 }))
 
-function Layout({ children }) {
+function Layout({ children, HeaderProps }) {
     const classes = useStyles()
 
     return (
-        <div className={classes.container}>
-            <Header/>
+        <Container className={classes.container}>
+            <Header {...HeaderProps}/>
 
             { children }
-        </div>
+        </Container>
     )
 }
 

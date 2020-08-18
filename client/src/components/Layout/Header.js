@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles(theme => ({
     container: {
         display: "flex",
-        justifyContent: "flex-end"
+        justifyContent: "space-between"
     },
 
     nav: {
@@ -23,11 +23,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Header() {
+function Header({ title }) {
     const classes = useStyles()
 
     return (
         <header className={classes.container}>
+            <div>
+                { title && <Typography variant="h5">{ title }</Typography> }
+            </div>
+
             <nav className={classes.nav}>
                 <a href="#projects">
                     <Typography variant="h5">Projects</Typography>

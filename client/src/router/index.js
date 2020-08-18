@@ -9,7 +9,7 @@ function Router() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/project/:id">
+                <Route path="/project/:slug">
                     <ProjectPage/>
                 </Route>
 

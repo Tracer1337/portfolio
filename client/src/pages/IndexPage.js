@@ -20,7 +20,7 @@ function IndexPage() {
                 <Hero/>
             </div>
 
-            <div className={classes.section}>
+            <div className={classes.section} id="projects">
                 <Projects/>
             </div>
         </Layout>

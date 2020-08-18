@@ -1,6 +1,7 @@
 [
     {
         "name": "Easy Meme",
+        "slug": "easymeme",
         "website": "https://www.easymeme69.com/",
         "description": "Meme-Generator as web- and android app",
         "techstack": [
@@ -29,6 +30,7 @@
 
     {
         "name": "Yet Another Blog",
+        "slug": "yet-another-blog",
         "website": "https://www.yet-another-blog.com/",
         "description": "Pretty ugly blog with a few posts",
         "techstack": [
@@ -53,8 +55,9 @@
 
     {
         "name": "Activity Analyzer",
+        "slug": "activity-analyzer",
         "website": "https://github.com/Tracer1337/activitiy-analyzer",
-        "description": "Tool for tracking and analyzing activities",
+        "description": "Personal tool for tracking and analyzing activities",
         "techstack": [
             "Javascript",
             "NodeJS",
@@ -68,15 +71,13 @@
         "apis": {
             "__activity_analyzer": {
                 "activity_id": "5b1aa523-14c3-4d60-8475-4713dfeee90a"
-            },
-            "google_analytics": {
-                "view_id": 215340054
             }
         }
     },
 
     {
         "name": "React Mui Boilerplate",
+        "slug": "react-mui-boilerplate",
         "website": "https://www.npmjs.com/package/react-mui-boilerplate",
         "description": "Personal react / express boilerplate",
         "techstack": [
