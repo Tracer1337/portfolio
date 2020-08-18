@@ -30,7 +30,8 @@ function ProjectPage() {
     return (
         <Layout
             HeaderProps={{
-                title: project?.name
+                title: project?.name,
+                backButton: true
             }}
         >
             <Grid className={classes.section} container spacing={2}>

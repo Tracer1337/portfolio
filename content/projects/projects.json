@@ -87,7 +87,7 @@
             "Express",
             "MySQL"
         ],
-        "type": "website",
+        "type": "npm-package",
         "apis": {
             "npm": {
                 "package_name": "react-mui-boilerplate"

@@ -95,17 +95,9 @@ for_name varchar(255) NOT NULL UNIQUE
 ### Project declaration
 
 * Make different types of projects
-    * For every type
-        * Amount of hours, if available (Activity Analyzer API)
-
-    * Web-App (web-app)
-        * Amount of users per month (Google Analytics API)
-
-    * Android App (android-app)
-        * Amount of downloads (Google Play API)
-
-    * npm Package (npm-package)
-        * Amount of downloads (npm API)
+    * website
+    * android-app
+    * npm-package
 
 ### .project Folder
 

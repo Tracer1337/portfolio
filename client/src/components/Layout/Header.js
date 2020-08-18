@@ -1,6 +1,8 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { useHistory } from "react-router-dom"
+import { Typography, IconButton, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import ChevronLeft from "@material-ui/icons/ChevronLeft"
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -20,16 +22,34 @@ const useStyles = makeStyles(theme => ({
                 marginRight: 0
             }
         }
+    },
+
+    backButton: {
+        marginRight: theme.spacing(2),
+
+        "& svg": {
+            color: theme.palette.text.primary
+        }
     }
 }))
 
-function Header({ title }) {
+function Header({ title, backButton }) {
     const classes = useStyles()
+
+    const history = useHistory()
 
     return (
         <header className={classes.container}>
             <div>
-                { title && <Typography variant="h5">{ title }</Typography> }
+                <Grid container>
+                    { backButton && (
+                        <IconButton onClick={history.goBack} size="small" className={classes.backButton}>
+                            <ChevronLeft/>
+                        </IconButton>
+                    ) }
+
+                    { title && <Typography variant="h5">{ title }</Typography> }
+                </Grid>
             </div>
 
             <nav className={classes.nav}>

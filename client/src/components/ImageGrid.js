@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react"
+import React, { useState, useEffect, useRef, useMemo, useReducer } from "react"
 import { Grid, Card } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
@@ -28,6 +28,8 @@ function Item({ src }) {
     const cardRef = useRef()
     const imageRef = useRef()
 
+    const [reloadKey, forceReload] = useReducer(key => key + 1, 0)
+
     useEffect(() => {
         const resize = () => {
             cardRef.current.style.height = imageRef.current.clientHeight + "px"
@@ -40,11 +42,11 @@ function Item({ src }) {
         return () => {
             window.removeEventListener("resize", resize)
         }
-    }, [cardRef, imageRef])
+    }, [cardRef, imageRef, reloadKey])
     
     return (
         <Card className={classes.card} innerRef={cardRef}>
-            <img src={src} alt="" className={classes.image} ref={imageRef} />
+            <img src={src} alt="" className={classes.image} ref={imageRef} onLoad={forceReload}/>
         </Card>
     )
 }
@@ -57,7 +59,7 @@ function ImageGrid({ images, isLoading }) {
 
     const skeletons = useMemo(() => (
         Array(amountOfRows).fill(0).map((_, i) => (
-            <Grid item xs={12 / amountOfRows}>
+            <Grid item xs={12 / amountOfRows} key={i}>
                 {Array(2).fill(0).map((_, j) => (
                     <Skeleton
                         variant="rect"

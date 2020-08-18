@@ -1,7 +1,9 @@
 import React from "react"
+import clsx from "clsx"
 import { Link } from "react-router-dom"
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import WebsiteIcon from "@material-ui/icons/Language"
 
 import googlePlayIcon from "../assets/images/google_play.webp"
 import placeholderImage from "../assets/images/placeholder-image.png"
@@ -10,7 +12,9 @@ import placeholderImage from "../assets/images/placeholder-image.png"
  * Assign icons / elements to every type
  */
 const projectTypeElementMap = {
-    "android-app": ({ className }) => <img src={googlePlayIcon} className={className} alt="Google Play"/>
+    "android-app": ({ className }) => <img src={googlePlayIcon} className={className} alt="Google Play"/>,
+    "website": ({ className }) => <WebsiteIcon className={className}/>,
+    "npm-package": ({ className }) => <i className={clsx(className, "devicon-npm-original-wordmark", "colored")}/>,
 }
 
 const apiLabelMap = {
@@ -32,7 +36,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     headerIcon: {
-        width: 24
+        width: 24,
+        fontSize: 24
     },
 
     headerIconWrapper: {
