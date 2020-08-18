@@ -115,7 +115,7 @@ function ProjectCard({ data }) {
                 </Link>
 
                 <Button size="small" color="primary" href={data.website} target="_blank">
-                    Visit
+                    Open
                 </Button>
             </CardActions>
         </Card>

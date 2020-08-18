@@ -19,9 +19,7 @@ app.use("/", routes)
 
 ;(async () => {
     // Startup
-    if (process.env.NODE_ENV !== "development" || true) {
-        await boot()
-    }
+    await boot()
     
     // Start server on port specified in .env
     app.listen(process.env.PORT, () => {

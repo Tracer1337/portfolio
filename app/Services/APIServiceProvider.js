@@ -22,8 +22,9 @@ async function fetchActivityAnalyzer({ activity_id }) {
         })
 
         const response = data.total_duration / 1000 / 3600 // Convert total_duration from milliseconds to hours
+        const rounded = Math.floor(response / 10) * 10
 
-        return response
+        return "~" + rounded
     } catch(error) {
         console.log(error)
     }

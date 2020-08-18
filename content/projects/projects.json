@@ -15,7 +15,7 @@
         ],
         "type": "android-app",
         "apis": {
-            "__activity_analyzer": {
+            "activity_analyzer": {
                 "activity_id": "e1a2ebfb-7842-4369-bb92-70977e9117b6"
             },
             "google_play": {
@@ -44,7 +44,7 @@
         ],
         "type": "website",
         "apis": {
-            "__activity_analyzer": {
+            "activity_analyzer": {
                 "activity_id": "5b1aa523-14c3-4d60-8475-4713dfeee90a"
             },
             "google_analytics": {
