@@ -1,8 +1,10 @@
 const { v4: uuid } = require("uuid")
-const fs = require("fs")
 const path = require("path")
 const { makeRunnable, run } = require("@m.moelter/task-runner")
-require("dotenv").config({ path: path.join(__dirname, "..", ".env") })
+
+if (require.main === module) {
+    require("dotenv").config({ path: path.join(__dirname, "..", ".env") })
+}
 
 const config = require("../config")
 const Storage = require("../app/Facades/StorageFacade")
@@ -44,7 +46,9 @@ async function storeImageForModel(filename, type) {
 }
 
 const runnable = makeRunnable(async () => {
-    global.db = await createConnection()
+    if (require.main === module) {
+        global.db = await createConnection()
+    }
 
     // Delete all models
     await run(async () => {
@@ -140,7 +144,9 @@ const runnable = makeRunnable(async () => {
         })()
     }, "Creating models")
 
-    db.end()
+    if (require.main === module) {
+        db.end()
+    }
 })
 
 // Run script if called throug command line
