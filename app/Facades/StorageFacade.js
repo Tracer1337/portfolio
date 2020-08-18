@@ -10,7 +10,7 @@ const DEV_BUCKET_DIR = path.join(ROOT_DIR, process.env.AWS_BUCKET)
 
 const cache = new Map()
 
-const useLocalStorage = process.env.NODE_ENV === "development" || true
+const useLocalStorage = true
 
 const StorageFacade = {
     createBucket(bucketName = process.env.APP_NAME + "-" + uuid()) {
