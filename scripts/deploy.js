@@ -64,7 +64,7 @@ async function pushToRemote() {
         "git add .",
         "git commit -m \"Create new build\"",
         "git push"
-    ], { skipError: true })
+    ], { skipErrors: true })
 }
 
 async function connectSSH() {
