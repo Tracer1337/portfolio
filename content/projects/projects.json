@@ -24,8 +24,26 @@
             "google_analytics": {
                 "view_id": 220774653
             }
-        },
-        "assets-folder": "easymeme"
+        }
+    },
+
+    {
+        "name": "Substitution-Plan App",
+        "slug": "subst-plan-app",
+        "website": "https://play.google.com/store/apps/details?id=com.vertretungsplan",
+        "description": "Mobile App for the substitution plan of my school",
+        "techstack": [
+            "Javascript",
+            "React",
+            "Java",
+            "Android"
+        ],
+        "type": "android-app",
+        "apis": {
+            "google_play": {
+                "app_id": "com.vertretungsplan"
+            }
+        }
     },
 
     {
@@ -51,6 +69,59 @@
                 "view_id": 215340054
             }
         }
+    },
+
+    {
+        "name": "MeArm - RaspberryPi",
+        "slug": "mearm-raspi",
+        "website": "https://www.yet-another-blog.com/post/robotic-arm",
+        "description": "Robotic arm controller via raspi and an app",
+        "techstack": [
+            "Python",
+            "Javascript",
+            "React"
+        ],
+        "type": "embedded",
+        "apis": {}
+    },
+
+    {
+        "name": "DynaSys online",
+        "slug": "dynasys-online",
+        "website": "https://youthful-mestorf-9e0ba8.netlify.app/",
+        "description": "Simulation software inspired by DynaSys",
+        "techstack": [
+            "Javascript",
+            "React"
+        ],
+        "type": "website",
+        "apis": {}
+    },
+
+    {
+        "name": "Pathfinding Visualization",
+        "slug": "pathfinding-visualization",
+        "website": "https://reverent-shirley-9fb34f.netlify.app/",
+        "description": "Interactive visualisation of pathfinding algorithms",
+        "techstack": [
+            "Javascript",
+            "React"
+        ],
+        "type": "website",
+        "apis": {}
+    },
+
+    {
+        "name": "Workout Clock",
+        "slug": "workout-clock",
+        "website": "https://wizardly-jepsen-c49888.netlify.app/",
+        "description": "Stopwatch for doing workouts at home",
+        "techstack": [
+            "Javascript",
+            "React"
+        ],
+        "type": "website",
+        "apis": {}
     },
 
     {

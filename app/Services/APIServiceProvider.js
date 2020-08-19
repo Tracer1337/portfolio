@@ -8,6 +8,11 @@ const config = require("../../config")
  * Fetch amount total duration from activity analyzer api
  */
 async function fetchActivityAnalyzer({ activity_id }) {
+    // This API request takes way to long
+    if (process.env.NODE_ENV === "development") {
+        return "~123"
+    }
+
     if (!activity_id) {
         return
     }

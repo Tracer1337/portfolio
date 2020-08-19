@@ -7,6 +7,7 @@ import WebsiteIcon from "@material-ui/icons/Language"
 
 import googlePlayIcon from "../assets/images/google_play.webp"
 import placeholderImage from "../assets/images/placeholder-image.png"
+import embeddedIcon from "../assets/images/embedded-icon.jpg"
 
 /**
  * Assign icons / elements to every type
@@ -15,6 +16,7 @@ const projectTypeElementMap = {
     "android-app": ({ className }) => <img src={googlePlayIcon} className={className} alt="Google Play"/>,
     "website": ({ className }) => <WebsiteIcon className={className}/>,
     "npm-package": ({ className }) => <i className={clsx(className, "devicon-npm-original-wordmark", "colored")}/>,
+    "embedded": ({ className }) => <img src={embeddedIcon} className={className} alt="Embedded"/>
 }
 
 const apiLabelMap = {

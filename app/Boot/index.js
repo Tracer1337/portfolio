@@ -1,4 +1,5 @@
 const CronJob = require("cron").CronJob
+const chokidar = require("chokidar")
 
 const CIServiceProvider = require("../Services/CIServiceProvider")
 const { createConnection } = require("../../database")
@@ -15,7 +16,18 @@ async function boot() {
         // Automatically update projects
         new CronJob("0 * * * *", loadProjects, null, true, "Europe/Berlin").start()
     } else {
-        // await loadProjects()
+        // Update projects whenever content folder has changed
+        let isActive = false
+
+        chokidar.watch("./content")
+            .on("ready", () => isActive = true)
+            .on("all", async () => {
+                if (isActive) {
+                    isActive = false
+                    await loadProjects()
+                    isActive = true
+                }
+            })
     }
 }
 

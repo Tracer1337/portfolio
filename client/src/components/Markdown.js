@@ -1,4 +1,5 @@
 import React from "react"
+import clsx from "clsx"
 import ReactMarkdown from "react-markdown"
 import hljs from "highlight.js/lib/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -57,7 +58,7 @@ function Markdown(props) {
             {...props}
             renderers={renderers}
             escapeHtml={false}
-            className={classes.container}
+            className={clsx(classes.container, props.className)}
         />
     )
 }

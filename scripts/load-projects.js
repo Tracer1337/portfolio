@@ -14,7 +14,7 @@ const TechstackEntry = require("../app/Models/TechstackEntry.js")
 const Icon = require("../app/Models/Icon.js")
 const { fetchMultipleAPIData } = require("../app/Services/APIServiceProvider.js")
 const { createConnection } = require("../database/index.js")
-const { compressImage, readdirAsync, readFileAsync, createTempFile } = require("../app/utils")
+const { compressImage, readdirAsync, readFileAsync, existsAsync, createTempFile } = require("../app/utils")
 
 const ROOT_DIR = path.join(__dirname, "..")
 const PROJECTS_DIR = path.join(ROOT_DIR, "content", "projects")
@@ -66,7 +66,8 @@ const runnable = makeRunnable(async () => {
     // Store new projects
     await run(async () => {
         // Load projects.json
-        const projects = require(path.join(PROJECTS_DIR, "projects.json"))
+        const projectFileContent = await readFileAsync(path.join(PROJECTS_DIR, "projects.json"))
+        const projects = JSON.parse(projectFileContent.toString())
 
         // Create new projects
         await Promise.all(projects.map(async (data, index) => {
@@ -81,9 +82,9 @@ const runnable = makeRunnable(async () => {
             })
 
             // Handle project's assets
-            if (data["assets-folder"]) {
-                const assetsFolder = path.join(PROJECTS_DIR, data["assets-folder"])
+            const assetsFolder = path.join(PROJECTS_DIR, data.slug)
 
+            if (await existsAsync(assetsFolder)) {
                 const storeImage = storeImageForModel.bind({
                     model_ref: project.id,
                     rootFolder: assetsFolder

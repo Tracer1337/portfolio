@@ -23,7 +23,7 @@ module.exports = {
     },
 
     // Used for image compression
-    maxImageWidth: 512,
+    maxImageWidth: 1920,
     imageFormat: "webp",
 
     api: {

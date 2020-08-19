@@ -23,29 +23,20 @@ export function getAmountOfRows() {
     }
 }
 
-export function getModalImageDimensions(src) {
+export function getDialogImageDimensions(src) {
     return new Promise(resolve => {
         const img = new Image()
 
         img.onload = () => {
             const { naturalWidth: width, naturalHeight: height } = img
 
-            /**
-             * If the final height of the image will be larger than the modal,
-             * constrain the height to maxHeight.
-             */
-            const maxWidth = (window.innerWidth <= 992 ? .8 : .5) * window.innerWidth
-            const maxHeight = window.innerHeight * .5
-            const imageRatio = height / width
-            const finalHeight = maxWidth * imageRatio
-
-            if (finalHeight > maxHeight) {
+            if (width > height) {
                 resolve({
-                    height: maxHeight
+                    maxWidth: window.innerWidth - 128
                 })
             } else {
                 resolve({
-                    width: "100%"
+                    maxHeight: window.innerHeight - 128
                 })
             }
         }

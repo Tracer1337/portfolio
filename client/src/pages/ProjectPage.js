@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import Layout from "../components/Layout/Layout.js"
 import useAPIData from "../utils/useAPIData.js"
-import ImageGrid from "../components/ImageGrid.js"
+import ImageGrid from "../components/ImageGrid/ImageGrid.js"
 import Markdown from "../components/Markdown.js"
 import Techstack from "../components/Techstack.js"
 

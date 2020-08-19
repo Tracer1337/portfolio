@@ -11,6 +11,7 @@ const readFileAsync = util.promisify(fs.readFile)
 const writeFileAsync = util.promisify(fs.writeFile)
 const unlinkAsync = util.promisify(fs.unlink)
 const readdirAsync = util.promisify(fs.readdir)
+const existsAsync = util.promisify(fs.exists)
 
 const ROOT_DIR = path.join(__dirname, "..", "..")
 const TEMP_DIR = path.join(ROOT_DIR, config.tempDir)
@@ -90,5 +91,5 @@ module.exports = {
     getFileExtension,
     compressImage,
     upload,
-    readFileAsync, writeFileAsync, unlinkAsync, readdirAsync
+    readFileAsync, writeFileAsync, unlinkAsync, readdirAsync, existsAsync
 }
