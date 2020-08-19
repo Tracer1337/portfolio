@@ -24,6 +24,9 @@ if (process.env.NODE_ENV === "development") {
 } else {
     // Serve static files
     rootRouter.use(express.static(path.join(__dirname, "..", "public")))
+
+    // Server React App on /*
+    rootRouter.get("/*", (req, res) => res.sendFile(path.resolve(__dirname, "..", "public", "index.html")))
 }
 
 module.exports = rootRouter
