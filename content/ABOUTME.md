@@ -1,1 +1,1 @@
-This is a test
+Hi, I'm Merlin and since 3 years programming is a part of my life. The most time has gone into fullstack web-development but I also did some IoT projects with my raspberry-pi. I recently did my A-levels here in Hamburg and want to begin studying computer science at the Uni-Hamburg this year. In my free time I visit the volunteer firefighters here in Hamburg and bake pizza at home. Lots of pizza.
