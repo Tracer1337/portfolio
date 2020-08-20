@@ -17,14 +17,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Layout({ children, HeaderProps }) {
+function Layout({ children }) {
     const classes = useStyles()
 
     return (
         <Container className={classes.container}>
             <Background/>
 
-            <Header {...HeaderProps}/>
+            <Header/>
 
             { children }
         </Container>

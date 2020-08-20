@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     techstackTitle: {
-        fontWeight: 200,
+        // fontWeight: 200,
         textAlign: "center",
         marginBottom: theme.spacing(4)
     },

@@ -12,17 +12,18 @@ import "./index.css"
 const theme = createMuiTheme({
     palette: {
         background: {
-            default: "#2979FF",
-            // default: "#FFFFFF"
+            // default: "#2979FF",
+            default: "#FFFFFF"
         },
 
         text: {
-            primary: "#FFFFFF"
+            // primary: "#FFFFFF"
+            primary: "#3a3a3a"
         }
     },
 
     typography: {
-        fontFamily: "Raleway, sans-serif"
+        // fontFamily: "Raleway, sans-serif"
     }
 })
 

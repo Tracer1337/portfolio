@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react"
+import { Slider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import PerlinNoise from "../../lib/perlin-noise.js"
 
@@ -21,18 +22,28 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const showSlider = false
+
 const CANVAS_SIZE = .25
 const NOISE_SCALE = 200
-const HUE_OFFSET = .35
+const HUE_OFFSET = .3
+const HUE_FACTOR = 1
 const SATURATION = 1
 const LIGHTNESS = .7
-let SPEED = 1
+let SPEED = .55
 SPEED /= 1e4
 
 function Background() {
     const classes = useStyles()
 
     const canvasRef = useRef()
+    
+    const [sliderValue, setSliderValue] = useState(0)
+
+    const handleSliderChange = (event, newValue) => {
+        console.log(newValue / 100)
+        setSliderValue(newValue)
+    }
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -67,7 +78,8 @@ function Background() {
                     value = (1 + value) / 2
 
                     // Convert hue to rgb values
-                    const [r, g, b] = hslToRgb((value + HUE_OFFSET) % 1, SATURATION, LIGHTNESS)
+                    const hue = (value + HUE_OFFSET) * HUE_FACTOR % 1
+                    const [r, g, b] = hslToRgb(hue, SATURATION, LIGHTNESS)
 
                     // Set image pixel color at cell to rgb
                     image.data[cell] = r
@@ -89,9 +101,12 @@ function Background() {
     }, [])
 
     return (
-        <div className={classes.container}>
-            <canvas ref={canvasRef} className={classes.canvas}/>
-        </div>
+        <>
+            { showSlider && <Slider value={sliderValue} onChange={handleSliderChange} /> }
+            <div className={classes.container}>
+                <canvas ref={canvasRef} className={classes.canvas}/>
+            </div>
+        </>
     )
 }
 

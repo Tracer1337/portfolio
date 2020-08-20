@@ -1,13 +1,16 @@
 import React from "react"
-import { useHistory } from "react-router-dom"
-import { Typography, IconButton, Grid } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import ChevronLeft from "@material-ui/icons/ChevronLeft"
 
 const useStyles = makeStyles(theme => ({
     container: {
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+
+        "& a": {
+            color: theme.palette.primary.contrastText
+        }
     },
 
     nav: {
@@ -15,20 +18,10 @@ const useStyles = makeStyles(theme => ({
 
         "& a": {
             marginRight: theme.spacing(8),
-            textDecoration: "none",
-            color: theme.palette.text.primary,
 
             "&:last-child": {
                 marginRight: 0
             }
-        }
-    },
-
-    backButton: {
-        marginRight: theme.spacing(2),
-
-        "& svg": {
-            color: theme.palette.text.primary
         }
     },
 
@@ -47,35 +40,19 @@ const useStyles = makeStyles(theme => ({
                     marginRight: 0
                 }
             }
-        },
-
-        backButton: {
-            marginRight: theme.spacing(1),
-            
-            "& svg": {
-                fontSize: theme.typography.body1.fontSize
-            }
         }
     }
 }))
 
-function Header({ title, backButton }) {
+function Header() {
     const classes = useStyles()
-
-    const history = useHistory()
 
     return (
         <header className={classes.container}>
             <div>
-                <Grid container>
-                    { backButton && (
-                        <IconButton onClick={history.goBack} size="small" className={classes.backButton}>
-                            <ChevronLeft/>
-                        </IconButton>
-                    ) }
-
-                    { title && <Typography variant="h5">{ title }</Typography> }
-                </Grid>
+                <Link to="/">
+                    <Typography variant="h5">Merlin Moelter</Typography>
+                </Link>
             </div>
 
             <nav className={classes.nav}>

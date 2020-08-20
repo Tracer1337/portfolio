@@ -5,8 +5,13 @@ import { makeStyles } from "@material-ui/core/styles"
 import MailIcon from "@material-ui/icons/Email"
 
 const useStyles = makeStyles(theme => ({
+    primaryWrapper: {
+        marginBottom: theme.spacing(1)
+    },
+
     primary: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(1),
+        fontWeight: 500
     },
 
     secondary: {
@@ -49,8 +54,13 @@ function Text() {
 
     return (
         <div className={classes.container}>
-            <Typography variant="h3" className={classes.primary}>Merlin Moelter</Typography>
-            <Typography variant="h3" className={classes.secondary}>Programming with passion</Typography>
+            <div className={classes.primaryWrapper}>
+                <Typography variant="h3" className={classes.primary}>Websites</Typography>
+                <Typography variant="h3" className={classes.primary}>Mobile Apps</Typography>
+                <Typography variant="h3" className={classes.primary}>Embedded Devices</Typography>
+            </div>
+
+            <Typography variant="h3" className={classes.secondary}>on a whole new level</Typography>
 
             <Grid container spacing={2} className={classes.linksWrapper}>
                 <Grid item>

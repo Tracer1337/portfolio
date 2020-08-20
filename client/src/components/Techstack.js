@@ -1,15 +1,9 @@
 import React from "react"
-import clsx from "clsx"
-import { Typography } from "@material-ui/core"
+import { Typography, Card, Grid } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
-    grid: {
-        display: "flex",
-        flexWrap: "wrap"
-    },
-
     item: {
         margin: theme.spacing(2),
         width: theme.spacing(8),
@@ -25,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     icon: {
-        fontSize: theme.spacing(5)
+        width: theme.spacing(5)
     },
 
     caption: {
@@ -49,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         },
 
         icon: {
-            fontSize: theme.spacing(4)
+            width: theme.spacing(4)
         },
 
         caption: {
@@ -66,29 +60,52 @@ function Techstack({ data, isLoading }) {
     }
 
     return (
-        <div className={classes.grid}>
-            { isLoading ? (
-                Array(12).fill(0).map((_, i) => (
-                    <Skeleton
-                        variant="rect"
-                        key={i}
-                        className={classes.item}
-                    />
-                ))
-            ) : (
-                data.map((entry, i) => (
-                    <div key={i} className={classes.item}>
-                        <div className={classes.iconWrapper}>
-                            <i className={clsx(entry.icon || `devicon-${entry.name.toLowerCase()}-plain`, classes.icon)}/>
-                        </div>
+        <Card elevation={5}>
+            <Grid container>
+                { isLoading ? (
+                    Array(12).fill(0).map((_, i) => (
+                        <Skeleton
+                            variant="rect"
+                            key={i}
+                            className={classes.item}
+                        />
+                    ))
+                ) : (
+                    data.map((entry, i) => {
+                        let iconName = entry.icon && entry.icon.toLowerCase().match(/^[^-]+/)[0]
+                        let fileName = entry.icon?.toLowerCase()
 
-                        <Typography variant="body2" className={classes.caption}>
-                            { entry.name }
-                        </Typography>
-                    </div>
-                ))
-            )}
-        </div>
+                        if (!iconName) {
+                            iconName = entry.name.toLowerCase()
+                            fileName = iconName + "-original"
+                        }
+
+                        let icon
+
+                        try {
+                            icon = require(`../assets/icons/${iconName}/${fileName}.svg`)
+                        } catch {}
+
+                        if (!icon) {
+                            console.log({ icon, iconName, entry })
+                            return null
+                        }
+
+                        return (
+                            <div key={i} className={classes.item}>
+                                <div className={classes.iconWrapper}>
+                                    <img src={icon} alt={iconName} className={classes.icon} />
+                                </div>
+
+                                <Typography variant="body2" className={classes.caption}>
+                                    {entry.name}
+                                </Typography>
+                            </div>
+                        )
+                    })
+                )}
+            </Grid>
+        </Card>
     )
 }
 
