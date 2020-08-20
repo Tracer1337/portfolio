@@ -11,7 +11,7 @@ async function boot() {
     
     if (process.env.NODE_ENV === "production") {
         // Init CI hooks
-        await CIServiceProvider.registerWebhook()
+        // await CIServiceProvider.registerWebhook()
 
         // Automatically update projects
         // new CronJob("0 * * * *", loadProjects, null, true, "Europe/Berlin").start()
