@@ -117,8 +117,8 @@ function ProjectCard({ data }) {
             <CardContent className={classes.content}>
                 <Grid item container wrap="nowrap" spacing={2}>
                     {Object.entries(apiLabelMap).map(([api, { icon, label }]) => data.apis[api] && (
-                        <Tooltip title={label}>
-                            <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem} key={api}>
+                        <Tooltip title={label} key={api}>
+                            <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem}>
                                 <Grid item>
                                     {React.createElement(icon, { className: classes.icon })}
                                 </Grid>

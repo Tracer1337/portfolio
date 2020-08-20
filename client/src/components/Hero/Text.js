@@ -22,6 +22,25 @@ const useStyles = makeStyles(theme => ({
     icon: {
         fontSize: 32,
         color: theme.palette.text.primary
+    },
+
+    [theme.breakpoints.down("md")]: {
+        container: {
+            margin: `${theme.spacing(8)}px 0`
+        },
+
+        primary: {
+            textAlign: "center"
+        },
+
+        secondary: {
+            textAlign: "center",
+            fontSize: theme.typography.h5.fontSize
+        },
+
+        linksWrapper: {
+            justifyContent: "center"
+        }
     }
 }))
 
@@ -29,11 +48,11 @@ function Text() {
     const classes = useStyles()
 
     return (
-        <div>
+        <div className={classes.container}>
             <Typography variant="h3" className={classes.primary}>Merlin Moelter</Typography>
             <Typography variant="h3" className={classes.secondary}>Programming with passion</Typography>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.linksWrapper}>
                 <Grid item>
                     <a href="https://github.com/Tracer1337" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <i className={clsx(classes.icon, "devicon-github-plain")}/>

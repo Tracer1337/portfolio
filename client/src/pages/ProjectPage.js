@@ -1,4 +1,5 @@
 import React from "react"
+import clsx from "clsx"
 import { useParams } from "react-router-dom"
 import { Grid } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
@@ -13,6 +14,12 @@ import Techstack from "../components/Techstack.js"
 const useStyles = makeStyles(theme => ({
     section: {
         marginTop: theme.spacing(4)
+    },
+
+    [theme.breakpoints.down("sm")]: {
+        content: {
+            flexDirection: "column"
+        }
     }
 }))
 
@@ -34,7 +41,7 @@ function ProjectPage() {
                 backButton: true
             }}
         >
-            <Grid className={classes.section} container spacing={2}>
+            <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
                 <Grid item xs>
                     { isLoading ? <Skeleton variant="rect" height={240} /> : (
                         <Markdown source={project.readme} />

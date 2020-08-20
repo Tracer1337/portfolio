@@ -8,6 +8,12 @@ import Header from "./Header.js"
 const useStyles = makeStyles(theme => ({
     container: {
         marginTop: theme.spacing(8)
+    },
+
+    [theme.breakpoints.down("md")]: {
+        container: {
+            marginTop: theme.spacing(4)
+        }
     }
 }))
 

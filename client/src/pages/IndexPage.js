@@ -9,6 +9,12 @@ import AboutMe from "../components/AboutMe.js"
 const useStyles = makeStyles(theme => ({
     section: {
         marginBottom: 200
+    },
+
+    [theme.breakpoints.down("sm")]: {
+        section: {
+            marginBottom: theme.spacing(12)
+        }
     }
 }))
 

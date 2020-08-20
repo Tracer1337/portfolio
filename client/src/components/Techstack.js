@@ -31,6 +31,30 @@ const useStyles = makeStyles(theme => ({
     caption: {
         fontWeight: 200,
         textAlign: "center"
+    },
+
+    [theme.breakpoints.down("md")]: {
+        grid: {
+            justifyContent: "center"
+        },
+
+        item: {
+            width: theme.spacing(6)
+        },
+
+        iconWrapper: {
+            width: theme.spacing(6),
+            height: theme.spacing(6),
+            padding: theme.spacing(1)
+        },
+
+        icon: {
+            fontSize: theme.spacing(4)
+        },
+
+        caption: {
+            fontSize: theme.typography.overline.fontSize
+        }
     }
 }))
 

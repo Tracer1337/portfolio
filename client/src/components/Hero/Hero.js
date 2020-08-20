@@ -26,6 +26,23 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 200,
         textAlign: "center",
         marginBottom: theme.spacing(4)
+    },
+
+    [theme.breakpoints.down("md")]: {
+        container: {
+            flexDirection: "column"
+        },
+        
+        primary: {
+            width: "100%"
+        }
+    },
+
+    [theme.breakpoints.down("sm")]: {
+        secondary: {
+            width: "100%",
+            padding: 0
+        }
     }
 }))
 

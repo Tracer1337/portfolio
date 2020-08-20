@@ -30,6 +30,32 @@ const useStyles = makeStyles(theme => ({
         "& svg": {
             color: theme.palette.text.primary
         }
+    },
+
+    [theme.breakpoints.down("md")]: {
+        container: {
+            "& h5": {
+                fontSize: theme.typography.body1.fontSize,
+            }
+        },
+
+        nav: {
+            "& a": {
+                marginRight: theme.spacing(4),
+
+                "&:last-child": {
+                    marginRight: 0
+                }
+            }
+        },
+
+        backButton: {
+            marginRight: theme.spacing(1),
+            
+            "& svg": {
+                fontSize: theme.typography.body1.fontSize
+            }
+        }
     }
 }))
 
