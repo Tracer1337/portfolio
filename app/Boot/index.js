@@ -14,7 +14,7 @@ async function boot() {
         await CIServiceProvider.registerWebhook()
 
         // Automatically update projects
-        new CronJob("0 * * * *", loadProjects, null, true, "Europe/Berlin").start()
+        // new CronJob("0 * * * *", loadProjects, null, true, "Europe/Berlin").start()
     } else {
         // Update projects whenever content folder has changed
         let isActive = false
