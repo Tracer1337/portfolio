@@ -12,7 +12,8 @@ import "./index.css"
 const theme = createMuiTheme({
     palette: {
         background: {
-            default: "#2979FF"
+            default: "#2979FF",
+            // default: "#FFFFFF"
         },
 
         text: {

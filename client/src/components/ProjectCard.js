@@ -1,7 +1,7 @@
 import React from "react"
 import clsx from "clsx"
 import { Link } from "react-router-dom"
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Typography, Tooltip } from "@material-ui/core"
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import WebsiteIcon from "@material-ui/icons/Language"
 import ClockIcon from "@material-ui/icons/Schedule"
