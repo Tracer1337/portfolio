@@ -44,7 +44,3 @@ export function getDialogImageDimensions(src) {
         img.src = src
     })
 }
-
-export function setScrollHeight(height = document.body.scrollHeight + 200) {
-    document.documentElement.style.setProperty("--scroll-height", height + "px")
-}

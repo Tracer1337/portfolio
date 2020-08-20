@@ -13,6 +13,8 @@ class Row {
     }
 }
 
+const SKELETON_HEIGHT = 300
+
 const useStyles = makeStyles(theme => ({
     card: {
         marginBottom: theme.spacing(2)
@@ -23,11 +25,12 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function ImageGrid({ images, isLoading }) {
+function ImageGrid({ images }) {
     const classes = useStyles()
 
     const [amountOfRows, setAmountOfRows] = useState(getAmountOfRows())
     const [rows, setRows] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const skeletons = useMemo(() => (
         Array(amountOfRows).fill(0).map((_, i) => (
@@ -35,7 +38,7 @@ function ImageGrid({ images, isLoading }) {
                 {Array(2).fill(0).map((_, j) => (
                     <Skeleton
                         variant="rect"
-                        height={Math.floor(Math.random() * 100) + 100}
+                        height={SKELETON_HEIGHT}
                         className={classes.card}
                         key={j}
                     />
@@ -51,7 +54,7 @@ function ImageGrid({ images, isLoading }) {
             const newRows = Array(amountOfRows).fill(0).map(() => new Row())
 
             // Insert all images into grid
-            for (let src of images) {
+            await Promise.all(images.map(async src => {
                 // Get image dimensions
                 const { width, height } = await getImageDimensions(src)
 
@@ -68,13 +71,14 @@ function ImageGrid({ images, isLoading }) {
                 })
 
                 // Add item to row's elements
-                row.elements.push( <Item src={src} key={src} /> )
+                row.elements.push(<Item src={src} key={src} />)
 
                 // Add element's score to row
                 row.score += ratio
-            }
-
+            }))
+            
             setRows(newRows)
+            setIsLoading(false)
         })()
     }, [amountOfRows, images])
 

@@ -8,8 +8,6 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" })
 const ROOT_DIR = path.join(__dirname, "..", "..")
 const DEV_BUCKET_DIR = path.join(ROOT_DIR, process.env.AWS_BUCKET)
 
-const cache = new Map()
-
 const useLocalStorage = true
 
 const StorageFacade = {
@@ -32,8 +30,6 @@ const StorageFacade = {
 
     uploadFile(inputPath, outputPath, bucketName = process.env.AWS_BUCKET) {
         const fileName = path.basename(outputPath)
-
-        cache.set(fileName, fs.readFileSync(inputPath))
 
         if (useLocalStorage) {
             return fs.copyFileSync(inputPath, path.join(ROOT_DIR, bucketName, fileName))
@@ -63,10 +59,6 @@ const StorageFacade = {
     getFile(filePath, bucketName = process.env.AWS_BUCKET) {
         const fileName = path.basename(filePath)
 
-        if (cache.has(fileName)) {
-            return cache.get(fileName)
-        }
-
         return new Promise((resolve, reject) => {
             let stream
 
@@ -89,7 +81,6 @@ const StorageFacade = {
 
             stream.on("end", () => {
                 const buffer = Buffer.concat(buffers)
-                cache.set(fileName, buffer)
                 resolve(buffer)
             })
         })
@@ -97,8 +88,6 @@ const StorageFacade = {
 
     deleteFile(filePath, bucketName = process.env.AWS_BUCKET) {
         const fileName = path.basename(filePath)
-
-        cache.delete(fileName)
 
         return new Promise(resolve => {
             if (useLocalStorage) {

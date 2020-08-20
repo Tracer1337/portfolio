@@ -1,11 +1,10 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Typography, Grid } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
 import ProjectCard from "../ProjectCard.js"
 import useAPIData from "../../utils/useAPIData.js"
-import { setScrollHeight } from "../../utils"
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -18,8 +17,6 @@ function Projects() {
 
     const { data, isLoading } = useAPIData("getProjects")
 
-    useEffect(setScrollHeight, [isLoading])
-
     return (
         <div>
             <Typography variant="h3" className={classes.title} align="center">Projects</Typography>
@@ -30,8 +27,8 @@ function Projects() {
                         <Grid item xs container justify="center" key={i}>
                             <Skeleton
                                 variant="rect"
-                                width={350}
-                                height={450}
+                                width={330}
+                                height={356}
                             />
                         </Grid>
                     ))

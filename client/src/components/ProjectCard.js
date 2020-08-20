@@ -1,9 +1,12 @@
 import React from "react"
 import clsx from "clsx"
 import { Link } from "react-router-dom"
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Typography } from "@material-ui/core"
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Typography, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import WebsiteIcon from "@material-ui/icons/Language"
+import ClockIcon from "@material-ui/icons/Schedule"
+import EyeIcon from "@material-ui/icons/Visibility"
+import DownloadIcon from "@material-ui/icons/GetApp"
 
 import googlePlayIcon from "../assets/images/google_play.webp"
 import placeholderImage from "../assets/images/placeholder-image.png"
@@ -20,16 +23,30 @@ const projectTypeElementMap = {
 }
 
 const apiLabelMap = {
-    "activity_analyzer": "Hours",
-    "google_analytics": "Pageviews / Month",
-    "google_play": "Downloads",
-    "npm": "Downloads / Month"
+    "activity_analyzer": {
+        icon: ({ className }) => <ClockIcon className={className} />,
+        label: "Hours"
+    },
+
+    "google_analytics": {
+        icon: ({ className }) => <EyeIcon className={className} />,
+        label: "Pageviews / Month"
+    },
+
+    "google_play": {
+        icon: ({ className }) => <DownloadIcon className={className} />,
+        label: "Downloads"
+    },
+
+    "npm": {
+        icon: ({ className }) => <DownloadIcon className={className} />,
+        label: "Downloads / Month"
+    }
 }
 
 const useStyles = makeStyles(theme => ({
     container: {
-        width: 350,
-        minHeight: 450,
+        width: 330,
         color: theme.palette.common.black
     },
 
@@ -49,15 +66,25 @@ const useStyles = makeStyles(theme => ({
     },
 
     image: {
-        paddingTop: 350 * 9 / 16 // 16:9
+        paddingTop: 330 * 9 / 16 // 16:9
     },
 
     content: {
-        height: 450 - (64 + 196 + 46) // Expand to full height
+        paddingBottom: 0,
+        height: 60
+    },
+
+    apiItem: {
+        width: "unset"
     },
 
     link: {
         textDecoration: "none"
+    },
+
+    icon: {
+        fontSize: 18,
+        color: theme.palette.text.secondary
     }
 }))
 
@@ -88,24 +115,20 @@ function ProjectCard({ data }) {
             />
 
             <CardContent className={classes.content}>
-                <Grid container spacing={2}>
-                    <Grid xs={12} item>
-                        <Typography variant="body2" gutterBottom noWrap>
-                            { data.description }
-                        </Typography>
-                    </Grid>
+                <Grid item container wrap="nowrap" spacing={2}>
+                    {Object.entries(apiLabelMap).map(([api, { icon, label }]) => data.apis[api] && (
+                        <Tooltip title={label}>
+                            <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem} key={api}>
+                                <Grid item>
+                                    {React.createElement(icon, { className: classes.icon })}
+                                </Grid>
 
-                    { Object.entries(apiLabelMap).map(([api, label]) => data.apis[api] && (
-                        <React.Fragment key={api}>
-                            <Grid item xs={6}>
-                                { label }
+                                <Grid item>
+                                    {data.apis[api].data}
+                                </Grid>
                             </Grid>
-
-                            <Grid item xs={6}>
-                                { data.apis[api].data }
-                            </Grid>
-                        </React.Fragment>
-                    )) }
+                        </Tooltip>
+                    ))}
                 </Grid>
             </CardContent>
 

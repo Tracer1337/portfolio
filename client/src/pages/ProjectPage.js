@@ -49,7 +49,7 @@ function ProjectPage() {
             </Grid>
 
             <div className={classes.section}>
-                <ImageGrid images={gallery.map(image => image.path)} isLoading={isLoading} />
+                { !isLoading && <ImageGrid images={gallery.map(image => image.path)} /> }
             </div>
         </Layout>
     )
