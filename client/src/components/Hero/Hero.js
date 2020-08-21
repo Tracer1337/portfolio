@@ -2,12 +2,12 @@ import React from "react"
 import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import Text from "./Text.js"
+import TextContent from "./TextContent.js"
 import Techstack from "../Techstack.js"
 import useAPIData from "../../utils/useAPIData.js"
 
 const useStyles = makeStyles(theme => ({
-    container: {
+    hero: {
         height: 740,
         display: "flex",
         alignItems: "center"
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     [theme.breakpoints.down("md")]: {
-        container: {
+        hero: {
             flexDirection: "column"
         },
         
@@ -52,9 +52,9 @@ function Hero() {
     const { data, isLoading } = useAPIData("getTotalTechstack")
 
     return (
-        <div className={classes.container}>
+        <div className={classes.hero}>
             <div className={classes.primary}>
-                <Text/>
+                <TextContent/>
             </div>
 
             <div className={classes.secondary}>

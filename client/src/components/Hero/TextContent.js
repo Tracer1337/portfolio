@@ -4,14 +4,11 @@ import { Typography, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import MailIcon from "@material-ui/icons/Email"
 
+import MaskedText from "./MaskedText.js"
+
 const useStyles = makeStyles(theme => ({
     primaryWrapper: {
         marginBottom: theme.spacing(1)
-    },
-
-    primary: {
-        marginBottom: theme.spacing(1),
-        fontWeight: 500
     },
 
     secondary: {
@@ -34,10 +31,6 @@ const useStyles = makeStyles(theme => ({
             margin: `${theme.spacing(8)}px 0`
         },
 
-        primary: {
-            textAlign: "center"
-        },
-
         secondary: {
             textAlign: "center",
             fontSize: theme.typography.h5.fontSize
@@ -49,15 +42,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Text() {
+function TextContent() {
     const classes = useStyles()
 
     return (
         <div className={classes.container}>
             <div className={classes.primaryWrapper}>
-                <Typography variant="h3" className={classes.primary}>Websites</Typography>
-                <Typography variant="h3" className={classes.primary}>Mobile Apps</Typography>
-                <Typography variant="h3" className={classes.primary}>Embedded Devices</Typography>
+                <MaskedText>Websites</MaskedText>
+                <MaskedText>Mobile Apps</MaskedText>
+                <MaskedText>Embedded Devices</MaskedText>
             </div>
 
             <Typography variant="h3" className={classes.secondary}>on a whole new level</Typography>
@@ -79,4 +72,4 @@ function Text() {
     )
 }
 
-export default Text
+export default TextContent

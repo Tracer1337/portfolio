@@ -7,9 +7,9 @@ import { hslToRgb } from "../../utils"
 
 const useStyles = makeStyles(theme => ({
     container: {
-        zIndex: -1,
+        // zIndex: -1,
         position: "absolute",
-        top: "-56%",
+        top: "-60%",
         left: 0,
         height: "100vh",
         width: "100vw"
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     canvas: {
         width: "100vw",
         height: "100vh",
-        transform: "skewY(-15deg)"
+        transform: "skewY(-12deg)"
     }
 }))
 
