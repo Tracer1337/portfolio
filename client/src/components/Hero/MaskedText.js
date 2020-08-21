@@ -6,14 +6,10 @@ import { makeStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles(theme => ({
     textWrapper: {
         position: "relative",
-        fontWeight: 500,
-        height: 72
+        fontWeight: 500
     },
 
     text: {
-        position: "absolute",
-        top: 0,
-        left: 0,
         fontWeight: 700
     },
 
@@ -21,14 +17,22 @@ const useStyles = makeStyles(theme => ({
         mixBlendMode: "color-burn"
     },
 
-    textDarken: {
-        opacity: .6
+    textMask: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        opacity: .7
     },
 
     [theme.breakpoints.down("md")]: {
         text: {
+            textAlign: "center"
+        },
+
+        textMask: {
             left: "50%",
-            transform: "translateX(-50%)"
+            transform: "translateX(-50%)",
+            width: "100%"
         }
     }
 }))
@@ -39,7 +43,7 @@ function MaskedText({ children }) {
     return (
         <div className={classes.textWrapper}>
             <Typography variant="h2" className={clsx(classes.text, classes.textBlend)}>{children}</Typography>
-            <Typography variant="h2" className={clsx(classes.text, classes.textDarken)}>{children}</Typography>
+            <Typography variant="h2" className={clsx(classes.text, classes.textMask)}>{children}</Typography>
         </div>
     )
 }

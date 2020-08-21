@@ -4,6 +4,10 @@ import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
+    card: {
+        position: "relative"
+    },
+
     item: {
         margin: theme.spacing(2),
         width: theme.spacing(8),
@@ -29,11 +33,12 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.down("md")]: {
         grid: {
-            justifyContent: "center"
+            justifyContent: "space-evenly"
         },
 
         item: {
-            width: theme.spacing(6)
+            width: theme.spacing(6),
+            height: 68
         },
 
         iconWrapper: {
@@ -60,8 +65,8 @@ function Techstack({ data, isLoading }) {
     }
 
     return (
-        <Card elevation={5}>
-            <Grid container>
+        <Card elevation={5} className={classes.card}>
+            <Grid container className={classes.grid}>
                 { isLoading ? (
                     Array(12).fill(0).map((_, i) => (
                         <Skeleton

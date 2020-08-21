@@ -16,6 +16,14 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(6)
     },
 
+    content: {
+        position: "relative"
+    },
+
+    title: {
+        fontWeight: 500
+    },
+
     [theme.breakpoints.down("sm")]: {
         content: {
             flexDirection: "column"
@@ -38,7 +46,7 @@ function ProjectPage() {
         <Layout>
             <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
                 <Grid item xs>
-                    <Typography variant="h4">{ project?.name }</Typography>
+                    <Typography variant="h4" className={classes.title}>{ project?.name }</Typography>
                     { isLoading ? <Skeleton variant="rect" height={240} /> : (
                         <Markdown source={project.readme} />
                     ) }

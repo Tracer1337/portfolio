@@ -4,9 +4,10 @@ import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
-    container: {
+    header: {
         display: "flex",
         justifyContent: "space-between",
+        position: "relative",
 
         "& a": {
             color: theme.palette.primary.contrastText
@@ -25,8 +26,12 @@ const useStyles = makeStyles(theme => ({
         }
     },
 
+    brand: {
+        fontWeight: 500
+    },
+
     [theme.breakpoints.down("md")]: {
-        container: {
+        header: {
             "& h5": {
                 fontSize: theme.typography.body1.fontSize,
             }
@@ -48,10 +53,10 @@ function Header() {
     const classes = useStyles()
 
     return (
-        <header className={classes.container}>
+        <header className={classes.header}>
             <div>
                 <Link to="/">
-                    <Typography variant="h5">Merlin Moelter</Typography>
+                    <Typography variant="h5" className={classes.brand}>Merlin Moelter</Typography>
                 </Link>
             </div>
 

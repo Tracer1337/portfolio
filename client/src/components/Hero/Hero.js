@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
 
     secondary: {
         width: "50%",
-        paddingLeft: theme.spacing(3)
+        paddingLeft: theme.spacing(3),
+        position: "relative"
     },
 
     techstackTitle: {
@@ -30,7 +31,8 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.down("md")]: {
         hero: {
-            flexDirection: "column"
+            flexDirection: "column",
+            height: "unset"
         },
         
         primary: {
