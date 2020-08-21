@@ -70,7 +70,9 @@ const runnable = makeRunnable(async () => {
         const projects = JSON.parse(projectFileContent.toString())
 
         // Create new projects
-        await Promise.all(projects.map(async (data, index) => {
+        for(let i = 0; i < projects.length; i++) {
+            const data = projects[i]
+
             // Fetch data from given endpoints
             const apiData = await fetchMultipleAPIData(data.apis)
             
@@ -78,7 +80,7 @@ const runnable = makeRunnable(async () => {
                 ...data,
                 id: uuid(),
                 apis: apiData,
-                position: index
+                position: i
             })
 
             // Handle project's assets
@@ -105,9 +107,9 @@ const runnable = makeRunnable(async () => {
                 if (gallery) {
                     const images = await readdirAsync(path.join(assetsFolder, "gallery"))
 
-                    await Promise.all(images.map(async filename => {
+                    for(let filename of images) {
                         await storeImage(path.join("gallery", filename), config.assetTypes.gallery)
-                    }))
+                    }
                 }
 
                 // Get contents of readme file
@@ -125,7 +127,7 @@ const runnable = makeRunnable(async () => {
 
             // Store project into database
             await project.store()
-        }))
+        }
 
         // Handle techstack entry icons
         await (async () => {
