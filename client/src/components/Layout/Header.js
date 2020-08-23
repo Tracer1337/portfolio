@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -50,7 +50,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Header() {
+    const history = useHistory()
+    const location = useLocation()
+
     const classes = useStyles()
+
+    const handleRedirect = () => {
+        if (location.pathName !== "/") {
+            history.push("/")
+        }
+    }
 
     return (
         <header className={classes.header}>
@@ -61,11 +70,11 @@ function Header() {
             </div>
 
             <nav className={classes.nav}>
-                <a href="#projects">
+                <a href="#projects" onClick={handleRedirect}>
                     <Typography variant="h5">Projects</Typography>
                 </a>
                 
-                <a href="#about-me">
+                <a href="#about-me" onClick={handleRedirect}>
                     <Typography variant="h5">About Me</Typography>
                 </a>
             </nav>

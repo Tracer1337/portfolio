@@ -60,7 +60,7 @@ function HueNoise() {
 
         // Fill image with noise
         const generator = new PerlinNoise()
-        let z = 0, lastTime = performance.now()
+        let z = 0, lastTime = performance.now(), shouldDetermine = false
 
         function update() {
             const currentTime = performance.now()
@@ -95,10 +95,16 @@ function HueNoise() {
 
             z += deltaTime * SPEED
 
-            requestAnimationFrame(update)
+            if (!shouldDetermine) {
+                requestAnimationFrame(update)
+            }
         }
 
         update()
+
+        return () => {
+            shouldDetermine = true
+        }
     }, [])
 
     return (
