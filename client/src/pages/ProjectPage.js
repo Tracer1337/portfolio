@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import clsx from "clsx"
 import { useParams } from "react-router-dom"
 import { Grid, Typography } from "@material-ui/core"
@@ -42,6 +42,10 @@ function ProjectPage() {
     const project = data?.find(project => project.slug === slug)
 
     const gallery = project?.assets.filter(asset => asset.type === "gallery") || []
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <Layout>
