@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
         textDecoration: "none",
         
         "& span": {
-            color: theme.palette.stripes.primary
+            color: theme.palette.common.white
         }
     },
 
