@@ -46,7 +46,12 @@ const renderers = {
 
 const useStyles = makeStyles(theme => ({
     container: {
-        fontSize: theme.typography.body1.fontSize
+        fontSize: theme.typography.body1.fontSize,
+        
+        "& a": {
+            textDecoration: "underline",
+            color: "inherit"
+        }
     }
 }))
 
