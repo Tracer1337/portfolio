@@ -48,7 +48,12 @@ const useStyles = makeStyles(theme => ({
     projectCard: {
         width: 330,
         color: theme.palette.common.white,
-        background: "#0c2e4e"
+        background: "#0c2e4e",
+        transition: "background-color 150ms ease-out",
+
+        "&:hover": {
+            background: "#1f4468"
+        }
     },
 
     headerAction: {
@@ -83,7 +88,8 @@ const useStyles = makeStyles(theme => ({
 
     link: {
         textDecoration: "none",
-        
+        color: theme.palette.common.white,
+
         "& span": {
             color: theme.palette.common.white
         }
@@ -100,47 +106,51 @@ function ProjectCard({ data }) {
 
     const thumbnail = data.assets?.find(asset => asset.type === "thumbnail")
 
+    const projectPageLink = "/project/" + data.slug
+
     return (
         <Card className={classes.projectCard}>
-            <CardHeader
-                title={data.name}
-                action={
-                    <div className={classes.headerIconWrapper}>
-                        { projectTypeElementMap[data.type] && React.createElement(projectTypeElementMap[data.type], {
-                            className: classes.headerIcon
-                        }) }
-                    </div>
-                }
-                classes={{
-                    action: classes.headerAction
-                }}
-            />
+            <Link to={projectPageLink} className={classes.link}>
+                <CardHeader
+                    title={data.name}
+                    action={
+                        <div className={classes.headerIconWrapper}>
+                            { projectTypeElementMap[data.type] && React.createElement(projectTypeElementMap[data.type], {
+                                className: classes.headerIcon
+                            }) }
+                        </div>
+                    }
+                    classes={{
+                        action: classes.headerAction
+                    }}
+                />
 
-            <CardMedia
-                image={thumbnail ? window.origin + thumbnail.path : placeholderImage}
-                className={classes.image}
-            />
+                <CardMedia
+                    image={thumbnail ? window.origin + thumbnail.path : placeholderImage}
+                    className={classes.image}
+                />
 
-            <CardContent className={classes.content}>
-                <Grid item container wrap="nowrap" spacing={2}>
-                    {Object.entries(apiLabelMap).map(([api, { icon, label }]) => data.apis[api] && (
-                        <Tooltip title={label} key={api}>
-                            <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem}>
-                                <Grid item>
-                                    {React.createElement(icon, { className: classes.icon })}
+                <CardContent className={classes.content}>
+                    <Grid item container wrap="nowrap" spacing={2}>
+                        {Object.entries(apiLabelMap).map(([api, { icon, label }]) => data.apis[api] && (
+                            <Tooltip title={label} key={api}>
+                                <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem}>
+                                    <Grid item>
+                                        {React.createElement(icon, { className: classes.icon })}
+                                    </Grid>
+
+                                    <Grid item>
+                                        {data.apis[api].data}
+                                    </Grid>
                                 </Grid>
-
-                                <Grid item>
-                                    {data.apis[api].data}
-                                </Grid>
-                            </Grid>
-                        </Tooltip>
-                    ))}
-                </Grid>
-            </CardContent>
+                            </Tooltip>
+                        ))}
+                    </Grid>
+                </CardContent>
+            </Link>
 
             <CardActions>
-                <Link to={"/project/" + data.slug} className={classes.link}>
+                <Link to={projectPageLink} className={classes.link}>
                     <Button size="small" color="primary">
                         Details
                     </Button>
