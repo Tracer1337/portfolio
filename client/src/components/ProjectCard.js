@@ -45,9 +45,10 @@ const apiLabelMap = {
 }
 
 const useStyles = makeStyles(theme => ({
-    container: {
+    projectCard: {
         width: 330,
-        color: theme.palette.common.black
+        color: theme.palette.common.black,
+        // background: "#0c2e4e"
     },
 
     headerAction: {
@@ -94,7 +95,7 @@ function ProjectCard({ data }) {
     const thumbnail = data.assets?.find(asset => asset.type === "thumbnail")
 
     return (
-        <Card className={classes.container}>
+        <Card className={classes.projectCard}>
             <CardHeader
                 title={data.name}
                 action={

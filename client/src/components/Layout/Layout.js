@@ -1,9 +1,10 @@
 import React from "react"
-import { Container } from "@material-ui/core"
+import clsx from "clsx"
 import { makeStyles } from "@material-ui/core/styles"
 
-import Background from "./Background.js"
+import HueNoise from "./HueNoise.js"
 import Header from "./Header.js"
+import Container from "./Container.js"
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -17,17 +18,19 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Layout({ children }) {
+function Layout({ children, className }) {
     const classes = useStyles()
 
     return (
-        <Container className={classes.container}>
-            <Background/>
+        <div className={clsx(classes.container, className)}>
+            <HueNoise/>
 
-            <Header/>
+            <Container>
+                <Header/>
+            </Container>
 
             { children }
-        </Container>
+        </div>
     )
 }
 

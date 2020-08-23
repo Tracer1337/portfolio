@@ -33,7 +33,7 @@ const LIGHTNESS = .7
 let SPEED = .55
 SPEED /= 1e4
 
-function Background() {
+function HueNoise() {
     const classes = useStyles()
 
     const canvasRef = useRef()
@@ -43,6 +43,7 @@ function Background() {
     const handleSliderChange = (event, newValue) => {
         console.log(newValue / 100)
         setSliderValue(newValue)
+        // HUE_OFFSET = newValue / 100
     }
 
     useEffect(() => {
@@ -82,10 +83,10 @@ function Background() {
                     const [r, g, b] = hslToRgb(hue, SATURATION, LIGHTNESS)
 
                     // Set image pixel color at cell to rgb
-                    image.data[cell] = r
-                    image.data[cell + 1] = g
-                    image.data[cell + 2] = b
-                    image.data[cell + 3] = 255 // Alpha channel
+                    image.data[cell] = r // Red
+                    image.data[cell + 1] = g // Green
+                    image.data[cell + 2] = b // Blue
+                    image.data[cell + 3] = 255 // Alpha
                 }
             }
 
@@ -102,7 +103,12 @@ function Background() {
 
     return (
         <>
-            { showSlider && <Slider value={sliderValue} onChange={handleSliderChange} /> }
+            { showSlider && (
+                <div style={{ position: "relative", zIndex: "100"}}>
+                    <Slider value={sliderValue} onChange={handleSliderChange} />
+                </div>
+            ) }
+
             <div className={classes.container}>
                 <canvas ref={canvasRef} className={classes.canvas}/>
             </div>
@@ -110,4 +116,4 @@ function Background() {
     )
 }
 
-export default Background
+export default HueNoise

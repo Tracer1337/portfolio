@@ -6,6 +6,7 @@ import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
 import Layout from "../components/Layout/Layout.js"
+import Container from "../components/Layout/Container.js"
 import useAPIData from "../utils/useAPIData.js"
 import ImageGrid from "../components/ImageGrid/ImageGrid.js"
 import Markdown from "../components/Markdown.js"
@@ -44,6 +45,7 @@ function ProjectPage() {
 
     return (
         <Layout>
+            <Container>
             <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
                 <Grid item xs>
                     <Typography variant="h4" className={classes.title}>{ project?.name }</Typography>
@@ -62,6 +64,7 @@ function ProjectPage() {
             <div className={classes.section}>
                 { !isLoading && <ImageGrid images={gallery.map(image => image.path)} /> }
             </div>
+            </Container>
         </Layout>
     )
 }
