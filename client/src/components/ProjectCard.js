@@ -19,7 +19,7 @@ const projectTypeElementMap = {
     "android-app": ({ className }) => <img src={googlePlayIcon} className={className} alt="Google Play"/>,
     "website": ({ className }) => <WebsiteIcon className={className}/>,
     "npm-package": ({ className }) => <i className={clsx(className, "devicon-npm-original-wordmark", "colored")}/>,
-    "embedded": ({ className }) => <img src={embeddedIcon} className={className} alt="Embedded"/>
+    "embedded": ({ className }) => <img src={embeddedIcon} className={className} alt="Embedded" style={{ filter: "invert(1)" }}/>
 }
 
 const apiLabelMap = {
@@ -47,8 +47,8 @@ const apiLabelMap = {
 const useStyles = makeStyles(theme => ({
     projectCard: {
         width: 330,
-        color: theme.palette.common.black,
-        // background: "#0c2e4e"
+        color: theme.palette.common.white,
+        background: "#0c2e4e"
     },
 
     headerAction: {
@@ -67,7 +67,9 @@ const useStyles = makeStyles(theme => ({
     },
 
     image: {
-        paddingTop: 330 * 9 / 16 // 16:9
+        paddingTop: (330 - theme.spacing(1) * 2) * 9 / 16, // 16:9,
+        margin: theme.spacing(1),
+        borderRadius: theme.shape.borderRadius
     },
 
     content: {
@@ -80,12 +82,16 @@ const useStyles = makeStyles(theme => ({
     },
 
     link: {
-        textDecoration: "none"
+        textDecoration: "none",
+        
+        "& span": {
+            color: theme.palette.stripes.primary
+        }
     },
 
     icon: {
         fontSize: 18,
-        color: theme.palette.text.secondary
+        color: theme.palette.common.white
     }
 }))
 
@@ -140,7 +146,7 @@ function ProjectCard({ data }) {
                     </Button>
                 </Link>
 
-                <Button size="small" color="primary" href={data.website} target="_blank">
+                <Button size="small" color="primary" href={data.website} target="_blank" className={classes.link}>
                     Open
                 </Button>
             </CardActions>
