@@ -1,4 +1,4 @@
-import { gridSizeMap } from "../config/constants.js"
+import { gridSizeMap, pageTitle } from "../config/constants.js"
 
 export function getImageDimensions(src) {
     return new Promise(resolve => {
@@ -68,4 +68,8 @@ export function hslToRgb(h, s, l) {
     }
 
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+export function makeTitle(title = "") {
+    return `${pageTitle} ${title && "|"} ${title}`
 }

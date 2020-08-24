@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import clsx from "clsx"
 import { useParams } from "react-router-dom"
-import { Grid, Typography } from "@material-ui/core"
+import { Helmet } from "react-helmet"
+import { Grid, Typography, Button } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -11,6 +12,7 @@ import useAPIData from "../utils/useAPIData.js"
 import ImageGrid from "../components/ImageGrid/ImageGrid.js"
 import Markdown from "../components/Markdown.js"
 import Techstack from "../components/Techstack.js"
+import { makeTitle } from "../utils"
 
 const useStyles = makeStyles(theme => ({
     section: {
@@ -28,6 +30,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
         content: {
             flexDirection: "column"
+        },
+
+        openButton: {
+            margin: `${theme.spacing(1)}px 0`
         }
     }
 }))
@@ -49,25 +55,37 @@ function ProjectPage() {
 
     return (
         <Layout>
+            <Helmet>
+                <title>{ makeTitle(project?.name) }</title>
+            </Helmet>
+
             <Container>
-            <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
-                <Grid item xs>
-                    <Typography variant="h4" className={classes.title}>{ project?.name }</Typography>
-                    { isLoading ? <Skeleton variant="rect" height={240} /> : (
-                        <Markdown source={project.readme} />
-                    ) }
+                <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
+                    <Grid container item xs direction="column">
+                        <Grid item xs>
+                            <Typography variant="h4" className={classes.title}>{ project?.name }</Typography>
+                            { isLoading ? <Skeleton variant="rect" height={240} /> : (
+                                <Markdown source={project.readme} />
+                            ) }
+                        </Grid>
+
+                        <Grid item>
+                            <Button variant="contained" color="primary" href={project?.website} target="_blank" className={classes.openButton}>
+                                Open
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+                    <Grid item xs>
+                        { isLoading ? <Skeleton variant="rect" height={240} /> : (
+                            <Techstack data={project.techstack || []} />
+                        ) }
+                    </Grid>
                 </Grid>
 
-                <Grid item xs>
-                    { isLoading ? <Skeleton variant="rect" height={240} /> : (
-                        <Techstack data={project.techstack || []} />
-                    ) }
-                </Grid>
-            </Grid>
-
-            <div className={classes.section}>
-                { !isLoading && <ImageGrid images={gallery.map(image => image.path)} /> }
-            </div>
+                <div className={classes.section}>
+                    { !isLoading && <ImageGrid images={gallery.map(image => image.path)} /> }
+                </div>
             </Container>
         </Layout>
     )

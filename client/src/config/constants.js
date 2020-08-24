@@ -6,3 +6,5 @@ export const gridSizeMap = {
     1100: 4,
     Infinity: 6
 }
+
+export const pageTitle = "Merlin Moelter"
