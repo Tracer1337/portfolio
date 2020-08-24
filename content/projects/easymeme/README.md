@@ -1,2 +1,1 @@
-Easy Meme is, as the name already tells, an easy way of creating memes. It provides pre-defined templates and stickers as well as a toolbox for adding whitespace, a grid,
-custom images and much more.
+EasyMeme is a tool for generating images (memes) by adding textboxes, borders or stickers to them. The application is developed for mobile devices, but is also usable on desktop through the website or the chrome extension. The chrome extension also features an automated template-loader to import images from other websites. The intention behind this project was to create a meme generator with a great UI, since existing products like [imgflip](https://imgflip.com/memegenerator) do look like websites from the 90s.
