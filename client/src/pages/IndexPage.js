@@ -42,9 +42,9 @@ function IndexPage() {
                 <Projects/>
             </div>
 
-            <Container className={classes.section} id="about-me">
+            <div className={classes.section} id="about-me">
                 <AboutMe/>
-            </Container>
+            </div>
         </Layout>
     )
 }

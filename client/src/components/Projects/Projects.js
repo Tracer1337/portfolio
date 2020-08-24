@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import Container from "../Layout/Container.js"
 import ProjectCard from "../ProjectCard.js"
-import Background from "./Background.js"
+import StripesBackground from "../Background/StripesBackground.js"
 import useAPIData from "../../utils/useAPIData.js"
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +31,7 @@ function Projects() {
 
     return (
         <div className={classes.projects}>
-            <Background/>
+            <StripesBackground/>
             
             <Container>
                 <div className={classes.content}>

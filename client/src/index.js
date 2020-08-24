@@ -22,7 +22,8 @@ const theme = createMuiTheme({
         stripes: {
             primary: "#80e9ff",
             secondary: "#7a73ff",
-            overlay: "#0048e5"
+            overlay: "#0048e5",
+            text: "#adbdcc"
         }
     }
 })

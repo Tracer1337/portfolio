@@ -2,7 +2,7 @@ import React from "react"
 import clsx from "clsx"
 import { makeStyles } from "@material-ui/core/styles"
 
-import HueNoise from "./HueNoise.js"
+import HueNoise from "../Background/HueNoise.js"
 import Header from "./Header.js"
 import Container from "./Container.js"
 

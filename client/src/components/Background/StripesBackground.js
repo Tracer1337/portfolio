@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Background() {
+function StripesBackground() {
     const classes = useStyles()
 
     return (
@@ -25,4 +25,4 @@ function Background() {
     )
 }
 
-export default Background
+export default StripesBackground
