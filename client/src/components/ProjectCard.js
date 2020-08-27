@@ -109,7 +109,7 @@ function ProjectCard({ data }) {
     const projectPageLink = "/project/" + data.slug
 
     return (
-        <Card className={classes.projectCard}>
+        <Card className={classes.projectCard} data-shootable>
             <Link to={projectPageLink} className={classes.link}>
                 <CardHeader
                     title={data.name}

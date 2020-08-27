@@ -87,6 +87,7 @@ function ProjectPage() {
                                         variant="text"
                                         color="inherit"
                                         startIcon={<ChevronLeftIcon/>}
+                                        data-shootable
                                     >{ isMedium ? "Previous" : prevProject.name }</Button>
                                 </Link>
                             ) }
@@ -99,6 +100,7 @@ function ProjectPage() {
                                         variant="text"
                                         color="inherit"
                                         endIcon={<ChevronRightIcon/>}
+                                        data-shootable
                                     >{ isMedium ? "Next" : nextProject.name }</Button>
                                 </Link>
                             ) }
@@ -115,14 +117,14 @@ function ProjectPage() {
                 <Grid className={clsx(classes.section, classes.content)} container spacing={2}>
                     <Grid container item xs direction="column">
                         <Grid item xs>
-                            <Typography variant="h4" className={classes.title}>{ project?.name }</Typography>
+                            <Typography variant="h4" className={classes.title} data-shootable>{ project?.name }</Typography>
                             { isLoading ? <Skeleton variant="rect" height={240} /> : (
                                 <Markdown source={project.readme} />
                             ) }
                         </Grid>
 
                         <Grid item>
-                            <Button variant="contained" color="primary" href={project?.website} target="_blank" className={classes.openButton}>
+                            <Button variant="contained" color="primary" href={project?.website} target="_blank" className={classes.openButton} data-shootable>
                                 Open
                             </Button>
                         </Grid>

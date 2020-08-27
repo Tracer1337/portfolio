@@ -35,7 +35,7 @@ function Projects() {
             
             <Container>
                 <div className={classes.content}>
-                    <Typography variant="h3" className={classes.title} align="center">Projects</Typography>
+                    <Typography variant="h3" className={classes.title} align="center" data-shootable>Projects</Typography>
 
                     <Grid container spacing={4}>
                         { isLoading ? (

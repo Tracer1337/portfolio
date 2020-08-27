@@ -41,7 +41,9 @@ const renderers = {
         }
 
         return <td>{children}</td>
-    }
+    },
+
+    paragraph: ({ children }) => <p data-shootable>{ children }</p>
 }
 
 const useStyles = makeStyles(theme => ({

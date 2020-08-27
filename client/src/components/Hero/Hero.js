@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
     },
 
     techstackTitle: {
-        // fontWeight: 200,
         textAlign: "center",
         marginBottom: theme.spacing(4)
     },
@@ -60,7 +59,7 @@ function Hero() {
             </div>
 
             <div className={classes.secondary}>
-                <Typography variant="h4" className={classes.techstackTitle}>My Techstack</Typography>
+                <Typography variant="h4" className={classes.techstackTitle} data-shootable>My Techstack</Typography>
                 <Techstack data={data} isLoading={isLoading} />
             </div>
         </div>

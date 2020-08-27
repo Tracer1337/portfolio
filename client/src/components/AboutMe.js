@@ -40,7 +40,7 @@ function AboutMe() {
 
             <Container>
                 <div className={classes.contentWrapper}>
-                    <Typography variant="h3" align="center" className={classes.title}>About Me</Typography>
+                    <Typography variant="h3" align="center" className={classes.title} data-shootable>About Me</Typography>
 
                     <Markdown source={data} className={classes.content}/>
                 </div>

@@ -41,7 +41,7 @@ function MaskedText({ children }) {
     const classes = useStyles()
 
     return (
-        <div className={classes.textWrapper}>
+        <div className={classes.textWrapper} data-shootable>
             <Typography variant="h2" className={clsx(classes.text, classes.textBlend)}>{children}</Typography>
             <Typography variant="h2" className={clsx(classes.text, classes.textMask)}>{children}</Typography>
         </div>

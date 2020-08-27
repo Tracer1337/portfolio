@@ -54,17 +54,17 @@ function TextContent() {
                 <MaskedText>Embedded Devices</MaskedText>
             </div>
 
-            <Typography variant="h3" className={classes.secondary}>on a whole new level</Typography>
+            <Typography variant="h3" className={classes.secondary} data-shootable>on a whole new level</Typography>
 
             <Grid container spacing={2} className={classes.linksWrapper}>
                 <Grid item>
-                    <a href="https://github.com/Tracer1337" target="_blank" rel="noopener noreferrer" className={classes.link}>
+                    <a href="https://github.com/Tracer1337" target="_blank" rel="noopener noreferrer" className={classes.link} data-shootable>
                         <i className={clsx(classes.icon, "devicon-github-plain")}/>
                     </a>
                 </Grid>
 
                 <Grid item>
-                    <a href="mailto:merlin.moelter@gmail.com" target="_blank" rel="noopener noreferrer" className={classes.link}>
+                    <a href="mailto:merlin.moelter@gmail.com" target="_blank" rel="noopener noreferrer" className={classes.link} data-shootable>
                         <MailIcon className={classes.icon}/>
                     </a>
                 </Grid>

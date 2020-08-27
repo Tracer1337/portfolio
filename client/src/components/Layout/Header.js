@@ -95,7 +95,7 @@ function Header({ centerElement }) {
 
             <header className={classes.header}>
                 <div className={classes.brand}>
-                    <Link to="/">
+                    <Link to="/" data-shootable>
                         <Typography variant="h5">Merlin Moelter</Typography>
                     </Link>
                 </div>
@@ -111,11 +111,11 @@ function Header({ centerElement }) {
                         </IconButton>
                     ) }
 
-                    <a href="#projects" onClick={handleRedirect}>
+                    <a href="#projects" onClick={handleRedirect} data-shootable>
                         <Typography variant="h5">Projects</Typography>
                     </a>
                     
-                    <a href="#about-me" onClick={handleRedirect}>
+                    <a href="#about-me" onClick={handleRedirect} data-shootable>
                         <Typography variant="h5">About Me</Typography>
                     </a>
                 </nav>

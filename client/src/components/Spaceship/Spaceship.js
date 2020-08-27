@@ -1,9 +1,14 @@
 import React, { useEffect, useRef } from "react"
+import { Fab } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import ReloadIcon from "@material-ui/icons/Replay"
 
 import sprite from "../../assets/images/spaceship.png"
 import explosion from "../../assets/images/explosion.gif"
 import Game from "./Game/Game.js"
+
+const SCROLL_OFFSET = 500
+const EXPLOSION_MIN_HEIGHT = 50
 
 function colliding(rect1, rect2) {
     return (
@@ -14,29 +19,43 @@ function colliding(rect1, rect2) {
     )
 }
 
-function destroy(element) {
+async function destroy(element) {
     element.setAttribute("data-destroyed", true)
     element.style.visibility = "hidden"
 
     const rect = element.getBoundingClientRect()
+    rect.y += document.documentElement.scrollTop
 
+    /**
+     * Build container
+     */
+    const container = document.createElement("div")
+
+    container.style.height = Math.max(EXPLOSION_MIN_HEIGHT, rect.height) + "px"
+    container.style.width = rect.width + "px"
+    container.style.display = "flex"
+    container.style.justifyContent = "center"
+    container.style.position = "absolute"
+    container.style.top = "0"
+    container.style.transform = `translate(${rect.x}px, ${rect.y}px)`
+
+    /**
+     * Build animation
+     */
     const animation = document.createElement("img")
 
     animation.src = explosion
 
-    animation.style.height = rect.height + "px"
-    animation.style.transform = `translate(${rect.x}px, ${rect.y}px)`
-    animation.style.position = "absolute"
-    animation.style.top = "0"
+    animation.style.height = "100%"
 
-    document.body.appendChild(animation)
+    container.appendChild(animation)
+
+    document.body.appendChild(container)
 
     setTimeout(() => {
-        document.body.removeChild(animation)
+        document.body.removeChild(container)
     }, 800)
 }
-
-const SCROLL_OFFSET = 500
 
 const useStyles = makeStyles(theme => ({
     spaceship: {
@@ -57,6 +76,17 @@ const useStyles = makeStyles(theme => ({
         position: "absolute",
         top: 8, left: 8,
         zIndex: 1000
+    },
+
+    fab: {
+        position: "fixed",
+        bottom: theme.spacing(4),
+        right: theme.spacing(4),
+        zIndex: 500
+    },
+
+    fabIcon: {
+        marginRight: theme.spacing(1)
     }
 }))
 
@@ -75,10 +105,12 @@ function Spaceship() {
         game.setOnPlayerChange(player => {
             document.documentElement.scrollTop = player.position.value[1] - window.innerHeight + SCROLL_OFFSET
 
-            spriteRef.current.style.transform = `
-                translate(${player.position.value[0]}px, ${player.position.value[1]}px)
-                rotate(${player.velocity.getAngle() + Math.PI}rad)
-            `
+            try {
+                spriteRef.current.style.transform = `
+                    translate(${player.position.value[0]}px, ${player.position.value[1]}px)
+                    rotate(${player.velocity.getAngle() + Math.PI}rad)
+                `
+            } catch {}
         })
 
         // Handle bullet movement
@@ -98,6 +130,7 @@ function Spaceship() {
             const elements = document.querySelectorAll("[data-shootable]:not([data-destroyed])")
             for (let element of elements) {
                 const elementRect = element.getBoundingClientRect()
+                elementRect.y += document.documentElement.scrollTop
 
                 const bulletRect = {
                     x: bullet.position.value[0],
@@ -109,17 +142,16 @@ function Spaceship() {
                 if (colliding(bulletRect, elementRect)) {
                     destroy(element)
                     bullet.destroy()
+                    break
                 }
             }
 
-            const element = document.getElementById(bullet.id)
-
-            if (element) {
-                element.style.transform = `
+            try {
+                document.getElementById(bullet.id).style.transform = `
                     translate(${bullet.position.value[0]}px, ${bullet.position.value[1]}px)
                     rotate(${bullet.velocity.getAngle() + Math.PI}rad)
                 `
-            }
+            } catch {}
         })
 
         // Handle bullet removal
@@ -130,15 +162,22 @@ function Spaceship() {
 
         game.start()
 
-        return game.destroy
+        return () => game.destroy()
     }, [])
 
     return (
-        <div ref={containerRef}>
-            <div className={classes.spaceship} ref={spriteRef}>
-                <img src={sprite} alt="Spaceship"/>
+        <>
+            <div ref={containerRef}>
+                <div className={classes.spaceship} ref={spriteRef}>
+                    <img src={sprite} alt="Spaceship"/>
+                </div>
             </div>
-        </div>
+
+            <Fab variant="extended" color="secondary" className={classes.fab} onClick={() => window.location.reload()}>
+                <ReloadIcon className={classes.fabIcon}/>
+                Reload Page
+            </Fab>
+        </>
     )
 }
 

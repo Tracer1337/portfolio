@@ -68,7 +68,7 @@ function Item({ src }) {
     }, [cardRef, imageRef, reloadKey])
 
     return (
-        <Card className={classes.card} innerRef={cardRef}>
+        <Card className={classes.card} innerRef={cardRef} data-shootable>
             <CardActionArea onClick={() => setIsDialogOpen(true)}>
                 <img src={src} alt="" className={classes.image} ref={imageRef} onLoad={forceReload} />
             </CardActionArea>

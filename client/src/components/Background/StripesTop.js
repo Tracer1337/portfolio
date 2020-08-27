@@ -70,10 +70,10 @@ function StripesBottom() {
     return (
         <div className={classes.stripes}>
             <div className={classes.innerStripes}>
-                <div className={clsx(classes.stripe, classes.long)} />
-                <div className={clsx(classes.stripe, classes.short)} />
+                <div className={clsx(classes.stripe, classes.long)} data-shootable/>
+                <div className={clsx(classes.stripe, classes.short)} data-shootable/>
                 <div className={clsx(classes.stripe, classes.long, classes.overlayMask)}>
-                    <div className={clsx(classes.stripe, classes.short)} />
+                    <div className={clsx(classes.stripe, classes.short)} data-shootable/>
                 </div>
             </div>
         </div>
