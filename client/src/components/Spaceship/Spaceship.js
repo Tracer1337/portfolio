@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const SCROLL_THRESHOLD = 500
+
 function Spaceship() {
     const classes = useStyles()
 
@@ -38,6 +40,10 @@ function Spaceship() {
         const activeBullets = new Set()
 
         game.setOnPlayerChange(player => {
+            if (player.position.value[1] > document.documentElement.scrollTop - window.innerHeight - SCROLL_THRESHOLD) {
+                document.documentElement.scrollTop = player.position.value[1] - window.innerHeight + SCROLL_THRESHOLD
+            }
+
             spriteRef.current.style.transform = `
                 translate(${player.position.value[0]}px, ${player.position.value[1]}px)
                 rotate(${player.velocity.getAngle() + Math.PI}rad)
