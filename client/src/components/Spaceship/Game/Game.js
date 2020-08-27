@@ -8,9 +8,9 @@ const RIGHT_ARROW = 39
 const DOWN_ARROW = 40
 const SPACE_BAR = 32
 
-const MOVEMENT_FORCE = new Vector2d([0, 1])
-const ROTATION_FORCE = Math.PI / 24
-const BULLET_VELOCITY = new Vector2d([0, 15])
+const MOVEMENT_FORCE = new Vector2d([0, .007])
+const ROTATION_FORCE = Math.PI / 40
+const BULLET_VELOCITY = new Vector2d([0, 1.25])
 
 function isOutOfScreen({ value: [x, y] }, [width, height]) {
     return x < 0 || x + width > window.innerWidth || y < 0 || y + height > document.body.scrollHeight

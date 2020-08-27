@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Fab } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import ReloadIcon from "@material-ui/icons/Replay"
@@ -6,6 +6,7 @@ import ReloadIcon from "@material-ui/icons/Replay"
 import sprite from "../../assets/images/spaceship.png"
 import explosion from "../../assets/images/explosion.gif"
 import Game from "./Game/Game.js"
+import ControlsDialog from "./ControlsDialog.js"
 
 const SCROLL_OFFSET = 500
 const EXPLOSION_MIN_HEIGHT = 50
@@ -96,7 +97,13 @@ function Spaceship() {
     const containerRef = useRef()
     const spriteRef = useRef()
 
+    const [isControlsDialogOpen, setIsControlsDialogOpen] = useState(true)
+
     useEffect(() => {
+        if (isControlsDialogOpen) {
+            return
+        }
+
         const game = new Game()
 
         const activeBullets = new Set()
@@ -163,13 +170,13 @@ function Spaceship() {
         game.start()
 
         return () => game.destroy()
-    }, [])
+    }, [isControlsDialogOpen])
 
     return (
         <>
-            <div ref={containerRef}>
+            <div ref={containerRef} style={{ display: isControlsDialogOpen && "none" }}>
                 <div className={classes.spaceship} ref={spriteRef}>
-                    <img src={sprite} alt="Spaceship"/>
+                    <img src={sprite} alt="Spaceship" />
                 </div>
             </div>
 
@@ -177,6 +184,11 @@ function Spaceship() {
                 <ReloadIcon className={classes.fabIcon}/>
                 Reload Page
             </Fab>
+
+            <ControlsDialog
+                open={isControlsDialogOpen}
+                onClose={() => setIsControlsDialogOpen(false)}
+            />
         </>
     )
 }

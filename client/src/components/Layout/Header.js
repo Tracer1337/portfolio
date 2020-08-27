@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { Typography, IconButton } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { Typography, IconButton, useMediaQuery } from "@material-ui/core"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import FlightIcon from "@material-ui/icons/Flight"
 
 import Spaceship from "../Spaceship/Spaceship.js"
@@ -79,6 +79,9 @@ function Header({ centerElement }) {
     const history = useHistory()
     const location = useLocation()
 
+    const theme = useTheme()
+    const isMedium = useMediaQuery(theme.breakpoints.down("md"))
+
     const classes = useStyles({ centerElement })
 
     const [isSpaceshipActive, setIsSpaceshipActive] = useState(false)
@@ -105,7 +108,7 @@ function Header({ centerElement }) {
                 </div>
 
                 <nav className={classes.nav}>
-                    {!isSpaceshipActive && (
+                    {!isSpaceshipActive && !isMedium && (
                         <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" style={{ marginRight: 64 }} color="inherit">
                             <FlightIcon/>
                         </IconButton>

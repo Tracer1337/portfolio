@@ -21,7 +21,7 @@ class Bullet {
     }
 
     update(deltaTime) {
-        this.position.add(this.velocity)
+        this.position.add(this.velocity.clone().mult(deltaTime))
     }
 }
 
