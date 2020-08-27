@@ -1,13 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { Typography, Button } from "@material-ui/core"
+import { Typography, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import FlightIcon from "@material-ui/icons/Flight"
+
+import Spaceship from "../Spaceship/Spaceship.js"
 
 const useStyles = makeStyles(theme => ({
     header: {
         display: "flex",
         justifyContent: "space-between",
         position: "relative",
+        color: theme.palette.primary.contrastText,
 
         "& a": {
             color: theme.palette.primary.contrastText
@@ -77,6 +81,8 @@ function Header({ centerElement }) {
 
     const classes = useStyles({ centerElement })
 
+    const [isSpaceshipActive, setIsSpaceshipActive] = useState(false)
+
     const handleRedirect = () => {
         if (location.pathName !== "/") {
             history.push("/")
@@ -96,6 +102,12 @@ function Header({ centerElement }) {
             </div>
 
             <nav className={classes.nav}>
+                {!isSpaceshipActive ? (
+                    <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" style={{ marginRight: 64 }} color="inherit">
+                        <FlightIcon/>
+                    </IconButton>
+                ) : <Spaceship />}
+
                 <a href="#projects" onClick={handleRedirect}>
                     <Typography variant="h5">Projects</Typography>
                 </a>
