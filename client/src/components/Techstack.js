@@ -97,7 +97,7 @@ function Techstack({ data, isLoading }) {
                         }
 
                         return (
-                            <div key={i} className={classes.item}>
+                            <div key={i} className={classes.item} data-shootable>
                                 <div className={classes.iconWrapper}>
                                     <img src={icon} alt={iconName} className={classes.icon} />
                                 </div>

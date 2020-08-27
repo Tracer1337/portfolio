@@ -94,9 +94,24 @@ class Game {
     }
 
     handleShoot() {
-        const position = this.player.position.clone()
-        const velocity = BULLET_VELOCITY.clone().rotate(this.player.velocity.getAngle())
-        this.bullets.push(new Bullet({ position, velocity }))
+        const angle = this.player.velocity.getAngle()
+
+        const position = this.player.position.clone().add(new Vector2d([0, 20]).rotate(angle))
+        const velocity = BULLET_VELOCITY.clone().rotate(angle)
+
+        const bullet = new Bullet({ position, velocity })
+
+        bullet.setOnDestroy(() => {
+            const index = this.bullets.findIndex(({ id }) => bullet.id === id)
+            this.removeBullet(index, bullet)
+        })
+
+        this.bullets.push(bullet)
+    }
+
+    removeBullet(index, bullet) {
+        this.bullets.splice(index, 1)
+        this.onBulletRemove(bullet)
     }
 
     start() {
@@ -133,9 +148,7 @@ class Game {
             this.onBulletChange(bullet)
 
             if (isOutOfScreen(bullet.position, bullet.dimensions)) {
-                this.bullets.splice(i, 1)
-
-                this.onBulletRemove(bullet)
+                this.removeBullet(i, bullet)
             }
         }
 
