@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { Typography } from "@material-ui/core"
+import { Typography, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
@@ -14,8 +14,24 @@ const useStyles = makeStyles(theme => ({
         }
     },
 
+    brand: {
+        zIndex: 100,
+
+        "& h5": {
+            fontWeight: 500
+        }
+    },
+
+    center: {
+        position: "absolute",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center"
+    },
+
     nav: {
         display: "flex",
+        zIndex: 100,
 
         "& a": {
             marginRight: theme.spacing(8),
@@ -24,10 +40,6 @@ const useStyles = makeStyles(theme => ({
                 marginRight: 0
             }
         }
-    },
-
-    brand: {
-        fontWeight: 500
     },
 
     [theme.breakpoints.down("md")]: {
@@ -46,14 +58,24 @@ const useStyles = makeStyles(theme => ({
                 }
             }
         }
+    },
+
+    [theme.breakpoints.down("sm")]: {
+        header: {
+            marginBottom: props => props.centerElement && 40,
+        },
+
+        center: {
+            transform: "translateY(100%)"
+        }
     }
 }))
 
-function Header() {
+function Header({ centerElement }) {
     const history = useHistory()
     const location = useLocation()
 
-    const classes = useStyles()
+    const classes = useStyles({ centerElement })
 
     const handleRedirect = () => {
         if (location.pathName !== "/") {
@@ -63,10 +85,14 @@ function Header() {
 
     return (
         <header className={classes.header}>
-            <div>
+            <div className={classes.brand}>
                 <Link to="/">
-                    <Typography variant="h5" className={classes.brand}>Merlin Moelter</Typography>
+                    <Typography variant="h5">Merlin Moelter</Typography>
                 </Link>
+            </div>
+
+            <div className={classes.center}>
+                { centerElement }
             </div>
 
             <nav className={classes.nav}>

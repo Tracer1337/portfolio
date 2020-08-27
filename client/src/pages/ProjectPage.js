@@ -1,10 +1,12 @@
 import React, { useEffect } from "react"
 import clsx from "clsx"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { Helmet } from "react-helmet"
-import { Grid, Typography, Button } from "@material-ui/core"
+import { Grid, Typography, Button, useMediaQuery } from "@material-ui/core"
 import { Skeleton } from "@material-ui/lab"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 
 import Layout from "../components/Layout/Layout.js"
 import Container from "../components/Layout/Container.js"
@@ -15,6 +17,10 @@ import Techstack from "../components/Techstack.js"
 import { makeTitle } from "../utils"
 
 const useStyles = makeStyles(theme => ({
+    navItem: {
+        width: "50%"
+    },
+
     section: {
         marginTop: theme.spacing(6)
     },
@@ -28,6 +34,14 @@ const useStyles = makeStyles(theme => ({
     },
 
     [theme.breakpoints.down("sm")]: {
+        nav: {
+            justifyContent: "space-between"
+        },
+
+        navItem: {
+            width: "unset"
+        },
+
         content: {
             flexDirection: "column"
         },
@@ -39,22 +53,60 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function ProjectPage() {
+    const theme = useTheme()
+    
+    const isMedium = useMediaQuery(theme.breakpoints.down("sm"))
+
     const { slug } = useParams()
 
     const classes = useStyles()
     
     const { isLoading, data } = useAPIData("getProjects")
 
-    const project = data?.find(project => project.slug === slug)
-
-    const gallery = project?.assets.filter(asset => asset.type === "gallery") || []
-
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
 
+    const project = data?.find(project => project.slug === slug)
+
+    const gallery = project?.assets.filter(asset => asset.type === "gallery") || []
+
+    const projectIndex = data?.findIndex(({ id }) => project.id === id)
+    const prevProject = data?.[projectIndex - 1]
+    const nextProject = data?.[projectIndex + 1]
+
     return (
-        <Layout>
+        <Layout
+            HeaderProps={{
+                centerElement: (
+                    <Grid container wrap="nowrap" spacing={2} className={classes.nav}>
+                        <Grid item container justify="flex-end" className={classes.navItem}>
+                            { prevProject && (
+                                <Link to={"/project/" + prevProject.slug}>
+                                    <Button
+                                        variant="text"
+                                        color="inherit"
+                                        startIcon={<ChevronLeftIcon/>}
+                                    >{ isMedium ? "Previous" : prevProject.name }</Button>
+                                </Link>
+                            ) }
+                        </Grid>
+
+                        <Grid item className={classes.navItem}>
+                            { nextProject && (
+                                <Link to={"/project/" + nextProject.slug}>
+                                    <Button
+                                        variant="text"
+                                        color="inherit"
+                                        endIcon={<ChevronRightIcon/>}
+                                    >{ isMedium ? "Next" : nextProject.name }</Button>
+                                </Link>
+                            ) }
+                        </Grid>
+                    </Grid>
+                )
+            }}
+        >
             <Helmet>
                 <title>{ makeTitle(project?.name) }</title>
             </Helmet>

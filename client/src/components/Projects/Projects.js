@@ -48,7 +48,7 @@ function Projects() {
                                     />
                                 </Grid>
                             ))
-                        ) : data.sort((a, b) => a.position - b.position).map((project, i) => (
+                        ) : data.map((project, i) => (
                             <Grid item xs container justify="center" key={i}>
                                 <ProjectCard data={project}/>
                             </Grid>

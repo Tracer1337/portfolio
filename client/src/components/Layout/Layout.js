@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Layout({ children, className }) {
+function Layout({ HeaderProps, className, children }) {
     const classes = useStyles()
 
     return (
@@ -26,7 +26,7 @@ function Layout({ children, className }) {
             <HueNoise/>
 
             <Container>
-                <Header/>
+                <Header {...HeaderProps}/>
             </Container>
 
             { children }
