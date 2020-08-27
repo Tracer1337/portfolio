@@ -1,16 +1,31 @@
-import Player from "./Player.js"
 import Vector2d from "./Vector2d.js"
+import Player from "./Player.js"
+import Bullet from "./Bullet.js"
 
 const LEFT_ARROW = 37
 const UP_ARROW = 38
 const RIGHT_ARROW = 39
+const DOWN_ARROW = 40
+const SPACE_BAR = 32
+
+const MOVEMENT_FORCE = new Vector2d([0, 1])
+const ROTATION_FORCE = Math.PI / 24
+const BULLET_VELOCITY = new Vector2d([0, 15])
+
+function isOutOfScreen({ value: [x, y] }, [width, height]) {
+    return x < 0 || x + width > window.innerWidth || y < 0 || y + height > document.body.scrollHeight
+}
 
 class Game {
     constructor() {
         this.onPlayerChange = () => {}
+        this.onBulletChange = () => {}
+        this.onBulletRemove = () => {}
+
         this.player = new Player()
-        this.movementForce = new Vector2d([0, .07])
-        this.rotationForce = Math.PI / 24
+        this.movementForce = MOVEMENT_FORCE
+        this.rotationForce = ROTATION_FORCE
+        this.bullets = []
 
         this.update = this.update.bind(this)
         this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -26,8 +41,16 @@ class Game {
         this.onPlayerChange = fn
     }
 
+    setOnBulletChange(fn) {
+        this.onBulletChange = fn
+    }
+
+    setOnBulletRemove(fn) {
+        this.onBulletRemove = fn
+    }
+
     handleKeyDown(event) {
-        if ([LEFT_ARROW, UP_ARROW, RIGHT_ARROW].includes(event.keyCode)) {
+        if ([LEFT_ARROW, UP_ARROW, RIGHT_ARROW, DOWN_ARROW, SPACE_BAR].includes(event.keyCode)) {
             event.preventDefault()
         }
 
@@ -37,6 +60,8 @@ class Game {
             this.leftArrowPressed = true
         } else if (event.keyCode === RIGHT_ARROW) {
             this.rightArrowPressed = true
+        } else if (event.keyCode === SPACE_BAR) {
+            this.handleShoot()
         }
     }
 
@@ -53,7 +78,8 @@ class Game {
     handleMovement() {
         if (this.upArrowPressed) {
             const force = this.movementForce.clone().rotate(this.player.acceleration.getAngle())
-            this.player.acceleration.add(force)
+            // this.player.acceleration.add(force)
+            this.player.acceleration = force
         }
 
         if (this.leftArrowPressed) {
@@ -65,6 +91,12 @@ class Game {
             this.player.acceleration.rotate(this.rotationForce)
             this.player.velocity.rotate(this.rotationForce)
         }
+    }
+
+    handleShoot() {
+        const position = this.player.position.clone()
+        const velocity = BULLET_VELOCITY.clone().rotate(this.player.velocity.getAngle())
+        this.bullets.push(new Bullet({ position, velocity }))
     }
 
     start() {
@@ -85,8 +117,27 @@ class Game {
 
         this.handleMovement()
 
+        const lastPosition = this.player.position.clone()
         this.player.update(deltaTime)
+        
+        if (isOutOfScreen(this.player.position, this.player.dimensions)) {
+            this.player.position = lastPosition
+        }
+
         this.onPlayerChange(this.player)
+
+        for (let i = 0; i < this.bullets.length; i++) {
+            const bullet = this.bullets[i]
+
+            bullet.update(deltaTime)
+            this.onBulletChange(bullet)
+
+            if (isOutOfScreen(bullet.position, bullet.dimensions)) {
+                this.bullets.splice(i, 1)
+
+                this.onBulletRemove(bullet)
+            }
+        }
 
         if (!this.shouldTerminate) {
             requestAnimationFrame(this.update)

@@ -5,6 +5,7 @@ class Player {
     velocity = new Vector2d([0, .001])
     acceleration = new Vector2d([0, .001])
     drag = .9
+    dimensions = [32, 32]
 
     update(deltaTime) {
         this.position.add(this.velocity)

@@ -90,33 +90,37 @@ function Header({ centerElement }) {
     }
 
     return (
-        <header className={classes.header}>
-            <div className={classes.brand}>
-                <Link to="/">
-                    <Typography variant="h5">Merlin Moelter</Typography>
-                </Link>
-            </div>
+        <>
+            { isSpaceshipActive && <Spaceship /> }
 
-            <div className={classes.center}>
-                { centerElement }
-            </div>
+            <header className={classes.header}>
+                <div className={classes.brand}>
+                    <Link to="/">
+                        <Typography variant="h5">Merlin Moelter</Typography>
+                    </Link>
+                </div>
 
-            <nav className={classes.nav}>
-                {!isSpaceshipActive ? (
-                    <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" style={{ marginRight: 64 }} color="inherit">
-                        <FlightIcon/>
-                    </IconButton>
-                ) : <Spaceship />}
+                <div className={classes.center}>
+                    { centerElement }
+                </div>
 
-                <a href="#projects" onClick={handleRedirect}>
-                    <Typography variant="h5">Projects</Typography>
-                </a>
-                
-                <a href="#about-me" onClick={handleRedirect}>
-                    <Typography variant="h5">About Me</Typography>
-                </a>
-            </nav>
-        </header>
+                <nav className={classes.nav}>
+                    {!isSpaceshipActive && (
+                        <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" style={{ marginRight: 64 }} color="inherit">
+                            <FlightIcon/>
+                        </IconButton>
+                    ) }
+
+                    <a href="#projects" onClick={handleRedirect}>
+                        <Typography variant="h5">Projects</Typography>
+                    </a>
+                    
+                    <a href="#about-me" onClick={handleRedirect}>
+                        <Typography variant="h5">About Me</Typography>
+                    </a>
+                </nav>
+            </header>
+        </>
     )
 }
 
