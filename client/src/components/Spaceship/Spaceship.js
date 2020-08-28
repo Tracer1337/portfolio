@@ -3,9 +3,10 @@ import { Fab } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import ReloadIcon from "@material-ui/icons/Replay"
 
+import ControlsDialog from "./ControlsDialog.js"
+import Scoreboard from "./Scoreboard.js"
 import sprite from "../../assets/images/spaceship.png"
 import Game from "./Game/Game.js"
-import ControlsDialog from "./ControlsDialog.js"
 import Explosion from "./Explosion.js"
 import { colliding } from "../../utils"
 
@@ -50,6 +51,7 @@ function Spaceship() {
 
     const containerRef = useRef()
     const spriteRef = useRef()
+    const scoreboardRef = useRef()
 
     const [isControlsDialogOpen, setIsControlsDialogOpen] = useState(true)
 
@@ -64,6 +66,11 @@ function Spaceship() {
     useEffect(() => {
         if (isControlsDialogOpen) {
             return
+        }
+
+        const handleScore = (element) => {
+            const elementScore = Math.floor(element.clientWidth * element.clientHeight / 1000)
+            scoreboardRef.current.addPoints(elementScore)
         }
 
         const activeBullets = new Set()
@@ -109,6 +116,7 @@ function Spaceship() {
 
                     if (colliding(bulletRect, elementRect)) {
                         Explosion.explode(element)
+                        handleScore(element)
                         bullet.destroy()
                         break
                     }
@@ -147,6 +155,8 @@ function Spaceship() {
                     <img src={sprite} alt="Spaceship" />
                 </div>
             </div>
+
+            <Scoreboard ref={scoreboardRef}/>
 
             <Fab variant="extended" color="secondary" className={classes.fab} onClick={handleReset}>
                 <ReloadIcon className={classes.fabIcon}/>
