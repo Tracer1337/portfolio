@@ -9,7 +9,7 @@ class Player {
     ])
     velocity = new Vector2d([0, 5])
     acceleration = new Vector2d([0, .001])
-    drag = .9
+    drag = .995
 
     update(deltaTime) {
         let velocity = this.velocity.clone().mult(deltaTime)
@@ -29,8 +29,10 @@ class Player {
         this.position.add(velocity)
         this.velocity.add(acceleration)
 
-        this.velocity.mult(this.drag)
-        this.acceleration.mult(this.drag)
+        const drag = this.drag ** deltaTime
+
+        this.velocity.mult(drag)
+        this.acceleration.mult(drag)
     }
 }
 

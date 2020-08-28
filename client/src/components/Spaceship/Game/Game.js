@@ -9,8 +9,8 @@ const DOWN_ARROW = 40
 const SPACE_BAR = 32
 
 const MOVEMENT_FORCE = .007
-const ROTATION_FORCE = Math.PI / 40
-const BULLET_VELOCITY = new Vector2d([0, 1.25])
+const ROTATION_FORCE = Math.PI / 450
+const BULLET_VELOCITY = 1.5
 
 function isOutOfScreen({ value: [x, y] }, [width, height]) {
     const directions = []
@@ -72,20 +72,20 @@ class Game {
         }
     }
 
-    handleMovement() {
+    handleMovement(deltaTime) {
         if (this.upArrowPressed) {
             const force = new Vector2d([0, MOVEMENT_FORCE]).rotate(this.player.acceleration.getAngle())
             this.player.acceleration = force
         }
 
         if (this.leftArrowPressed) {
-            this.player.acceleration.rotate(-this.rotationForce)
-            this.player.velocity.rotate(-this.rotationForce)
+            this.player.acceleration.rotate(-this.rotationForce * deltaTime)
+            this.player.velocity.rotate(-this.rotationForce * deltaTime)
         }
 
         if (this.rightArrowPressed) {
-            this.player.acceleration.rotate(this.rotationForce)
-            this.player.velocity.rotate(this.rotationForce)
+            this.player.acceleration.rotate(this.rotationForce * deltaTime)
+            this.player.velocity.rotate(this.rotationForce * deltaTime)
         }
     }
 
@@ -93,7 +93,7 @@ class Game {
         const angle = this.player.velocity.getAngle()
 
         const position = this.player.position.clone().add(new Vector2d([0, 20]).rotate(angle))
-        const velocity = BULLET_VELOCITY.clone().rotate(angle)
+        const velocity = new Vector2d([0, BULLET_VELOCITY]).rotate(angle)
 
         const bullet = new Bullet({
             position,
@@ -116,6 +116,7 @@ class Game {
         this.lastTime = performance.now()
         this.shouldTerminate = false
 
+
         window.addEventListener("keydown", this.handleKeyDown)
 
         window.addEventListener("keyup", this.handleKeyUp)
@@ -128,7 +129,7 @@ class Game {
         const deltaTime = currentTime - this.lastTime
         this.lastTime = currentTime
 
-        this.handleMovement()
+        this.handleMovement(deltaTime)
 
         this.player.update(deltaTime)
         this.onPlayerChange(this.player)
