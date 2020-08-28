@@ -12,7 +12,7 @@ function ControlsDialog(props) {
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={props.onClose}>Close</Button>
+                <Button onClick={props.onClose}>Okay</Button>
             </DialogActions>
         </Dialog>
     )

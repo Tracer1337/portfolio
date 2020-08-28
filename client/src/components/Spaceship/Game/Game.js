@@ -96,7 +96,7 @@ class Game {
     }
 
     handleShoot() {
-        if (!this.spacePressed || this.shootingThrottledUntil && this.shootingThrottledUntil > performance.now()) {
+        if (!this.spacePressed || (this.shootingThrottledUntil && this.shootingThrottledUntil > performance.now())) {
             return
         }
 
