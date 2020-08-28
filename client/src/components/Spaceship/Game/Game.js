@@ -12,7 +12,7 @@ const MOVEMENT_FORCE = .007
 const ROTATION_FORCE = Math.PI / 550
 const BULLET_VELOCITY = 1.5
 
-const SHOOTING_THROTTLE_DURATION = 1000 / 5
+const SHOOTING_THROTTLE_DURATION = 1000 / 10
 
 function isOutOfScreen({ value: [x, y] }, [width, height]) {
     const directions = []
