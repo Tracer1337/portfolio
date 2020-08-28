@@ -1,19 +1,13 @@
-import Vector2d from "./Vector2d.js"
-
 class Bullet {
     static idCounter = 0
 
-    constructor({ position, velocity }) {
-        this.onDestroy = () => {}
+    constructor(args) {
+        this.onDestroy = args.onDestroy
 
-        this.position = position
-        this.velocity = velocity
+        this.position = args.position
+        this.velocity = args.velocity
         this.id = Bullet.idCounter++
         this.dimensions = [2, 20]
-    }
-
-    setOnDestroy(fn) {
-        this.onDestroy = fn        
     }
 
     destroy() {

@@ -17,10 +17,10 @@ function isOutOfScreen({ value: [x, y] }, [width, height]) {
 }
 
 class Game {
-    constructor() {
-        this.onPlayerChange = () => {}
-        this.onBulletChange = () => {}
-        this.onBulletRemove = () => {}
+    constructor(args) {
+        this.onPlayerChange = args.onPlayerChange
+        this.onBulletChange = args.onBulletChange
+        this.onBulletRemove = args.onBulletRemove
 
         this.player = new Player()
         this.movementForce = MOVEMENT_FORCE
@@ -35,18 +35,6 @@ class Game {
         this.downArrowPressed = false
         this.leftArrowPressed = false
         this.rightArrowPressed = false
-    }
-
-    setOnPlayerChange(fn) {
-        this.onPlayerChange = fn
-    }
-
-    setOnBulletChange(fn) {
-        this.onBulletChange = fn
-    }
-
-    setOnBulletRemove(fn) {
-        this.onBulletRemove = fn
     }
 
     handleKeyDown(event) {
@@ -78,7 +66,6 @@ class Game {
     handleMovement() {
         if (this.upArrowPressed) {
             const force = this.movementForce.clone().rotate(this.player.acceleration.getAngle())
-            // this.player.acceleration.add(force)
             this.player.acceleration = force
         }
 
@@ -99,11 +86,13 @@ class Game {
         const position = this.player.position.clone().add(new Vector2d([0, 20]).rotate(angle))
         const velocity = BULLET_VELOCITY.clone().rotate(angle)
 
-        const bullet = new Bullet({ position, velocity })
-
-        bullet.setOnDestroy(() => {
-            const index = this.bullets.findIndex(({ id }) => bullet.id === id)
-            this.removeBullet(index, bullet)
+        const bullet = new Bullet({
+            position,
+            velocity,
+            onDestroy: () => {
+                const index = this.bullets.findIndex(({ id }) => bullet.id === id)
+                this.removeBullet(index, bullet)
+            }
         })
 
         this.bullets.push(bullet)
