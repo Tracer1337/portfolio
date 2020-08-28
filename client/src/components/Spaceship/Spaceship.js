@@ -26,10 +26,11 @@ const useStyles = makeStyles(theme => ({
     bullet: {
         width: 2,
         height: 20,
-        backgroundColor: "red",
+        backgroundColor: "#990000",
         position: "absolute",
         top: 8, left: 8,
-        zIndex: 1000
+        zIndex: 1000,
+        boxShadow: "0px 0px 3px 1px #990000"
     },
 
     fab: {
@@ -51,6 +52,14 @@ function Spaceship() {
     const spriteRef = useRef()
 
     const [isControlsDialogOpen, setIsControlsDialogOpen] = useState(true)
+
+    const handleReset = () => {
+        const elements = document.querySelectorAll("[data-destroyed]")
+
+        for (let element of elements) {
+            element.removeAttribute("data-destroyed")
+        }
+    }
 
     useEffect(() => {
         if (isControlsDialogOpen) {
@@ -139,9 +148,9 @@ function Spaceship() {
                 </div>
             </div>
 
-            <Fab variant="extended" color="secondary" className={classes.fab} onClick={() => window.location.reload()}>
+            <Fab variant="extended" color="secondary" className={classes.fab} onClick={handleReset}>
                 <ReloadIcon className={classes.fabIcon}/>
-                Reload Page
+                Reset
             </Fab>
 
             <ControlsDialog

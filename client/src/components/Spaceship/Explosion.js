@@ -34,7 +34,6 @@ function createAnimation() {
 
 function explode(element) {
     element.setAttribute("data-destroyed", true)
-    element.style.visibility = "hidden"
 
     const rect = element.getBoundingClientRect()
     rect.y += document.documentElement.scrollTop

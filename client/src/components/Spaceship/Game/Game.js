@@ -9,8 +9,10 @@ const DOWN_ARROW = 40
 const SPACE_BAR = 32
 
 const MOVEMENT_FORCE = .007
-const ROTATION_FORCE = Math.PI / 450
+const ROTATION_FORCE = Math.PI / 550
 const BULLET_VELOCITY = 1.5
+
+const SHOOTING_THROTTLE_DURATION = 1000 / 5
 
 function isOutOfScreen({ value: [x, y] }, [width, height]) {
     const directions = []
@@ -33,7 +35,6 @@ class Game {
         this.onBulletRemove = args.onBulletRemove
 
         this.player = new Player()
-        this.rotationForce = ROTATION_FORCE
         this.bullets = []
 
         this.update = this.update.bind(this)
@@ -41,9 +42,11 @@ class Game {
         this.handleKeyUp = this.handleKeyUp.bind(this)
 
         this.upArrowPressed = false
-        this.downArrowPressed = false
         this.leftArrowPressed = false
         this.rightArrowPressed = false
+        this.spacePressed = false
+
+        this.shootingThrottledUntil = null
     }
 
     handleKeyDown(event) {
@@ -58,7 +61,7 @@ class Game {
         } else if (event.keyCode === RIGHT_ARROW) {
             this.rightArrowPressed = true
         } else if (event.keyCode === SPACE_BAR) {
-            this.handleShoot()
+            this.spacePressed = true
         }
     }
 
@@ -69,6 +72,9 @@ class Game {
             this.leftArrowPressed = false
         } else if (event.keyCode === RIGHT_ARROW) {
             this.rightArrowPressed = false
+        } else if (event.keyCode === SPACE_BAR) {
+            this.spacePressed = false
+            this.shootingThrottledUntil = null
         }
     }
 
@@ -79,17 +85,23 @@ class Game {
         }
 
         if (this.leftArrowPressed) {
-            this.player.acceleration.rotate(-this.rotationForce * deltaTime)
-            this.player.velocity.rotate(-this.rotationForce * deltaTime)
+            this.player.acceleration.rotate(-ROTATION_FORCE * deltaTime)
+            this.player.velocity.rotate(-ROTATION_FORCE * deltaTime)
         }
 
         if (this.rightArrowPressed) {
-            this.player.acceleration.rotate(this.rotationForce * deltaTime)
-            this.player.velocity.rotate(this.rotationForce * deltaTime)
+            this.player.acceleration.rotate(ROTATION_FORCE * deltaTime)
+            this.player.velocity.rotate(ROTATION_FORCE * deltaTime)
         }
     }
 
     handleShoot() {
+        if (!this.spacePressed || this.shootingThrottledUntil && this.shootingThrottledUntil > performance.now()) {
+            return
+        }
+
+        this.shootingThrottledUntil = performance.now() + SHOOTING_THROTTLE_DURATION
+
         const angle = this.player.velocity.getAngle()
 
         const position = this.player.position.clone().add(new Vector2d([0, 20]).rotate(angle))
@@ -130,6 +142,7 @@ class Game {
         this.lastTime = currentTime
 
         this.handleMovement(deltaTime)
+        this.handleShoot()
 
         this.player.update(deltaTime)
         this.onPlayerChange(this.player)

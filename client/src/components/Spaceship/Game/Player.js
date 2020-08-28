@@ -9,7 +9,7 @@ class Player {
     ])
     velocity = new Vector2d([0, 5])
     acceleration = new Vector2d([0, .001])
-    drag = .995
+    drag = .993
 
     update(deltaTime) {
         let velocity = this.velocity.clone().mult(deltaTime)
