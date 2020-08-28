@@ -1,4 +1,5 @@
 import Vector2d from "./Vector2d.js"
+import { isOutOfScreen } from "./Game.js"
 
 class Player {
     dimensions = [32, 32]
@@ -11,8 +12,22 @@ class Player {
     drag = .9
 
     update(deltaTime) {
-        this.position.add(this.velocity.clone().mult(deltaTime))
-        this.velocity.add(this.acceleration.clone().mult(deltaTime))
+        let velocity = this.velocity.clone().mult(deltaTime)
+        const acceleration = this.acceleration.clone().mult(deltaTime)
+
+        const outOfScreenDirections = isOutOfScreen(this.position.clone().add(velocity), this.dimensions)
+
+        if (outOfScreenDirections) {
+            if (outOfScreenDirections.includes("x")) {
+                velocity.value[0] = 0
+            } 
+            if (outOfScreenDirections.includes("y")) {
+                velocity.value[1] = 0
+            }
+        }
+
+        this.position.add(velocity)
+        this.velocity.add(acceleration)
 
         this.velocity.mult(this.drag)
         this.acceleration.mult(this.drag)

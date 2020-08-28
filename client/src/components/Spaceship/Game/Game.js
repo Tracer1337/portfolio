@@ -8,12 +8,22 @@ const RIGHT_ARROW = 39
 const DOWN_ARROW = 40
 const SPACE_BAR = 32
 
-const MOVEMENT_FORCE = new Vector2d([0, .007])
+const MOVEMENT_FORCE = .007
 const ROTATION_FORCE = Math.PI / 40
 const BULLET_VELOCITY = new Vector2d([0, 1.25])
 
 function isOutOfScreen({ value: [x, y] }, [width, height]) {
-    return x < 0 || x + width > window.innerWidth || y < 0 || y + height > document.body.scrollHeight
+    const directions = []
+
+    if (x < 0 || x + width > window.innerWidth) {
+        directions.push("x")
+    }
+
+    if (y < 0 || y + height > document.body.scrollHeight) {
+        directions.push("y")
+    }
+
+    return directions.length ? directions : false
 }
 
 class Game {
@@ -23,7 +33,6 @@ class Game {
         this.onBulletRemove = args.onBulletRemove
 
         this.player = new Player()
-        this.movementForce = MOVEMENT_FORCE
         this.rotationForce = ROTATION_FORCE
         this.bullets = []
 
@@ -65,7 +74,7 @@ class Game {
 
     handleMovement() {
         if (this.upArrowPressed) {
-            const force = this.movementForce.clone().rotate(this.player.acceleration.getAngle())
+            const force = new Vector2d([0, MOVEMENT_FORCE]).rotate(this.player.acceleration.getAngle())
             this.player.acceleration = force
         }
 
@@ -121,13 +130,7 @@ class Game {
 
         this.handleMovement()
 
-        const lastPosition = this.player.position.clone()
         this.player.update(deltaTime)
-        
-        if (isOutOfScreen(this.player.position, this.player.dimensions)) {
-            this.player.position = lastPosition
-        }
-
         this.onPlayerChange(this.player)
 
         for (let i = 0; i < this.bullets.length; i++) {
@@ -152,5 +155,7 @@ class Game {
         window.removeEventListener("keyup", this.handleKeyUp)
     }
 }
+
+export { isOutOfScreen }
 
 export default Game

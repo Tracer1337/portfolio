@@ -38,8 +38,8 @@ class Vector2d {
         return this
     }
 
-    getAngle(vector = new Vector2d([1, 0])) {
-        return Math.atan2(this.value[1], this.value[0]) - Math.atan2(vector.value[1], vector.value[0]) - Math.PI / 2
+    getAngle(vector = new Vector2d([0, 1])) {
+        return Math.atan2(this.value[1], this.value[0]) - Math.atan2(vector.value[1], vector.value[0])
     }
 
     clone() {
