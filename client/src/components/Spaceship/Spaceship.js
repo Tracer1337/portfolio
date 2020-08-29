@@ -5,12 +5,12 @@ import ReloadIcon from "@material-ui/icons/Replay"
 
 import ControlsDialog from "./ControlsDialog.js"
 import Scoreboard from "./Scoreboard.js"
+import MobileControls from "./MobileControls.js"
 import sprite from "../../assets/images/spaceship.png"
 import Game from "./Game/Game.js"
 import Explosion from "./Explosion.js"
 import { colliding } from "../../utils"
-
-const SCROLL_OFFSET = 500
+import { IS_MOBILE } from "../../config/constants.js"
 
 const useStyles = makeStyles(theme => ({
     spaceship: {
@@ -36,9 +36,9 @@ const useStyles = makeStyles(theme => ({
 
     fab: {
         position: "fixed",
-        bottom: theme.spacing(4),
-        right: theme.spacing(4),
-        zIndex: 500
+        zIndex: 500,
+        [IS_MOBILE ? "left" : "right"]: theme.spacing(4),
+        [IS_MOBILE ? "top" : "bottom"]: theme.spacing(4)
     },
 
     fabIcon: {
@@ -52,6 +52,7 @@ function Spaceship() {
     const containerRef = useRef()
     const spriteRef = useRef()
     const scoreboardRef = useRef()
+    const mobileControlsRef = useRef()
 
     const [isControlsDialogOpen, setIsControlsDialogOpen] = useState(true)
 
@@ -76,9 +77,11 @@ function Spaceship() {
         const activeBullets = new Set()
 
         const game = new Game({
+            touchEvents: mobileControlsRef.current?.eventTarget,
+
             // Handle player movement
             onPlayerChange: player => {
-                document.documentElement.scrollTop = player.position.value[1] - window.innerHeight + SCROLL_OFFSET
+                document.documentElement.scrollTop = player.position.value[1] - window.innerHeight * .4
 
                 try {
                     spriteRef.current.style.transform = `
@@ -162,6 +165,8 @@ function Spaceship() {
                 <ReloadIcon className={classes.fabIcon}/>
                 Reset
             </Fab>
+
+            { IS_MOBILE && <MobileControls ref={mobileControlsRef} /> }
 
             <ControlsDialog
                 open={isControlsDialogOpen}

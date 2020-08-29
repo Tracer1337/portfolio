@@ -8,3 +8,5 @@ export const gridSizeMap = {
 }
 
 export const pageTitle = "Merlin Moelter"
+
+export const IS_MOBILE = /Mobi|Android/i.test(navigator.userAgent)

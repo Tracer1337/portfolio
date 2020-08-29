@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { Typography, IconButton, useMediaQuery } from "@material-ui/core"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
+import { Typography, IconButton } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
 import FlightIcon from "@material-ui/icons/Flight"
 
 import Spaceship from "../Spaceship/Spaceship.js"
@@ -46,6 +46,10 @@ const useStyles = makeStyles(theme => ({
         }
     },
 
+    spaceshipButton: {
+        marginRight: theme.spacing(8)
+    },
+
     [theme.breakpoints.down("md")]: {
         header: {
             "& h5": {
@@ -61,6 +65,14 @@ const useStyles = makeStyles(theme => ({
                     marginRight: 0
                 }
             }
+        },
+
+        spaceshipButton: {
+            marginRight: theme.spacing(4),
+
+            "& svg": {
+                fontSize: 18
+            }
         }
     },
 
@@ -71,6 +83,16 @@ const useStyles = makeStyles(theme => ({
 
         center: {
             transform: "translateY(100%)"
+        },
+
+        nav: {
+            "& a": {
+                marginRight: theme.spacing(2)
+            }
+        },
+        
+        spaceshipButton: {
+            marginRight: theme.spacing(2)
         }
     }
 }))
@@ -78,9 +100,6 @@ const useStyles = makeStyles(theme => ({
 function Header({ centerElement }) {
     const history = useHistory()
     const location = useLocation()
-
-    const theme = useTheme()
-    const isMedium = useMediaQuery(theme.breakpoints.down("md"))
 
     const classes = useStyles({ centerElement })
 
@@ -108,8 +127,8 @@ function Header({ centerElement }) {
                 </div>
 
                 <nav className={classes.nav}>
-                    {!isSpaceshipActive && !isMedium && (
-                        <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" style={{ marginRight: 64 }} color="inherit">
+                    {!isSpaceshipActive && (
+                        <IconButton onClick={() => setIsSpaceshipActive(true)} size="small" className={classes.spaceshipButton} color="inherit">
                             <FlightIcon/>
                         </IconButton>
                     ) }
