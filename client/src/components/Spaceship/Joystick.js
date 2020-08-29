@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 
+import Vector2d from "./Game/Vector2d.js"
+
 const useStyles = makeStyles(theme => ({
     joystick: {
         width: "100%",
@@ -27,13 +29,18 @@ function Joystick({ eventTarget = new EventTarget() }) {
         const joystick = joystickRef.current
         const thumb = thumbRef.current
 
-        joystick.style.height = joystick.offsetWidth + "px"
+        const joystickSize = joystick.offsetWidth
+        joystick.style.height = joystickSize + "px"
 
         const joystickRect = joystick.getBoundingClientRect()
         const thumbRect = thumb.getBoundingClientRect()
-        
-        const centerPosition = joystickRect.width / 2 - thumbRect.width / 2
-        
+
+        const centerPosition = joystickSize / 2
+        const defaultPosition = {
+            x: centerPosition - thumbRect.width / 2,
+            y: centerPosition - thumbRect.width / 2
+        }
+
         const position = {}
 
         const dispatch = (type, value) => {
@@ -50,16 +57,22 @@ function Joystick({ eventTarget = new EventTarget() }) {
         const getThumbPositionFromEvent = (event) => {
             const { clientX, clientY } = event.touches[0]
 
-            let x = clientX - joystickRect.x - thumbRect.width / 2
-            let y = clientY - joystickRect.y - thumbRect.height / 2
+            let x = clientX - joystickRect.x
+            let y = clientY - joystickRect.y
 
-            if (x < 0 || x + thumbRect.width > joystickRect.width) {
-                x = position.x
+            const normalized = normalizePosition({ x, y })
+
+            const vector = new Vector2d([normalized.x, normalized.y])
+
+            if (vector.abs() > 1) {
+                vector.setMag(1)
+
+                x = (vector.value[0] + 1) / 2 * joystickSize
+                y = (vector.value[1] + 1) / 2 * joystickSize
             }
 
-            if (y < 0 || y + thumbRect.height > joystickRect.height) {
-                y = position.y
-            }
+            x -= thumbRect.width / 2
+            y -= thumbRect.height / 2
 
             return { x, y }
         }
@@ -68,13 +81,16 @@ function Joystick({ eventTarget = new EventTarget() }) {
             position.x = newPosition.x
             position.y = newPosition.y
 
-            dispatch("thumbMove", normalizePosition(position))
+            dispatch("thumbMove", normalizePosition({
+                x: position.x + thumbRect.width / 2,
+                y: position.y + thumbRect.height / 2
+            }))
 
             thumb.style.transform = `translate(${position.x}px, ${position.y}px)`
         }
 
         const handleTouchEnd = () => {
-            setThumbPosition({ x: centerPosition, y: centerPosition })
+            setThumbPosition(defaultPosition)
         }
 
         const handleTouchMove = (event) => {
@@ -85,7 +101,7 @@ function Joystick({ eventTarget = new EventTarget() }) {
             setThumbPosition(newPosition)
         }
 
-        setThumbPosition({ x: centerPosition, y: centerPosition })
+        setThumbPosition(defaultPosition)
 
         joystick.addEventListener("touchend", handleTouchEnd)
         joystick.addEventListener("touchcancel", handleTouchEnd)

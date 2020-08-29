@@ -33,8 +33,8 @@ class Vector2d {
     }
 
     setMag(magnitude) {
-        this.value[0] = this.value[0] * (magnitude / this.abs())
-        this.value[1] = this.value[1] * (magnitude / this.abs())
+        const factor = magnitude / this.abs()
+        this.value = [this.value[0] * factor, this.value[1] * factor]
         return this
     }
 
