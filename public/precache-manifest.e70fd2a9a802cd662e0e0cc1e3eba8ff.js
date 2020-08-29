@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c6a2a9ce164af96842957696e2491b04",
+    "revision": "2920f8e8050fc4fada679c370dab171c",
     "url": "/index.html"
   },
   {
-    "revision": "95c2d5dfc6ae1cc99d77",
+    "revision": "535c128ac00d3eeec282",
     "url": "/static/css/2.8c407835.chunk.css"
   },
   {
-    "revision": "2ef29b11d71b870ebad7",
+    "revision": "31493aa6f7098fb1c371",
     "url": "/static/css/main.b28db314.chunk.css"
   },
   {
-    "revision": "95c2d5dfc6ae1cc99d77",
-    "url": "/static/js/2.c954e87b.chunk.js"
+    "revision": "535c128ac00d3eeec282",
+    "url": "/static/js/2.b6e747af.chunk.js"
   },
   {
     "revision": "029cacb393da85609b7166ec787b372d",
-    "url": "/static/js/2.c954e87b.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.b6e747af.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2ef29b11d71b870ebad7",
-    "url": "/static/js/main.5b0ebffa.chunk.js"
+    "revision": "31493aa6f7098fb1c371",
+    "url": "/static/js/main.f9237fee.chunk.js"
   },
   {
     "revision": "9b4e396c183e42c1fa5c",
@@ -1330,6 +1330,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "4a4f9ff90ed56cc0ae752cbfb3fb7189",
     "url": "/static/media/sequelize-plain.4a4f9ff9.svg"
+  },
+  {
+    "revision": "c5b14856f2149502b1c4d9040d8551cf",
+    "url": "/static/media/shoot-icon.c5b14856.jpg"
   },
   {
     "revision": "a122ca9dfbf084d7123e4b3d5e54b3cb",
