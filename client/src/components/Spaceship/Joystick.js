@@ -3,22 +3,21 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
     joystick: {
-        width: 200,
-        height: 200,
+        width: "100%",
         border: `1px solid ${theme.palette.common.white}`,
         borderRadius: "50%"
     },
 
     thumb: {
-        width: 50,
-        height: 50,
+        width: "25%",
+        height: "25%",
         backgroundColor: theme.palette.common.white,
         borderRadius: "50%",
         boxShadow: theme.shadows[3]
     }
 }))
 
-function Joystick({ eventTarget }) {
+function Joystick({ eventTarget = new EventTarget() }) {
     const classes = useStyles()
 
     const joystickRef = useRef()
@@ -27,6 +26,8 @@ function Joystick({ eventTarget }) {
     useEffect(() => {
         const joystick = joystickRef.current
         const thumb = thumbRef.current
+
+        joystick.style.height = joystick.offsetWidth + "px"
 
         const joystickRect = joystick.getBoundingClientRect()
         const thumbRect = thumb.getBoundingClientRect()
@@ -95,6 +96,8 @@ function Joystick({ eventTarget }) {
             joystick.removeEventListener("touchcancel", handleTouchEnd)
             joystick.removeEventListener("touchmove", handleTouchMove, { passive: false })
         }
+
+        // eslint-disable-next-line
     }, [])
 
     return (

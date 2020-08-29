@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function ShootButton({ eventTarget }) {
+function ShootButton({ eventTarget = new EventTarget() }) {
     const classes = useStyles()
 
     const dispatch = (type) => eventTarget.dispatchEvent(new CustomEvent(type))

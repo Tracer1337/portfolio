@@ -13,6 +13,10 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1),
         zIndex: 500,
         width: "100%"
+    },
+
+    joystickContainer: {
+        minWidth: 200
     }
 }))
 
@@ -42,7 +46,7 @@ function MobileControls(props, ref) {
                     <ShootButton eventTarget={eventTargetRef.current}/>
                 </Grid>
 
-                <Grid item container justify="flex-end">
+                <Grid item container justify="flex-end" className={classes.joystickContainer}>
                     <Joystick eventTarget={eventTargetRef.current}/>
                 </Grid>
             </Grid>
