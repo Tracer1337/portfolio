@@ -57,7 +57,7 @@ function ControlsDialog(props) {
             <DialogTitle>Controls</DialogTitle>
 
             <DialogContent dividers className={classes.content}>
-                <Grid container spacing={2} direction="row-reverse">
+                <Grid container spacing={2} direction={IS_MOBILE ? "row-reverse" : "row"}>
                     <Grid container item xs={6}>
                         { IS_MOBILE ? (
                             <Grid item xs={12}>

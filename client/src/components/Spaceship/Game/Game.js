@@ -131,7 +131,7 @@ class Game {
 
     destroy() {
         this.shouldTerminate = true
-        this.controls.destroy()
+        this.controller.destroy()
     }
 }
 

@@ -127,7 +127,6 @@ class Controller {
     handleThumbMove(event) {
         const position = new Vector2d([event.detail.x, event.detail.y])
         
-        
         if (position.abs() > 0) {
             const angle = position.getAngle()
             

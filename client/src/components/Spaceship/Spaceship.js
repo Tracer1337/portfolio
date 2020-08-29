@@ -6,7 +6,7 @@ import ReloadIcon from "@material-ui/icons/Replay"
 import ControlsDialog from "./ControlsDialog.js"
 import Scoreboard from "./Scoreboard.js"
 import MobileControls from "./MobileControls.js"
-import sprite from "../../assets/images/spaceship.png"
+import sprite from "../../assets/images/spaceship.webp"
 import Game from "./Game/Game.js"
 import Explosion from "./Explosion.js"
 import { colliding } from "../../utils"
@@ -80,7 +80,7 @@ function Spaceship() {
             touchEvents: mobileControlsRef.current?.eventTarget,
 
             // Handle player movement
-            onPlayerChange: player => {
+            onPlayerChange: (player) => {
                 document.documentElement.scrollTop = player.position.value[1] - window.innerHeight * .4
 
                 try {
@@ -92,7 +92,7 @@ function Spaceship() {
             },
 
             // Handle bullet movement
-            onBulletChange: bullet => {
+            onBulletChange: (bullet) => {
                 if (!activeBullets.has(bullet.id)) {
                     const element = document.createElement("div")
 
@@ -134,7 +134,7 @@ function Spaceship() {
             },
 
             // Handle bullet removal
-            onBulletRemove: bullet => {
+            onBulletRemove: (bullet) => {
                 activeBullets.delete(bullet.id)
                 const domElement = document.getElementById(bullet.id)
 

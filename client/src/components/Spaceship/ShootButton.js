@@ -2,7 +2,7 @@ import React from "react"
 import { Fab } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import shooticon from "../../assets/images/shoot-icon.jpg"
+import shooticon from "../../assets/images/shoot-icon.webp"
 
 const useStyles = makeStyles(theme => ({
     shootButton: {
