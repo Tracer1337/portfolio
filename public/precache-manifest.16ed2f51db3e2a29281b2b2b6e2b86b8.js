@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5b6093160dabd9dcc242ef2d65606f84",
+    "revision": "8d743620203afeb1d1b5d7cb542a5192",
     "url": "/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/2.8c407835.chunk.css"
   },
   {
-    "revision": "ecb6bed3e3e940f485be",
+    "revision": "2995349ceebb0f97fb4b",
     "url": "/static/css/main.b28db314.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.9d3fcc1a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ecb6bed3e3e940f485be",
-    "url": "/static/js/main.47e2b64c.chunk.js"
+    "revision": "2995349ceebb0f97fb4b",
+    "url": "/static/js/main.28570296.chunk.js"
   },
   {
     "revision": "9b4e396c183e42c1fa5c",
@@ -556,8 +556,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/erlang-plain.39a5da81.svg"
   },
   {
-    "revision": "6f05b4749576692b1ae1a4ed226bf02e",
-    "url": "/static/media/explosion.6f05b474.gif"
+    "revision": "0906f792f0738b04d52502ae30b97d08",
+    "url": "/static/media/explosion.0906f792.gif"
   },
   {
     "revision": "f1a0b0e9c7eb8a3294e84f11441de5df",
@@ -1332,8 +1332,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/sequelize-plain.4a4f9ff9.svg"
   },
   {
-    "revision": "c5b14856f2149502b1c4d9040d8551cf",
-    "url": "/static/media/shoot-icon.c5b14856.jpg"
+    "revision": "182e9d08686472b211d95e98e5947cda",
+    "url": "/static/media/shoot-icon.182e9d08.webp"
   },
   {
     "revision": "a122ca9dfbf084d7123e4b3d5e54b3cb",
@@ -1376,8 +1376,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/sourcetree-original.b1c123df.svg"
   },
   {
-    "revision": "758f01ea537ad0b56811a2bf0db68efd",
-    "url": "/static/media/spaceship.758f01ea.png"
+    "revision": "9c624cde5dd064cb98377477c3b63de1",
+    "url": "/static/media/spaceship.9c624cde.webp"
   },
   {
     "revision": "1c14fb48a8fd9e91d59d3de82882b0e1",

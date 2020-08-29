@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.b28db314.chunk.css",
-    "main.js": "/static/js/main.47e2b64c.chunk.js",
-    "main.js.map": "/static/js/main.47e2b64c.chunk.js.map",
+    "main.js": "/static/js/main.28570296.chunk.js",
+    "main.js.map": "/static/js/main.28570296.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
     "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
     "static/css/2.8c407835.chunk.css": "/static/css/2.8c407835.chunk.css",
     "static/js/2.9d3fcc1a.chunk.js": "/static/js/2.9d3fcc1a.chunk.js",
     "static/js/2.9d3fcc1a.chunk.js.map": "/static/js/2.9d3fcc1a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.a5ccf0c067e09f2648ce5584d62d8182.js": "/precache-manifest.a5ccf0c067e09f2648ce5584d62d8182.js",
+    "precache-manifest.16ed2f51db3e2a29281b2b2b6e2b86b8.js": "/precache-manifest.16ed2f51db3e2a29281b2b2b6e2b86b8.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.8c407835.chunk.css.map": "/static/css/2.8c407835.chunk.css.map",
     "static/css/main.b28db314.chunk.css.map": "/static/css/main.b28db314.chunk.css.map",
@@ -143,7 +143,7 @@
     "static/media/erlang-original.svg": "/static/media/erlang-original.e0cfde3b.svg",
     "static/media/erlang-plain-wordmark.svg": "/static/media/erlang-plain-wordmark.9fc7b4e3.svg",
     "static/media/erlang-plain.svg": "/static/media/erlang-plain.39a5da81.svg",
-    "static/media/explosion.gif": "/static/media/explosion.6f05b474.gif",
+    "static/media/explosion.gif": "/static/media/explosion.0906f792.gif",
     "static/media/express-original-wordmark.svg": "/static/media/express-original-wordmark.f1a0b0e9.svg",
     "static/media/express-original.svg": "/static/media/express-original.c3af8b67.svg",
     "static/media/facebook-original.svg": "/static/media/facebook-original.94458658.svg",
@@ -337,7 +337,7 @@
     "static/media/sequelize-original.svg": "/static/media/sequelize-original.b8a803af.svg",
     "static/media/sequelize-plain-wordmark.svg": "/static/media/sequelize-plain-wordmark.74193066.svg",
     "static/media/sequelize-plain.svg": "/static/media/sequelize-plain.4a4f9ff9.svg",
-    "static/media/shoot-icon.jpg": "/static/media/shoot-icon.c5b14856.jpg",
+    "static/media/shoot-icon.webp": "/static/media/shoot-icon.182e9d08.webp",
     "static/media/sketch-line-wordmark.svg": "/static/media/sketch-line-wordmark.a122ca9d.svg",
     "static/media/sketch-line.svg": "/static/media/sketch-line.66df715d.svg",
     "static/media/sketch-original-wordmark.svg": "/static/media/sketch-original-wordmark.67676ab1.svg",
@@ -348,7 +348,7 @@
     "static/media/slack-plain.svg": "/static/media/slack-plain.a73f2d08.svg",
     "static/media/sourcetree-original-wordmark.svg": "/static/media/sourcetree-original-wordmark.c1118214.svg",
     "static/media/sourcetree-original.svg": "/static/media/sourcetree-original.b1c123df.svg",
-    "static/media/spaceship.png": "/static/media/spaceship.758f01ea.png",
+    "static/media/spaceship.webp": "/static/media/spaceship.9c624cde.webp",
     "static/media/ssh-original-wordmark.svg": "/static/media/ssh-original-wordmark.1c14fb48.svg",
     "static/media/ssh-original.svg": "/static/media/ssh-original.7b0b1286.svg",
     "static/media/stylus-original.svg": "/static/media/stylus-original.e68c487b.svg",
@@ -413,6 +413,6 @@
     "static/css/2.8c407835.chunk.css",
     "static/js/2.9d3fcc1a.chunk.js",
     "static/css/main.b28db314.chunk.css",
-    "static/js/main.47e2b64c.chunk.js"
+    "static/js/main.28570296.chunk.js"
   ]
 }
