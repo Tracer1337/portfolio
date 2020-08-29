@@ -3,7 +3,7 @@ const chokidar = require("chokidar")
 
 const CIServiceProvider = require("../Services/CIServiceProvider")
 const { createConnection } = require("../../database")
-const loadProjects = require("../../scripts/load-projects.js")
+const updateAPIData = require("../../scripts/update-api-data.js")
 
 async function boot() {
     // Connect to database
@@ -14,7 +14,7 @@ async function boot() {
         // await CIServiceProvider.registerWebhook()
 
         // Automatically update projects
-        // new CronJob("0 * * * *", loadProjects, null, true, "Europe/Berlin").start()
+        new CronJob("0 * * * *", updateAPIData, null, true, "Europe/Berlin").start()
     } else {
         // Update projects whenever content folder has changed
         let isActive = false
