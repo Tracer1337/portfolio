@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         width: 32,
         position: "absolute",
         top: 0, left: 0,
-        zIndex: 2000,
+        zIndex: 200,
 
         "& img": {
             width: "100%"
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#990000",
         position: "absolute",
         top: 8, left: 8,
-        zIndex: 1000,
+        zIndex: 100,
         boxShadow: "0px 0px 3px 1px #990000"
     },
 
