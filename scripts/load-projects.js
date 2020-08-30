@@ -1,6 +1,6 @@
 const { v4: uuid } = require("uuid")
 const path = require("path")
-const { makeRunnable, run } = require("@m.moelter/task-runner")
+const { makeRunnable, run, exec } = require("@m.moelter/task-runner")
 
 if (require.main === module) {
     require("dotenv").config({ path: path.join(__dirname, "..", ".env") })
@@ -48,6 +48,13 @@ async function storeImageForModel(filename, type) {
 const runnable = makeRunnable(async () => {
     if (require.main === module) {
         global.db = await createConnection()
+    }
+
+    // If run on server => Stop all ressource-heavy processes
+    if (process.env.NODE_ENV === "production") {
+        await run(async () => {
+            await exec("sudo pm2 stop all")
+        }, "Clearing Memory")
     }
 
     // Delete all models
@@ -124,7 +131,7 @@ const runnable = makeRunnable(async () => {
             if (data.techstack) {
                 await project.setTechstack(data.techstack)
             }
-
+            
             // Store project into database
             await project.store()
         }
@@ -146,6 +153,13 @@ const runnable = makeRunnable(async () => {
             }))
         })()
     }, "Creating models")
+
+    // If run on server => Start all processes which where stopped previously
+    if (process.env.NODE_ENV === "production") {
+        await run(async () => {
+            await exec("sudo pm2 start all")
+        }, "Releasing Memory")
+    }
 
     if (require.main === module) {
         db.end()

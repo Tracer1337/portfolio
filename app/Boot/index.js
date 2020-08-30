@@ -3,6 +3,7 @@ const chokidar = require("chokidar")
 
 const CIServiceProvider = require("../Services/CIServiceProvider")
 const { createConnection } = require("../../database")
+const loadProjects = require("../../scripts/load-projects.js")
 const updateAPIData = require("../../scripts/update-api-data.js")
 
 async function boot() {
