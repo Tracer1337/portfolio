@@ -1,7 +1,7 @@
 [
     {
-        "name": "Easy Meme",
-        "slug": "easymeme",
+        "name": "Meme Bros",
+        "slug": "memebros",
         "website": "https://www.easymeme69.com/",
         "description": "Meme-Generator as web- and android app",
         "techstack": [
@@ -15,14 +15,8 @@
         ],
         "type": "android-app",
         "apis": {
-            "__activity_analyzer": {
-                "activity_id": "e1a2ebfb-7842-4369-bb92-70977e9117b6"
-            },
             "google_play": {
                 "app_id": "com.easymeme69.memegenerator"
-            },
-            "google_analytics": {
-                "view_id": 220774653
             }
         }
     },
@@ -62,9 +56,6 @@
         ],
         "type": "website",
         "apis": {
-            "__activity_analyzer": {
-                "activity_id": "5b1aa523-14c3-4d60-8475-4713dfeee90a"
-            },
             "google_analytics": {
                 "view_id": 215340054
             }
@@ -139,11 +130,7 @@
             "Apache"
         ],
         "type": "website",
-        "apis": {
-            "__activity_analyzer": {
-                "activity_id": "5b1aa523-14c3-4d60-8475-4713dfeee90a"
-            }
-        }
+        "apis": {}
     },
 
     {

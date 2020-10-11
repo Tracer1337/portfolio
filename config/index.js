@@ -27,15 +27,6 @@ module.exports = {
     imageFormat: "webp",
 
     api: {
-        activityAnalyzer: {
-            name: "activity_analyzer",
-
-            routes: {
-                base: "http://52.59.214.55:3000/api",
-                activity: "http://52.59.214.55:3000/api/activities"
-            }
-        },
-
         googleAnalytics: {
             name: "google_analytics"
         },
