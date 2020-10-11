@@ -21,12 +21,13 @@ const useStyles = makeStyles(theme => ({
         position: "absolute",
         top: 0,
         left: 0,
-        opacity: .7
+        opacity: .8
     },
 
     [theme.breakpoints.down("md")]: {
         text: {
-            textAlign: "center"
+            textAlign: "center",
+            fontSize: theme.typography.h3.fontSize
         },
 
         textMask: {

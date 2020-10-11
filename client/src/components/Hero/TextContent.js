@@ -1,6 +1,6 @@
 import React from "react"
 import clsx from "clsx"
-import { Typography, Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import MailIcon from "@material-ui/icons/Email"
 
@@ -8,13 +8,7 @@ import MaskedText from "./MaskedText.js"
 
 const useStyles = makeStyles(theme => ({
     primaryWrapper: {
-        marginBottom: theme.spacing(1)
-    },
-
-    secondary: {
-        fontWeight: 200,
-        marginBottom: theme.spacing(3),
-        position: "relative"
+        marginBottom: theme.spacing(3)
     },
 
     link: {
@@ -27,14 +21,13 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.primary
     },
 
+    linksWrapper: {
+        position: "relative"
+    },
+
     [theme.breakpoints.down("md")]: {
         container: {
             margin: `${theme.spacing(8)}px 0`
-        },
-
-        secondary: {
-            textAlign: "center",
-            fontSize: theme.typography.h5.fontSize
         },
 
         linksWrapper: {
@@ -49,12 +42,8 @@ function TextContent() {
     return (
         <div className={classes.container}>
             <div className={classes.primaryWrapper}>
-                <MaskedText>Websites</MaskedText>
-                <MaskedText>Mobile Apps</MaskedText>
-                <MaskedText>Embedded Devices</MaskedText>
+                <MaskedText>Programming is art.</MaskedText>
             </div>
-
-            <Typography variant="h3" className={classes.secondary} data-shootable>on a whole new level</Typography>
 
             <Grid container spacing={2} className={classes.linksWrapper}>
                 <Grid item>
