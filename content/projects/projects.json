@@ -116,10 +116,10 @@
     },
 
     {
-        "name": "Activity Analyzer",
-        "slug": "activity-analyzer",
-        "website": "https://github.com/Tracer1337/activitiy-analyzer",
-        "description": "Personal tool for tracking and analyzing activities",
+        "name": "Competition Platform",
+        "slug": "competition-platform",
+        "website": "http://52.59.214.55:3200/",
+        "description": "Competitions Platform with discord integration",
         "techstack": [
             "Javascript",
             "NodeJS",
