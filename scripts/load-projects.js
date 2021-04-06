@@ -50,13 +50,6 @@ const runnable = makeRunnable(async () => {
         global.db = await createConnection()
     }
 
-    // If run on server => Stop all ressource-heavy processes
-    if (process.env.NODE_ENV === "production") {
-        await run(async () => {
-            await exec("sudo pm2 stop all")
-        }, "Clearing Memory")
-    }
-
     // Delete all models
     await run(async () => {
         const classes = [Project, TechstackEntry, Asset, Icon]
@@ -153,13 +146,6 @@ const runnable = makeRunnable(async () => {
             }))
         })()
     }, "Creating models")
-
-    // If run on server => Start all processes which where stopped previously
-    if (process.env.NODE_ENV === "production") {
-        await run(async () => {
-            await exec("sudo pm2 start all")
-        }, "Releasing Memory")
-    }
 
     if (require.main === module) {
         db.end()
