@@ -6,7 +6,6 @@ import Layout from "../components/Layout/Layout.js"
 import Container from "../components/Layout/Container.js"
 import Hero from "../components/Hero/Hero.js"
 import Projects from "../components/Projects/Projects.js"
-import AboutMe from "../components/AboutMe.js"
 import { makeTitle } from "../utils"
 
 const useStyles = makeStyles(theme => ({
@@ -38,12 +37,8 @@ function IndexPage() {
                 <Hero/>
             </Container>
 
-            <div className={classes.section} id="projects">
+            <div id="projects">
                 <Projects/>
-            </div>
-
-            <div className={classes.section} id="about-me">
-                <AboutMe/>
             </div>
         </Layout>
     )

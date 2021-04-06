@@ -1,7 +1,14 @@
-I'm Merlin, and for 3 years programming is a part of my life. I like expressing myself through my projects and creating applications which people like to use. I am currently employed at the [Sonormed GMBH](https://www.sonormed.com/de/), where we develop a progressive web application in a rather small team. The company works in the field of digital audiology and the product me and my coworkers develop is about a passive therapy for developing a more healthy relationship to tinnitus.
+Roses are red,  
+Violets are blue,  
+I like quality products,  
+And so do you.  
 
-Besides doing my a-levels in school I visit the volunteer firefighters in my free time where I began my education for becoming a firefighter on February this year. This is, especially in the summer, a really fun and versatile hobby to pursue since we may perform exercises using water which can be a nice cooling-off in the summer or go paddling for rescue on a lake.
+Now wouldn't it be the best choice,  
+To hire me?  
+Tell me!  
+Heee.  
 
-As mentioned before, I am currently working on my a-levels in school which will be written in June this year. After school, I attempt to enroll in the university of Hamburg for a bachelor degree in computer science, and I am actively looking for further oppurtunities to educate myself. Areas that interest me besides the projects I am currently working on are artificial intelligence with main focus on neural networks, data science, and backing pizza.
-
-In case you want, after reading this glorious article, contact me, the preferred method is writing an email to [merlin.moelter@gmail.com](mailto:merlin.moelter@gmail.com).
+My programming skills are,  
+Much better than my poetry skills,  
+Please hire me,  
+So I can pay my bills.

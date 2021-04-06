@@ -136,10 +136,6 @@ function Header({ centerElement }) {
                     <a href="#projects" onClick={handleRedirect} data-shootable>
                         <Typography variant="h5">Projects</Typography>
                     </a>
-                    
-                    <a href="#about-me" onClick={handleRedirect} data-shootable>
-                        <Typography variant="h5">About Me</Typography>
-                    </a>
                 </nav>
             </header>
         </>
