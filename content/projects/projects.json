@@ -17,6 +17,34 @@
     },
 
     {
+        "name": "Wolfgang",
+        "slug": "wolfgang",
+        "website": "https://wolfgang.gg/",
+        "description": "A modular discord bot",
+        "techstack": [
+            "Typescript",
+            "NodeJS",
+            "React",
+            "Express",
+            "MySQL",
+            "NGINX"
+        ],
+        "type": "website"
+    },
+
+    {
+        "name": "Shitty Search",
+        "slug": "shitty-search",
+        "website": "https://github.com/Tracer1337/shitty-search",
+        "description": "The worst search engine you have ever seen",
+        "techstack": [
+            "Typescript",
+            "MySQL"
+        ],
+        "type": "website"
+    },
+
+    {
         "name": "Substitution-Plan App",
         "slug": "subst-plan-app",
         "website": "https://play.google.com/store/apps/details?id=com.vertretungsplan",
@@ -33,8 +61,8 @@
     {
         "name": "Yet Another Blog",
         "slug": "yet-another-blog",
-        "website": "https://www.yet-another-blog.com/",
-        "description": "Pretty ugly blog with a few posts",
+        "website": "https://github.com/Tracer1337/laravel-blog",
+        "description": "Ugly blog with a completely unnecessary SPA",
         "techstack": [
             "Javascript",
             "PHP",
@@ -45,19 +73,6 @@
             "Apache"
         ],
         "type": "website"
-    },
-
-    {
-        "name": "MeArm - RaspberryPi",
-        "slug": "mearm-raspi",
-        "website": "https://www.yet-another-blog.com/post/robotic-arm",
-        "description": "Robotic arm controller via raspi and an app",
-        "techstack": [
-            "Python",
-            "Javascript",
-            "React"
-        ],
-        "type": "embedded"
     },
 
     {
@@ -82,49 +97,5 @@
             "React"
         ],
         "type": "website"
-    },
-
-    {
-        "name": "Workout Clock",
-        "slug": "workout-clock",
-        "website": "https://wizardly-jepsen-c49888.netlify.app/",
-        "description": "Stopwatch for doing workouts at home",
-        "techstack": [
-            "Javascript",
-            "React"
-        ],
-        "type": "website"
-    },
-
-    {
-        "name": "Competition Platform",
-        "slug": "competition-platform",
-        "website": "http://52.59.214.55:3200/",
-        "description": "Competitions Platform with discord integration",
-        "techstack": [
-            "Javascript",
-            "NodeJS",
-            "React",
-            "Express",
-            "MySQL",
-            "AWS",
-            "Apache"
-        ],
-        "type": "website"
-    },
-
-    {
-        "name": "React Mui Boilerplate",
-        "slug": "react-mui-boilerplate",
-        "website": "https://www.npmjs.com/package/react-mui-boilerplate",
-        "description": "Personal react / express boilerplate",
-        "techstack": [
-            "Javascript",
-            "NodeJS",
-            "React",
-            "Express",
-            "MySQL"
-        ],
-        "type": "npm-package"
     }
 ]
