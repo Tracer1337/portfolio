@@ -2,6 +2,7 @@ node_modules/
 *.pem
 *.log
 .env
-temp/*
+temp/
 portfolio*/
 config/*credentials.*
+storage/

@@ -13,7 +13,7 @@ class Project extends Model {
     constructor(values) {
         super({
             table: "projects",
-            columns: ["id", "name", "slug", "website", "type", "description", "readme", "apis", "position"],
+            columns: ["id", "name", "slug", "website", "type", "description", "readme", "position"],
             ...values
         })
     }
@@ -35,10 +35,6 @@ class Project extends Model {
     async init() {
         this.techstack = await TechstackEntry.findAllBy("project_id", this.id)
         this.assets = await Asset.findAllBy("model_ref", this.id)
-
-        try {
-            this.apis = typeof this.apis === "string" ? JSON.parse(this.apis) : this.apis
-        } catch {}
     }
 
     async store() {
@@ -74,7 +70,6 @@ class Project extends Model {
             type: this.type,
             description: this.description,
             readme: this.readme,
-            apis: this.apis,
             assets: this.assets,
             position: this.position,
             techstack: this.techstack

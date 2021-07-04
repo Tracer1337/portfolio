@@ -9,7 +9,6 @@ module.exports = {
         "type varchar(255) NOT NULL",
         "description text",
         "readme mediumtext",
-        "apis text",
         "position integer NOT NULL"
     ]
 }

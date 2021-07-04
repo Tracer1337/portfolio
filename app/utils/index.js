@@ -3,7 +3,6 @@ const path = require("path")
 const { v4: uuid } = require("uuid")
 const util = require("util")
 const sharp = require("sharp")
-const multer = require("multer")
 
 const config = require("../../config")
 
@@ -70,26 +69,11 @@ async function compressImage(buffer) {
             .toBuffer()
 }
 
-// Create configured multer instance
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, callback) => {
-            callback(null, TEMP_DIR)
-        },
-
-        filename: (req, file, callback) => {
-            const filename = uuid() + "." + getFileExtension(file.originalname)
-            callback(null, filename)
-        }
-    })
-})
-
 module.exports = {
     queryAsync,
     quotedList,
     createTempFile,
     getFileExtension,
     compressImage,
-    upload,
     readFileAsync, writeFileAsync, unlinkAsync, readdirAsync, existsAsync
 }

@@ -13,12 +13,7 @@
             "AWS",
             "Apache"
         ],
-        "type": "android-app",
-        "apis": {
-            "google_play": {
-                "app_id": "com.easymeme69.memegenerator"
-            }
-        }
+        "type": "android-app"
     },
 
     {
@@ -32,12 +27,7 @@
             "Java",
             "Android"
         ],
-        "type": "android-app",
-        "apis": {
-            "google_play": {
-                "app_id": "com.vertretungsplan"
-            }
-        }
+        "type": "android-app"
     },
 
     {
@@ -54,12 +44,7 @@
             "AWS",
             "Apache"
         ],
-        "type": "website",
-        "apis": {
-            "google_analytics": {
-                "view_id": 215340054
-            }
-        }
+        "type": "website"
     },
 
     {
@@ -72,8 +57,7 @@
             "Javascript",
             "React"
         ],
-        "type": "embedded",
-        "apis": {}
+        "type": "embedded"
     },
 
     {
@@ -85,8 +69,7 @@
             "Javascript",
             "React"
         ],
-        "type": "website",
-        "apis": {}
+        "type": "website"
     },
 
     {
@@ -98,8 +81,7 @@
             "Javascript",
             "React"
         ],
-        "type": "website",
-        "apis": {}
+        "type": "website"
     },
 
     {
@@ -111,8 +93,7 @@
             "Javascript",
             "React"
         ],
-        "type": "website",
-        "apis": {}
+        "type": "website"
     },
 
     {
@@ -129,8 +110,7 @@
             "AWS",
             "Apache"
         ],
-        "type": "website",
-        "apis": {}
+        "type": "website"
     },
 
     {
@@ -145,11 +125,6 @@
             "Express",
             "MySQL"
         ],
-        "type": "npm-package",
-        "apis": {
-            "npm": {
-                "package_name": "react-mui-boilerplate"
-            }
-        }
+        "type": "npm-package"
     }
 ]

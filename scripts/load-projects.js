@@ -1,6 +1,6 @@
 const { v4: uuid } = require("uuid")
 const path = require("path")
-const { makeRunnable, run, exec } = require("@m.moelter/task-runner")
+const { makeRunnable, run } = require("@m.moelter/task-runner")
 
 if (require.main === module) {
     require("dotenv").config({ path: path.join(__dirname, "..", ".env") })
@@ -12,7 +12,6 @@ const Project = require("../app/Models/Project.js")
 const Asset = require("../app/Models/Asset.js")
 const TechstackEntry = require("../app/Models/TechstackEntry.js")
 const Icon = require("../app/Models/Icon.js")
-const { fetchMultipleAPIData } = require("../app/Services/APIServiceProvider.js")
 const { createConnection } = require("../database/index.js")
 const { compressImage, readdirAsync, readFileAsync, existsAsync, createTempFile } = require("../app/utils")
 
@@ -29,7 +28,7 @@ async function storeImageForModel(filename, type) {
 
     // Write file to storage
     const temp = await createTempFile(compressed, config.imageFormat)
-    await Storage.uploadFile(temp.path, temp.filename)
+    Storage.uploadFile(temp.path, temp.filename)
     await temp.delete()
 
     // Create asset
@@ -72,14 +71,10 @@ const runnable = makeRunnable(async () => {
         // Create new projects
         for(let i = 0; i < projects.length; i++) {
             const data = projects[i]
-
-            // Fetch data from given endpoints
-            const apiData = await fetchMultipleAPIData(data.apis)
             
             const project = new Project({
                 ...data,
                 id: uuid(),
-                apis: apiData,
                 position: i
             })
 

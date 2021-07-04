@@ -4,9 +4,6 @@ import { Link } from "react-router-dom"
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Button, Grid, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import WebsiteIcon from "@material-ui/icons/Language"
-import ClockIcon from "@material-ui/icons/Schedule"
-import EyeIcon from "@material-ui/icons/Visibility"
-import DownloadIcon from "@material-ui/icons/GetApp"
 
 import googlePlayIcon from "../assets/images/google_play.webp"
 import placeholderImage from "../assets/images/placeholder-image.png"
@@ -20,28 +17,6 @@ const projectTypeElementMap = {
     "website": ({ className }) => <WebsiteIcon className={className}/>,
     "npm-package": ({ className }) => <i className={clsx(className, "devicon-npm-original-wordmark", "colored")}/>,
     "embedded": ({ className }) => <img src={embeddedIcon} className={className} alt="Embedded" style={{ filter: "invert(1)" }}/>
-}
-
-const apiLabelMap = {
-    "activity_analyzer": {
-        icon: ({ className }) => <ClockIcon className={className} />,
-        label: "Hours"
-    },
-
-    "google_analytics": {
-        icon: ({ className }) => <EyeIcon className={className} />,
-        label: "Pageviews / Month"
-    },
-
-    "google_play": {
-        icon: ({ className }) => <DownloadIcon className={className} />,
-        label: "Downloads"
-    },
-
-    "npm": {
-        icon: ({ className }) => <DownloadIcon className={className} />,
-        label: "Downloads / Month"
-    }
 }
 
 const useStyles = makeStyles(theme => ({
@@ -80,10 +55,6 @@ const useStyles = makeStyles(theme => ({
     content: {
         paddingBottom: 0,
         height: 60
-    },
-
-    apiItem: {
-        width: "unset"
     },
 
     link: {
@@ -129,24 +100,6 @@ function ProjectCard({ data }) {
                     image={thumbnail ? window.origin + thumbnail.path : placeholderImage}
                     className={classes.image}
                 />
-
-                <CardContent className={classes.content}>
-                    <Grid item container wrap="nowrap" spacing={2}>
-                        {Object.entries(apiLabelMap).map(([api, { icon, label }]) => data.apis[api] && (
-                            <Tooltip title={label} key={api}>
-                                <Grid item container direction="column" alignItems="center" justify="space-between" className={classes.apiItem}>
-                                    <Grid item>
-                                        {React.createElement(icon, { className: classes.icon })}
-                                    </Grid>
-
-                                    <Grid item>
-                                        {data.apis[api].data}
-                                    </Grid>
-                                </Grid>
-                            </Tooltip>
-                        ))}
-                    </Grid>
-                </CardContent>
             </Link>
 
             <CardActions>
