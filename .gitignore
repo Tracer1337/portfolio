@@ -1,4 +1,8 @@
-node_modules
-.cache
-public
-generated/*[.ts]
+node_modules/
+*.pem
+*.log
+.env
+temp/
+portfolio*/
+config/*credentials.*
+storage/

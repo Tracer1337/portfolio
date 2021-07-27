@@ -1,0 +1,101 @@
+[
+    {
+        "name": "Meme Bros",
+        "slug": "memebros",
+        "website": "https://www.easymeme69.com/",
+        "description": "Meme-Generator as web- and android app",
+        "techstack": [
+            "Javascript",
+            "NodeJS",
+            "React",
+            "Express",
+            "MySQL",
+            "AWS",
+            "Apache"
+        ],
+        "type": "android-app"
+    },
+
+    {
+        "name": "Wolfgang",
+        "slug": "wolfgang",
+        "website": "https://wolfgang.gg/",
+        "description": "A modular discord bot",
+        "techstack": [
+            "Typescript",
+            "NodeJS",
+            "React",
+            "Express",
+            "MySQL",
+            "NGINX"
+        ],
+        "type": "website"
+    },
+
+    {
+        "name": "Shitty Search",
+        "slug": "shitty-search",
+        "website": "https://github.com/Tracer1337/shitty-search",
+        "description": "The worst search engine you have ever seen",
+        "techstack": [
+            "Typescript",
+            "MySQL"
+        ],
+        "type": "website"
+    },
+
+    {
+        "name": "Substitution-Plan App",
+        "slug": "subst-plan-app",
+        "website": "https://play.google.com/store/apps/details?id=com.vertretungsplan",
+        "description": "Mobile App for the substitution plan of my school",
+        "techstack": [
+            "Javascript",
+            "React",
+            "Java",
+            "Android"
+        ],
+        "type": "android-app"
+    },
+
+    {
+        "name": "Yet Another Blog",
+        "slug": "yet-another-blog",
+        "website": "https://github.com/Tracer1337/laravel-blog",
+        "description": "Ugly blog with a completely unnecessary SPA",
+        "techstack": [
+            "Javascript",
+            "PHP",
+            "Laravel",
+            "React",
+            "MySQL",
+            "AWS",
+            "Apache"
+        ],
+        "type": "website"
+    },
+
+    {
+        "name": "DynaSys online",
+        "slug": "dynasys-online",
+        "website": "https://youthful-mestorf-9e0ba8.netlify.app/",
+        "description": "Simulation software inspired by DynaSys",
+        "techstack": [
+            "Javascript",
+            "React"
+        ],
+        "type": "website"
+    },
+
+    {
+        "name": "Pathfinding Visualization",
+        "slug": "pathfinding-visualization",
+        "website": "https://reverent-shirley-9fb34f.netlify.app/",
+        "description": "Interactive visualisation of pathfinding algorithms",
+        "techstack": [
+            "Javascript",
+            "React"
+        ],
+        "type": "website"
+    }
+]
