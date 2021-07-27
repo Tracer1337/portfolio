@@ -15,6 +15,7 @@ import ImageGrid from "../components/ImageGrid/ImageGrid.js"
 import Markdown from "../components/Markdown.js"
 import Techstack from "../components/Techstack.js"
 import { makeTitle } from "../utils"
+import { getImageURL } from "../config/api.js"
 
 const useStyles = makeStyles(theme => ({
     navItem: {
@@ -69,9 +70,7 @@ function ProjectPage() {
 
     const project = data?.find(project => project.slug === slug)
 
-    const gallery = project?.assets.filter(asset => asset.type === "gallery") || []
-
-    const projectIndex = data?.findIndex(({ id }) => project.id === id)
+    const projectIndex = data?.findIndex(({ slug }) => project.slug === slug)
     const prevProject = data?.[projectIndex - 1]
     const nextProject = data?.[projectIndex + 1]
 
@@ -138,7 +137,7 @@ function ProjectPage() {
                 </Grid>
 
                 <div className={classes.section}>
-                    { !isLoading && <ImageGrid images={gallery.map(image => image.path)} /> }
+                    { !isLoading && <ImageGrid images={project.gallery.map(getImageURL)} /> }
                 </div>
             </Container>
         </Layout>

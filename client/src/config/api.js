@@ -17,4 +17,5 @@ function url(path) {
 
 export const getTotalTechstack = () => axios.get(url("/resources/techstack"))
 export const getProjects = () => axios.get(url("/resources/projects")).then(format(PROJECTS))
-export const getAboutMeText = () => axios.get(url("/resources/aboutme"))
+
+export const getImageURL = (filename) => url(`/resources/images/${filename}`)

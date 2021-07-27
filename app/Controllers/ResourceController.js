@@ -1,30 +1,24 @@
-const path = require("path")
+const ContentLoader = require("../Services/ContentLoader")
 
-const TechstackEntry = require("../Models/TechstackEntry.js")
-const Project = require("../Models/Project.js")
-const { readFileAsync } = require("../utils")
-
-const CONTENT_DIR = path.join(__dirname, "..", "..", "content")
-
-async function getTotalTechstack(req, res) {
-    // Get distinct techstack entries
-    const entries = await TechstackEntry.findDistinct("name")
-
-    res.send(entries)
+function getTotalTechstack(req, res) {
+    res.send(ContentLoader.techstack)
 }
 
-async function getProjects(req, res) {
-    // Get project models
-    const projects = await Project.where("id = id")
-
+function getProjects(req, res) {
+    const projects = Object.values(ContentLoader.projects)
     res.send(projects)
 }
 
-async function getAboutMe(req, res) {
-    // Get content of "aboutme.md"
-    const content = (await readFileAsync(path.join(CONTENT_DIR, "ABOUTME.md"))).toString()
-
-    res.send(content)
+function getImage(req, res) {
+    const image = ContentLoader.images[req.params.file]
+    if (!image) {
+        return res.sendStatus(404)
+    }
+    res.set("Content-Type", "image/webp").send(image)
 }
 
-module.exports = { getTotalTechstack, getProjects, getAboutMe }
+module.exports = {
+    getTotalTechstack,
+    getProjects,
+    getImage
+}

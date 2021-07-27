@@ -5,6 +5,7 @@ import { Card, CardHeader, CardMedia, CardActions, Button } from "@material-ui/c
 import { makeStyles } from "@material-ui/core/styles"
 import WebsiteIcon from "@material-ui/icons/Language"
 
+import { getImageURL } from "../config/api"
 import googlePlayIcon from "../assets/images/google_play.webp"
 import placeholderImage from "../assets/images/placeholder-image.png"
 import embeddedIcon from "../assets/images/embedded-icon.jpg"
@@ -75,8 +76,6 @@ const useStyles = makeStyles(theme => ({
 function ProjectCard({ data }) {
     const classes = useStyles()
 
-    const thumbnail = data.assets?.find(asset => asset.type === "thumbnail")
-
     const projectPageLink = "/project/" + data.slug
 
     return (
@@ -97,7 +96,7 @@ function ProjectCard({ data }) {
                 />
 
                 <CardMedia
-                    image={thumbnail ? window.origin + thumbnail.path : placeholderImage}
+                    image={data.thumbnail ? getImageURL(data.thumbnail) : placeholderImage}
                     className={classes.image}
                 />
             </Link>
