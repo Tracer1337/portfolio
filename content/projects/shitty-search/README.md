@@ -1,1 +1,1 @@
-Shitty Search is a simple search engine which is for educational purposes only.
+Shitty Search is a simple search engine which may never be used by anyone.
