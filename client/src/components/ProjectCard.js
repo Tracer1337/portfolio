@@ -80,26 +80,24 @@ function ProjectCard({ data }) {
 
     return (
         <Card className={classes.projectCard} data-shootable>
-            <Link to={projectPageLink} className={classes.link}>
-                <CardHeader
-                    title={data.name}
-                    action={
-                        <div className={classes.headerIconWrapper}>
-                            { projectTypeElementMap[data.type] && React.createElement(projectTypeElementMap[data.type], {
-                                className: classes.headerIcon
-                            }) }
-                        </div>
-                    }
-                    classes={{
-                        action: classes.headerAction
-                    }}
-                />
+            <CardHeader
+                title={data.name}
+                action={
+                    <div className={classes.headerIconWrapper}>
+                        { projectTypeElementMap[data.type] && React.createElement(projectTypeElementMap[data.type], {
+                            className: classes.headerIcon
+                        }) }
+                    </div>
+                }
+                classes={{
+                    action: classes.headerAction
+                }}
+            />
 
-                <CardMedia
-                    image={data.thumbnail ? getImageURL(data.thumbnail) : placeholderImage}
-                    className={classes.image}
-                />
-            </Link>
+            <CardMedia
+                image={data.thumbnail ? getImageURL(data.thumbnail) : placeholderImage}
+                className={classes.image}
+            />
 
             <CardActions>
                 <Link to={projectPageLink} className={classes.link}>
