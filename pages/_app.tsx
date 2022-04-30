@@ -1,9 +1,10 @@
-import React from "react"
+/** @jsxImportSource @emotion/react */
 import { CacheProvider, css, Global } from "@emotion/react"
 import { AppProps } from "next/app"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
 import Head from "next/head"
+import Layout from "../components/Layout"
 
 export type CustomAppProps = AppProps & {
     emotionCache: EmotionCache
@@ -33,7 +34,9 @@ export default function App(props: CustomAppProps) {
                     }
                 `}
             />
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </CacheProvider>
     )
 }
