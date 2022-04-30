@@ -1,32 +1,35 @@
-import * as React from "react"
-import Document, { Html, Head, Main, NextScript } from "next/document"
+import React from "react"
+import Document, {
+    Html,
+    Head,
+    Main,
+    NextScript,
+    DocumentContext
+} from "next/document"
 import createEmotionServer from "@emotion/server/create-instance"
-import theme from "../lib/theme"
 import { createEmotionCache } from "../lib/emotion"
 
-export default class MyDocument extends Document {
-    render() {
-        return (
-            <Html lang="en">
-                <Head>
-                    <meta name="theme-color" content={theme.palette.primary.main} />
-                    <link rel="shortcut icon" href="/static/favicon.ico" />
-                    <link rel="preconnect" href="https://fonts.googleapis.com" />
-                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet" />
-                    {/* @ts-ignore */}
-                    {this.props.emotionStyleTags}
-                </Head>
-                <body>
-                    <Main />
-                    <NextScript />
-                </body>
-            </Html>
-        )
-    }
+function MyDocument(props: React.ComponentProps<typeof Document> & {
+    emotionStyleTags: JSX.Element[]
+}) {
+    return (
+        <Html lang="en">
+            <Head>
+                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet" />
+                {props.emotionStyleTags}
+            </Head>
+            <body>
+                <Main />
+                <NextScript />
+            </body>
+        </Html>
+    )
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     const originalRenderPage = ctx.renderPage
 
     const cache = createEmotionCache()
@@ -56,3 +59,5 @@ MyDocument.getInitialProps = async (ctx) => {
         emotionStyleTags,
     }
 }
+
+export default MyDocument
