@@ -1,36 +1,66 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
+import anime from "animejs"
+import styled from "@emotion/styled"
 
-const stars = 1000
-
-function Background() {
-    const canvasRef = useRef<HTMLCanvasElement>(null)
+function useAnimation({ targetRefs }: {
+    targetRefs: [
+        React.RefObject<HTMLDivElement>,
+        React.RefObject<HTMLDivElement>
+    ]
+}) {
+    const isAnimating = useRef(false)
 
     useEffect(() => {
-        const canvas = canvasRef.current
-    
-        if (!canvas) return
+        if (isAnimating.current) return
 
-        canvas.width = canvas.clientWidth
-        canvas.height = canvas.clientHeight
+        const targets = targetRefs.map((ref) => ref.current)
 
-        const context = canvas.getContext("2d")
+        if (targets.some((target) => !target)) return
 
-        if (!context) return
+        isAnimating.current = true
 
-        context.fillStyle = "#fff"
+        const duration = 1000
 
-        for (let i = 0; i < stars; i++) {
-            const x = Math.random() * canvas.width
-            const y = Math.random() * canvas.height
-            const r = Math.random() * 2
-            context.beginPath()
-            context.ellipse(x, y, r, r, 0, 0, Math.PI * 2)
-            context.fill()
-        }
+        const animation = anime({
+            targets,
+            easing: "linear",
+            translateY: -100,
+            duration,
+            autoplay: false
+        })
+
+        const ScrollMagic = require("scrollmagic")
+
+        const controller = new ScrollMagic.Controller()
+
+        new ScrollMagic.Scene({
+            triggerElement: "body",
+            triggerHook: "onLeave",
+            duration: window.innerHeight * 2
+        })
+            .on("progress", (event: ScrollMagic.ProgressEvent) => {
+                animation.seek(event.progress * duration)
+            })
+            .addTo(controller)
     }, [])
-    
+}
+
+const Starfield = styled.div`
+    background-image: url("/starfield.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`
+
+function Background() {
+    const targetRef1 = useRef<HTMLDivElement>(null)
+    const targetRef2 = useRef<HTMLDivElement>(null)
+
+    useAnimation({ targetRefs: [targetRef1, targetRef2] })
+
     return (
         <div css={css`
             // https://mycolor.space/gradient3?ori=to+right+top&hex=%23000000&hex2=%2302000A&hex3=%23000000&submit=submit
@@ -40,9 +70,12 @@ function Background() {
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            display: flex;
         `}>
-            <canvas ref={canvasRef}/>
+            <Starfield ref={targetRef1}/>
+            <Starfield
+                ref={targetRef2}
+                css={css`transformY: 100%;`}
+            />
         </div>
     )
 }
