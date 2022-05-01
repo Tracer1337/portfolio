@@ -38,7 +38,7 @@ function useParallaxAnimation({ targetRefs }: {
         new ScrollMagic.Scene({
             triggerElement: "body",
             triggerHook: "onLeave",
-            duration: document.body.clientHeight
+            duration: document.body.clientHeight * 2
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {
                 animation.seek(event.progress * duration)

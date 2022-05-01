@@ -3,7 +3,14 @@ import React, { useRef } from "react"
 import { css } from "@emotion/react"
 import { useCrashAnimation } from "./animation"
 
-function CrashAnimation(props: React.ComponentProps<"div">) {
+function CrashAnimation({
+    offset,
+    duration,
+    ...props
+}: React.ComponentProps<"div"> & {
+    offset: number,
+    duration: number
+}) {
     const containerRef = useRef<HTMLDivElement>(null)
     const spaceshipRef = useRef<HTMLImageElement>(null)
     const moonRef = useRef<HTMLImageElement>(null)
@@ -13,7 +20,9 @@ function CrashAnimation(props: React.ComponentProps<"div">) {
         containerRef,
         spaceshipRef,
         moonRef,
-        explosionRef
+        explosionRef,
+        offset,
+        duration
     })
     
     return (

@@ -3,19 +3,22 @@ import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
 
 const explosionSrc = "/explosion.gif"
-const duration = 1000
 const rotationStage2Begin = 0.6
 
 export function useCrashAnimation({
     containerRef,
     spaceshipRef,
     moonRef,
-    explosionRef
+    explosionRef,
+    offset,
+    duration
 }: {
     containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
     moonRef: React.RefObject<HTMLImageElement>,
-    explosionRef: React.RefObject<HTMLImageElement>
+    explosionRef: React.RefObject<HTMLImageElement>,
+    offset: number,
+    duration: number
 }) {
     const isAnimating = useRef(false)
     const explosionTimeoutRef = useRef<number>()
@@ -93,7 +96,7 @@ export function useCrashAnimation({
         new ScrollMagic.Scene({
             triggerElement: container,
             triggerHook: "onLeave",
-            offset: -144,
+            offset,
             duration
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {

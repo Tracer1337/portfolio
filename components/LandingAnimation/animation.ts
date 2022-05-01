@@ -2,16 +2,18 @@ import React, { useEffect, useRef } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
 
-const duration = 1000
-
 export function useLandingAnimation({
     containerRef,
     spaceshipRef,
-    marsRef
+    marsRef,
+    offset,
+    duration
 }: {
     containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
-    marsRef: React.RefObject<HTMLImageElement>
+    marsRef: React.RefObject<HTMLImageElement>,
+    offset: number,
+    duration: number
 }) {
     const isAnimating = useRef(false)
 
@@ -66,7 +68,7 @@ export function useLandingAnimation({
 
         new ScrollMagic.Scene({
             triggerElement: container,
-            offset: 200,
+            offset,
             duration
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {

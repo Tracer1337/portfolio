@@ -2,9 +2,7 @@
 import { css } from "@emotion/react"
 import { getAPIUrl } from "../../lib/cms"
 
-function Techstack({ skills }: {
-    skills: any[]
-}) {
+function Techstack({ skills }: { skills: any[] }) {
     return (
         <div css={css`
             display: flex;
@@ -18,9 +16,9 @@ function Techstack({ skills }: {
                 display: flex;
                 flex-wrap: wrap;
             `}>
-                {skills.map((skill) => (
+                {skills.map((skill, i) => (
                     <div
-                        key={skill.name}
+                        key={i}
                         css={css`
                             width: 64px;
                             height: 88px;

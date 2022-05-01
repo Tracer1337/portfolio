@@ -6,7 +6,8 @@ export function getAPIUrl(path: string) {
 
 export async function getProjects() {
     const res = await fetch(getAPIUrl("/projects"))
-    return await res.json()
+    const entries: any[] = await res.json()
+    return entries.reverse()
 }
 
 export async function getSkills() {
