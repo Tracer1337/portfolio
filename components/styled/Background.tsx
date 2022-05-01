@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
 import anime from "animejs"
 import styled from "@emotion/styled"
+import CrashAnimation from "../animations/CrashAnimation"
 
 function useAnimation({ targetRefs }: {
     targetRefs: [
@@ -62,21 +63,29 @@ function Background() {
     useAnimation({ targetRefs: [targetRef1, targetRef2] })
 
     return (
-        <div css={css`
-            // https://mycolor.space/gradient3?ori=to+right+top&hex=%23000000&hex2=%2302000A&hex3=%23000000&submit=submit
-            background-image: linear-gradient(to right top, #000000, #020001, #030002, #040004, #040006, #040006, #040006, #040006, #040004, #030002, #020001, #000000);
-            position: fixed;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        `}>
-            <Starfield ref={targetRef1}/>
-            <Starfield
-                ref={targetRef2}
-                css={css`transformY: 100%;`}
-            />
-        </div>
+        <>
+            <div css={css`
+                // https://mycolor.space/gradient3?ori=to+right+top&hex=%23000000&hex2=%2302000A&hex3=%23000000&submit=submit
+                background-image: linear-gradient(to right top, #000000, #020001, #030002, #040004, #040006, #040006, #040006, #040006, #040004, #030002, #020001, #000000);
+                position: fixed;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: -1;
+            `}>
+                <Starfield ref={targetRef1}/>
+                <Starfield
+                    ref={targetRef2}
+                    css={css`transformY: 100%;`}
+                />
+            </div>
+            <div css={css`
+                position: absolute;
+                width: 100%;
+            `}>
+                <CrashAnimation css={css`margin-top: 300px;`}/>
+            </div>
+        </>
     )
 }
 
