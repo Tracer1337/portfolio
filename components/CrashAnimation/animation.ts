@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useRef } from "react"
-import { css } from "@emotion/react"
 import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
 
 const explosionSrc = "/explosion.gif"
+const duration = 500
+const rotationStage2Begin = 0.6
 
-function useAnimation({
+export function useCrashAnimation({
     containerRef,
     spaceshipRef,
     moonRef,
@@ -33,9 +34,6 @@ function useAnimation({
         if (!container || !spaceship || !moon || !explosion) return
 
         isAnimating.current = true
-
-        const duration = 500
-        const rotationStage2Begin = 0.6
 
         const animatedValues = {
             scale: 1,
@@ -105,65 +103,3 @@ function useAnimation({
             .addTo(controller)
     }, [])
 }
-
-function CrashAnimation(props: React.ComponentProps<"div">) {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const spaceshipRef = useRef<HTMLImageElement>(null)
-    const moonRef = useRef<HTMLImageElement>(null)
-    const explosionRef = useRef<HTMLImageElement>(null)
-
-    useAnimation({
-        containerRef,
-        spaceshipRef,
-        moonRef,
-        explosionRef
-    })
-    
-    return (
-        <div
-            ref={containerRef}
-            css={css`
-                position: relative;
-                height: 300px;
-                width: 100%;
-            `}
-            {...props}
-        >
-            <img
-                src="/moon.png"
-                ref={moonRef}
-                css={css`
-                    position: absolute;
-                    left: 300px;
-                    bottom: 0;
-                    width: 200px;
-                    height: 200px;
-                    transform: translate(-50%, 50%);
-                `}
-            />
-            <img
-                ref={explosionRef}
-                css={css`
-                    position: absolute;
-                    left: 300px;
-                    bottom: 0;
-                    transform: translate(-50%, 50%);
-                `}
-            />
-            <img
-                src="/nasa-rocket.png"
-                ref={spaceshipRef}
-                css={css`
-                    position: absolute;
-                    left: 600px;
-                    bottom: 0;
-                    width: 98px;
-                    height: 102px;
-                    transform: rotate(-80deg);
-                `}
-            />
-        </div>
-    )
-}
-
-export default CrashAnimation

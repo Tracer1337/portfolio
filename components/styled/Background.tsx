@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
 import anime from "animejs"
 import styled from "@emotion/styled"
-import CrashAnimation from "../animations/CrashAnimation"
+import CrashAnimation from "../CrashAnimation"
 
 function useAnimation({ targetRefs }: {
     targetRefs: [
