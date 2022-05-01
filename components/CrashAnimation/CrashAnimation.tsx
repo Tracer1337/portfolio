@@ -17,48 +17,43 @@ function CrashAnimation(props: React.ComponentProps<"div">) {
     })
     
     return (
-        <div
-            ref={containerRef}
-            css={css`
+        <div ref={containerRef} {...props}>
+            <div css={css`
                 position: relative;
+                width: 500px;
                 height: 300px;
-                width: 100%;
-            `}
-            {...props}
-        >
-            <img
-                src="/moon.png"
-                ref={moonRef}
-                css={css`
-                    position: absolute;
-                    left: 300px;
-                    bottom: 0;
-                    width: 200px;
-                    height: 200px;
-                    transform: translate(-50%, 50%);
-                `}
-            />
-            <img
-                ref={explosionRef}
-                css={css`
-                    position: absolute;
-                    left: 300px;
-                    bottom: 0;
-                    transform: translate(-50%, 50%);
-                `}
-            />
-            <img
-                src="/nasa-rocket.png"
-                ref={spaceshipRef}
-                css={css`
-                    position: absolute;
-                    left: 600px;
-                    bottom: 0;
-                    width: 98px;
-                    height: 102px;
-                    transform: rotate(-80deg);
-                `}
-            />
+            `}>
+                <img
+                    src="/moon.png"
+                    ref={moonRef}
+                    css={css`
+                        position: absolute;
+                        bottom: 0;
+                        width: 200px;
+                        height: 200px;
+                    `}
+                />
+                <img
+                    ref={explosionRef}
+                    css={css`
+                        position: absolute;
+                        bottom: 0;
+                    `}
+                />
+                <img
+                    src="/nasa-rocket.png"
+                    ref={spaceshipRef}
+                    css={css`
+                        position: absolute;
+                        left: 400px;
+                        bottom: 100px;
+                        width: 98px;
+                        height: 102px;
+                        transform: rotate(-80deg);
+                    `}
+                />
+            </div>
+            {props.children}
         </div>
     )
 }

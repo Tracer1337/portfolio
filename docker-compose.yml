@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  strapi:
+    image: strapi/strapi:latest
+    volumes:
+      - strapi:/srv/app
+    ports:
+      - 1337:1337
+
+volumes:
+  strapi:

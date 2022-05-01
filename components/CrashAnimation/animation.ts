@@ -92,7 +92,8 @@ export function useCrashAnimation({
 
         new ScrollMagic.Scene({
             triggerElement: container,
-            offset: 200,
+            triggerHook: "onLeave",
+            offset: -144,
             duration
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {
