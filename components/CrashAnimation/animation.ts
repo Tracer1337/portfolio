@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import React, { useEffect, useRef } from "react"
 import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
 
 const explosionSrc = "/explosion.gif"
-const duration = 500
+const duration = 1000
 const rotationStage2Begin = 0.6
 
 export function useCrashAnimation({
@@ -16,7 +15,7 @@ export function useCrashAnimation({
     containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
     moonRef: React.RefObject<HTMLImageElement>,
-    explosionRef: React.RefObject<HTMLImageElement>,
+    explosionRef: React.RefObject<HTMLImageElement>
 }) {
     const isAnimating = useRef(false)
     const explosionTimeoutRef = useRef<number>()

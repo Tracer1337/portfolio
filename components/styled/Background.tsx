@@ -4,8 +4,9 @@ import { css } from "@emotion/react"
 import anime from "animejs"
 import styled from "@emotion/styled"
 import CrashAnimation from "../CrashAnimation"
+import LandingAnimation from "../LandingAnimation"
 
-function useAnimation({ targetRefs }: {
+function useParallaxAnimation({ targetRefs }: {
     targetRefs: [
         React.RefObject<HTMLDivElement>,
         React.RefObject<HTMLDivElement>
@@ -39,7 +40,7 @@ function useAnimation({ targetRefs }: {
         new ScrollMagic.Scene({
             triggerElement: "body",
             triggerHook: "onLeave",
-            duration: window.innerHeight * 2
+            duration: document.body.clientHeight
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {
                 animation.seek(event.progress * duration)
@@ -60,7 +61,7 @@ function Background() {
     const targetRef1 = useRef<HTMLDivElement>(null)
     const targetRef2 = useRef<HTMLDivElement>(null)
 
-    useAnimation({ targetRefs: [targetRef1, targetRef2] })
+    useParallaxAnimation({ targetRefs: [targetRef1, targetRef2] })
 
     return (
         <>
@@ -84,6 +85,7 @@ function Background() {
                 width: 100%;
             `}>
                 <CrashAnimation css={css`margin-top: 300px;`}/>
+                <LandingAnimation css={css`margin-top: 1000px;`}/>
             </div>
         </>
     )
