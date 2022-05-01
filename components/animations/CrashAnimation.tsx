@@ -2,6 +2,9 @@
 import React, { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
 import anime from "animejs"
+import { useImagePreload } from "../../lib/preload"
+
+const explosionSrc = "/explosion.gif"
 
 function useAnimation({
     containerRef,
@@ -15,6 +18,9 @@ function useAnimation({
     explosionRef: React.RefObject<HTMLImageElement>,
 }) {
     const isAnimating = useRef(false)
+    const explosionTimeoutRef = useRef<number>()
+
+    useImagePreload([explosionSrc])
 
     useEffect(() => {
         if (isAnimating.current) return
@@ -68,6 +74,18 @@ function useAnimation({
                     scale(${animatedValues.scale})
                 `
                 target.style.opacity = animatedValues.opacity.toString()
+
+                if (progress === 1) {
+                    moon.style.display = "none"
+                    explosion.src = explosionSrc
+                    clearTimeout(explosionTimeoutRef.current)
+                    explosionTimeoutRef.current = setTimeout(() => {
+                        explosion.src = ""
+                    }, 800) as any as number
+                } else {
+                    moon.style.display = ""
+                    explosion.src = ""
+                }
             }
         })
 
@@ -112,6 +130,27 @@ function CrashAnimation(props: React.ComponentProps<"div">) {
             {...props}
         >
             <img
+                src="/moon.png"
+                ref={moonRef}
+                css={css`
+                    position: absolute;
+                    left: 300px;
+                    bottom: 0;
+                    width: 200px;
+                    height: 200px;
+                    transform: translate(-50%, 50%);
+                `}
+            />
+            <img
+                ref={explosionRef}
+                css={css`
+                    position: absolute;
+                    left: 300px;
+                    bottom: 0;
+                    transform: translate(-50%, 50%);
+                `}
+            />
+            <img
                 src="/nasa-rocket.png"
                 ref={spaceshipRef}
                 css={css`
@@ -123,8 +162,6 @@ function CrashAnimation(props: React.ComponentProps<"div">) {
                     transform: rotate(-80deg);
                 `}
             />
-            <img src="/nasa-rocket.png" ref={moonRef} style={{ display: "none" }}/>
-            <img src="/nasa-rocket.png" ref={explosionRef} style={{ display: "none" }}/>
         </div>
     )
 }
