@@ -14,9 +14,6 @@ type Props = {
 }
 
 export default function Index({ projects, skills }: Props) {
-    skills = [...skills, ...skills]
-    projects = [...projects, ...projects]
-
     const projectsSectionRef = useRef<HTMLDivElement>(null)
 
     const [projectsSectionHeight, setProjectsSectionHeight] = useState(0)
