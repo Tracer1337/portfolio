@@ -5,6 +5,7 @@ import anime from "animejs"
 import styled from "@emotion/styled"
 import CrashAnimation from "../CrashAnimation"
 import LandingAnimation from "../LandingAnimation"
+import CarAnimation from "../CarAnimation"
 
 function useParallaxAnimation({ targetRefs }: {
     targetRefs: [
@@ -86,6 +87,7 @@ function Background() {
             `}>
                 <CrashAnimation css={css`margin-top: 300px;`}/>
                 <LandingAnimation css={css`margin-top: 1000px;`}/>
+                <CarAnimation css={css`margin-top: 1000px;`}/>
             </div>
         </>
     )

@@ -31,6 +31,7 @@ export default function App(props: CustomAppProps) {
                         background-color: #000;
                         color: #fff;
                         font-family: 'Inter', sans-serif;
+                        overflow-x: hidden;
                     }
                 `}
             />
