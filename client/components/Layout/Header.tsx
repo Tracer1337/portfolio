@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
+import React from "react"
 import { css } from "@emotion/react"
 import Container from "../styled/Container"
 import Link from "next/link"
 import { useAppContext } from "../../lib/context"
 
-function Header() {
+function Header(props: React.ComponentProps<"div">) {
     const context = useAppContext()
 
     const { header } = context.layout.attributes
@@ -14,12 +15,15 @@ function Header() {
     }
 
     return (
-        <Container css={css`
-            height: 128px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        `}>
+        <Container
+            css={css`
+                height: 128px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            `}
+            {...props}
+        >
             {!header.title ? <div/> : (
                 <Link href="/">
                     <h3 css={css`

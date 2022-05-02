@@ -4,17 +4,17 @@ import { css } from "@emotion/react"
 import Background from "../styled/Background"
 import Container from "../styled/Container"
 import Header from "./Header"
+import Footer from "./Footer"
 
 function Layout({ children }: React.PropsWithChildren<{}>) {
     return (
         <>
             <Background/>
-            <div css={css`margin-bottom: 16px;`}>
-                <Header/>
-            </div>
+            <Header css={css`margin-bottom: 16px;`}/>
             <Container>
                 {children}
             </Container>
+            <Footer css={css`margin-top: 100px;`}/>
         </>
     )
 }

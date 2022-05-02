@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_layout_copyrights",
+  "info": {
+    "displayName": "Copyright",
+    "icon": "adjust"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "default": "Merlin Moelter"
+    },
+    "year": {
+      "type": "integer",
+      "default": 2022,
+      "required": true,
+      "min": 0
+    }
+  }
+}

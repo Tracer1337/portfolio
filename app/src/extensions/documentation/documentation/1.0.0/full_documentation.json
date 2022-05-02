@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2022-05-02T18:48:24.251Z"
+    "x-generation-date": "2022-05-02T20:30:40.084Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -90,6 +90,28 @@
                                       },
                                       "url": {
                                         "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "footer": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "copyright": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "year": {
+                                        "type": "integer"
                                       }
                                     }
                                   }
@@ -696,6 +718,28 @@
                                 }
                               }
                             },
+                            "footer": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "copyright": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "year": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -1175,6 +1219,22 @@
                               },
                               "url": {
                                 "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "footer": {
+                        "type": "object",
+                        "properties": {
+                          "copyright": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "year": {
+                                "type": "integer"
                               }
                             }
                           }

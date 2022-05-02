@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "copyright": {
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.copyright"
+    }
+  }
+}

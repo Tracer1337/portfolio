@@ -45,6 +45,28 @@
                                   }
                                 }
                               },
+                              "footer": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "copyright": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "year": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -646,6 +668,28 @@
                                 }
                               }
                             },
+                            "footer": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "copyright": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "year": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -1125,6 +1169,22 @@
                               },
                               "url": {
                                 "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "footer": {
+                        "type": "object",
+                        "properties": {
+                          "copyright": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "year": {
+                                "type": "integer"
                               }
                             }
                           }

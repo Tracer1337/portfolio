@@ -59,6 +59,9 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
         populate: {
             header: {
                 populate: "*"
+            },
+            footer: {
+                populate: "*"
             }
         }
     })
