@@ -1,43 +1,69 @@
 /** @jsxImportSource @emotion/react */
 import { CacheProvider, css, Global } from "@emotion/react"
-import { AppProps } from "next/app"
+import App, { AppContext, AppProps } from "next/app"
 import Head from "next/head"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
 import Layout from "../components/Layout"
+import { AppContextProvider } from "../lib/context"
+import { fetchAPI } from "../lib/api"
 
 export type CustomAppProps = AppProps & {
-    emotionCache: EmotionCache
+    emotionCache: EmotionCache,
+    layout: any
 }
 
 const clientSideEmotionCache = createEmotionCache()
 
-export default function App(props: CustomAppProps) {
+export default function MyApp(props: CustomAppProps) {
     const {
         Component,
         emotionCache = clientSideEmotionCache,
+        layout,
         pageProps
     } = props
 
     return (
         <CacheProvider value={emotionCache}>
-            <Head>
-                <meta name="viewport" content="initial-scale=1, width=device-width"/>
-            </Head>
-            <Global
-                styles={css`
-                    body {
-                        margin: 0;
-                        background-color: #000;
-                        color: #fff;
-                        font-family: 'Inter', sans-serif;
-                        overflow-x: hidden;
-                    }
-                `}
-            />
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <AppContextProvider value={{ layout }}>
+                <Head>
+                    <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                </Head>
+                <Global
+                    styles={css`
+                        body {
+                            margin: 0;
+                            background-color: #000;
+                            color: #fff;
+                            font-family: 'Inter', sans-serif;
+                            overflow-x: hidden;
+                        }
+
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    `}
+                />
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </AppContextProvider>
         </CacheProvider>
     )
+}
+
+MyApp.getInitialProps = async (ctx: AppContext) => {
+    const props = await App.getInitialProps(ctx)
+    const layout = await fetchAPI("/layout", {
+        populate: {
+            header: {
+                populate: "*"
+            }
+        }
+    })
+    return {
+        ...props,
+        layout: layout.data
+    }
 }

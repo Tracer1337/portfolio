@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_layout_headers",
+  "info": {
+    "displayName": "Header",
+    "icon": "address-book"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Merlin Moelter"
+    },
+    "action": {
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.header-action"
+    }
+  }
+}

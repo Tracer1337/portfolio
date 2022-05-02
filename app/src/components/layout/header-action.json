@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_layout_header_actions",
+  "info": {
+    "displayName": "Header Action",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "FOLLOW ME ON GITHUB",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "default": "https://github.com/Tracer1337",
+      "required": true
+    }
+  }
+}
