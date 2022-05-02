@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
-import { getAPIUrl } from "../../lib/cms"
+import { getStrapiUrl } from "../../lib/api"
 import Button from "../styled/Button"
 
 function Projects({ projects }: { projects: any[] }) {
     const getThumbnailURL = (project: any) =>
-        getAPIUrl(
-            project.thumbnail.formats.small?.url ||
-            project.thumbnail.url
+        getStrapiUrl(
+            project.attributes.thumbnail.data.attributes.formats?.small?.url ||
+            project.attributes.thumbnail.data.attributes.url
         )
-    
+
     return (
         <div css={css`
             display: flex;
@@ -32,8 +32,8 @@ function Projects({ projects }: { projects: any[] }) {
                         flex-direction: column;
                         justify-content: space-between;
                     `}>
-                        <h3 css={css`margin: 0;`}>{project.name}</h3>
-                        <a href={project.url} target="_blank">
+                        <h3 css={css`margin: 0;`}>{project.attributes.name}</h3>
+                        <a href={project.attributes.url} target="_blank">
                             <Button>Open Project</Button>
                         </a>
                     </div>

@@ -20,10 +20,10 @@
                           "attributes": {
                             "type": "object",
                             "properties": {
-                              "Name": {
+                              "name": {
                                 "type": "string"
                               },
-                              "Icon": {
+                              "icon": {
                                 "type": "object",
                                 "properties": {
                                   "data": {
@@ -969,10 +969,10 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "Name": {
+                            "name": {
                               "type": "string"
                             },
-                            "Icon": {
+                            "icon": {
                               "type": "object",
                               "properties": {
                                 "data": {
@@ -1807,10 +1807,10 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "Name": {
+                      "name": {
                         "type": "string"
                       },
-                      "Icon": {
+                      "icon": {
                         "oneOf": [
                           {
                             "type": "integer"
@@ -1848,10 +1848,10 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "Name": {
+                            "name": {
                               "type": "string"
                             },
-                            "Icon": {
+                            "icon": {
                               "type": "object",
                               "properties": {
                                 "data": {
@@ -2706,10 +2706,10 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "Name": {
+                            "name": {
                               "type": "string"
                             },
-                            "Icon": {
+                            "icon": {
                               "type": "object",
                               "properties": {
                                 "data": {
@@ -3555,10 +3555,10 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "Name": {
+                      "name": {
                         "type": "string"
                       },
-                      "Icon": {
+                      "icon": {
                         "oneOf": [
                           {
                             "type": "integer"

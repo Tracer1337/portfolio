@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { CacheProvider, css, Global } from "@emotion/react"
 import { AppProps } from "next/app"
+import Head from "next/head"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
-import Head from "next/head"
 import Layout from "../components/Layout"
 
 export type CustomAppProps = AppProps & {

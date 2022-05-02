@@ -13,9 +13,11 @@
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
+    "@types/qs": "^6.9.7",
     "animejs": "^3.2.1",
     "canvas-confetti": "^1.5.1",
     "next": "12.1.5",
+    "qs": "^6.10.3",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "scrollmagic": "^2.0.8"

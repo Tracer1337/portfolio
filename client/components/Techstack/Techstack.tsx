@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
-import { getAPIUrl } from "../../lib/cms"
+import { getStrapiUrl } from "../../lib/api"
 
 function Techstack({ skills }: { skills: any[] }) {
     return (
@@ -30,11 +30,11 @@ function Techstack({ skills }: { skills: any[] }) {
                         `}
                     >
                         <img
-                            src={getAPIUrl(skill.icon.url)}
-                            alt={skill.name}
+                            src={getStrapiUrl(skill.attributes.icon.data.attributes.url)}
+                            alt={skill.attributes.name}
                             css={css`width: 40px; margin-bottom: 8px;`}
                         />
-                        <span>{skill.name}</span>
+                        <span>{skill.attributes.name}</span>
                     </div>
                 ))}
             </div>

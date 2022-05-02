@@ -4,25 +4,26 @@
   "info": {
     "singularName": "skill",
     "pluralName": "skills",
-    "displayName": "Skill"
+    "displayName": "Skill",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Icon": {
-      "allowedTypes": [
-        "images"
-      ],
+    "icon": {
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

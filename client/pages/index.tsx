@@ -5,7 +5,7 @@ import CrashAnimation from "../components/CrashAnimation"
 import LandingAnimation from "../components/LandingAnimation"
 import Techstack from "../components/Techstack"
 import Projects from "../components/Projects"
-import { getProjects, getSkills } from "../lib/cms"
+import { fetchAPI } from "../lib/api"
 import { useEffect, useRef, useState } from "react"
 
 type Props = {
@@ -59,13 +59,26 @@ export default function Index({ projects, skills }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-    const projects = await getProjects()
-    const skills = await getSkills()
-    console.log(projects[0], skills[0])
+    const projects = await fetchAPI("/projects", {
+        populate: {
+            thumbnail: "*"
+        },
+        pagination: {
+            pageSize: 100
+        }
+    })
+    const skills = await fetchAPI("/skills", {
+        populate: {
+            icon: "*"
+        },
+        pagination: {
+            pageSize: 100
+        }
+    })
     return {
         props: {
-            projects,
-            skills
+            projects: projects.data,
+            skills: skills.data
         }
     }
 }
