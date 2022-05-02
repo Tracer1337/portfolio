@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2022-05-02T17:12:53.919Z"
+    "x-generation-date": "2022-05-02T17:44:19.264Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1132,6 +1132,9 @@
                                     }
                                   }
                                 }
+                              },
+                              "position": {
+                                "type": "integer"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -2525,6 +2528,9 @@
                                 }
                               }
                             },
+                            "position": {
+                              "type": "integer"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -2759,6 +2765,9 @@
                       },
                       "url": {
                         "type": "string"
+                      },
+                      "position": {
+                        "type": "integer"
                       }
                     }
                   }
@@ -3849,6 +3858,9 @@
                                   }
                                 }
                               }
+                            },
+                            "position": {
+                              "type": "integer"
                             },
                             "createdAt": {
                               "type": "string",
@@ -5151,6 +5163,9 @@
                                 }
                               }
                             },
+                            "position": {
+                              "type": "integer"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -5410,6 +5425,9 @@
                           ],
                           "example": "string or id"
                         }
+                      },
+                      "position": {
+                        "type": "integer"
                       },
                       "createdAt": {
                         "type": "string",

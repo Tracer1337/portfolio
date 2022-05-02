@@ -63,6 +63,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
         populate: {
             thumbnail: "*"
         },
+        sort: "position",
         pagination: {
             pageSize: 100
         }

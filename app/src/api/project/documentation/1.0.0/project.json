@@ -1083,6 +1083,9 @@
                                   }
                                 }
                               },
+                              "position": {
+                                "type": "integer"
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -2475,6 +2478,9 @@
                                 }
                               }
                             },
+                            "position": {
+                              "type": "integer"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -2709,6 +2715,9 @@
                       },
                       "url": {
                         "type": "string"
+                      },
+                      "position": {
+                        "type": "integer"
                       }
                     }
                   }
@@ -3799,6 +3808,9 @@
                                   }
                                 }
                               }
+                            },
+                            "position": {
+                              "type": "integer"
                             },
                             "createdAt": {
                               "type": "string",
@@ -5101,6 +5113,9 @@
                                 }
                               }
                             },
+                            "position": {
+                              "type": "integer"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -5360,6 +5375,9 @@
                           ],
                           "example": "string or id"
                         }
+                      },
+                      "position": {
+                        "type": "integer"
                       },
                       "createdAt": {
                         "type": "string",

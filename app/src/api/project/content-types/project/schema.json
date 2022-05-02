@@ -33,6 +33,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::skill.skill"
+    },
+    "position": {
+      "required": true,
+      "type": "integer",
+      "unique": true
     }
   }
 }
