@@ -20,13 +20,12 @@ export function useCrashAnimation({
     offset: number,
     duration: number
 }) {
-    const isAnimating = useRef(false)
     const explosionTimeoutRef = useRef<number>()
 
     useImagePreload([explosionSrc])
 
     useEffect(() => {
-        if (isAnimating.current) return
+        if (duration <= 0) return
 
         const container = containerRef.current
         const spaceship = spaceshipRef.current
@@ -34,8 +33,6 @@ export function useCrashAnimation({
         const explosion = explosionRef.current
 
         if (!container || !spaceship || !moon || !explosion) return
-
-        isAnimating.current = true
 
         const animatedValues = {
             scale: 1,
@@ -89,11 +86,10 @@ export function useCrashAnimation({
             }
         })
 
-        const ScrollMagic = require("scrollmagic")
+        const controller = new window.ScrollMagic.Controller()
 
-        const controller = new ScrollMagic.Controller()
-
-        new ScrollMagic.Scene({
+        // @ts-ignore
+        new window.ScrollMagic.Scene({
             triggerElement: container,
             triggerHook: "onLeave",
             offset,
@@ -102,7 +98,10 @@ export function useCrashAnimation({
             .on("progress", (event: ScrollMagic.ProgressEvent) => {
                 animation.seek(event.progress * duration)
             })
+            .addIndicators()
             .setPin(container)
             .addTo(controller)
-    }, [])
+        
+        return () => controller.destroy(false)
+    }, [offset, duration])
 }

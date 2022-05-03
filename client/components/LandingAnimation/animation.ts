@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
 
@@ -15,18 +15,14 @@ export function useLandingAnimation({
     offset: number,
     duration: number
 }) {
-    const isAnimating = useRef(false)
-
     useEffect(() => {
-        if (isAnimating.current) return
+        if (duration <= 0) return
 
         const container = containerRef.current
         const spaceship = spaceshipRef.current
         const mars = marsRef.current
 
         if (!container || !spaceship || !mars) return
-
-        isAnimating.current = true
 
         const animation = anime({
             targets: spaceship,
@@ -62,19 +58,21 @@ export function useLandingAnimation({
             }
         })
 
-        const ScrollMagic = require("scrollmagic")
+        const controller = new window.ScrollMagic.Controller()
 
-        const controller = new ScrollMagic.Controller()
-
-        new ScrollMagic.Scene({
+        // @ts-ignore
+        new window.ScrollMagic.Scene({
             triggerElement: container,
             offset,
-            duration
+            duration,
         })
             .on("progress", (event: ScrollMagic.ProgressEvent) => {
                 animation.seek(event.progress * duration)
             })
             .setPin(container)
             .addTo(controller)
-    }, [])
+            .addIndicators()
+        
+        return () => controller.destroy(false)
+    }, [offset, duration])
 }

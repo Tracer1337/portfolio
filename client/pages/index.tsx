@@ -14,11 +14,16 @@ type Props = {
 }
 
 export default function Index({ projects, skills }: Props) {
+    const crashAnimationRef = useRef<HTMLDivElement>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
 
+    const [crashAnimationRect, setCrashAnimationRect] = useState<DOMRect>()
     const [projectsSectionHeight, setProjectsSectionHeight] = useState(0)
 
     useEffect(() => {
+        setCrashAnimationRect(
+            crashAnimationRef.current?.getBoundingClientRect()
+        )
         setProjectsSectionHeight(
             projectsSectionRef.current?.clientHeight || 0
         )
@@ -27,33 +32,37 @@ export default function Index({ projects, skills }: Props) {
     return (
         <>
             <CrashAnimation
-                offset={-144}
-                duration={1000}
+                ref={crashAnimationRef}
+                offset={crashAnimationRect ? -crashAnimationRect.y : 0}
+                duration={1500}
                 css={css`
                     margin-top: 64px;
-                    margin-bottom: 300px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    flex-wrap: wrap;
                 `}
             >
-                <Techstack skills={skills}/>
-            </CrashAnimation>
-            <div ref={projectsSectionRef} css={css`
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                margin-bottom: 300px;
-            `}>
-                <Projects projects={projects}/>
-                {projectsSectionHeight > 0 && (
+                <Techstack
+                    skills={skills}
+                    css={css`flex-grow: 1;`}
+                />
+                <div ref={projectsSectionRef} css={css`
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-top: 300px;
+                    margin-bottom: 300px;
+                `}>
+                    <Projects projects={projects}/>
                     <LandingAnimation
-                        offset={200}
+                        offset={300}
                         duration={projectsSectionHeight - 500}
                         css={css`display: flex;`}
                     />
-                )}
-            </div>
+                </div>
+            </CrashAnimation>
         </>
     )
 }

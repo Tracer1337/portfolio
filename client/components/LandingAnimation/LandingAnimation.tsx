@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef } from "react"
+import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { useLandingAnimation } from "./animation"
 
@@ -10,7 +10,7 @@ function LandingAnimation({
 }: React.ComponentProps<"div"> & {
     offset: number,
     duration: number
-}) {
+}, ref: React.ForwardedRef<HTMLDivElement>) {
     const containerRef = useRef<HTMLDivElement>(null)
     const spaceshipRef = useRef<HTMLImageElement>(null)
     const marsRef = useRef<HTMLImageElement>(null)
@@ -22,6 +22,9 @@ function LandingAnimation({
         offset,
         duration
     })
+
+    // @ts-ignore
+    useImperativeHandle(ref, () => containerRef.current)
     
     return (
         <div ref={containerRef} {...props}>
@@ -60,4 +63,4 @@ function LandingAnimation({
     )
 }
 
-export default LandingAnimation
+export default React.forwardRef(LandingAnimation)

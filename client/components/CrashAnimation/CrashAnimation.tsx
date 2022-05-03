@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef } from "react"
+import React, { useEffect, useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { useCrashAnimation } from "./animation"
 
@@ -10,7 +10,7 @@ function CrashAnimation({
 }: React.ComponentProps<"div"> & {
     offset: number,
     duration: number
-}) {
+}, ref: React.ForwardedRef<HTMLDivElement>) {
     const containerRef = useRef<HTMLDivElement>(null)
     const spaceshipRef = useRef<HTMLImageElement>(null)
     const moonRef = useRef<HTMLImageElement>(null)
@@ -24,6 +24,9 @@ function CrashAnimation({
         offset,
         duration
     })
+
+    // @ts-ignore
+    useImperativeHandle(ref, () => containerRef.current)
     
     return (
         <div ref={containerRef} {...props}>
@@ -67,4 +70,4 @@ function CrashAnimation({
     )
 }
 
-export default CrashAnimation
+export default React.forwardRef(CrashAnimation)
