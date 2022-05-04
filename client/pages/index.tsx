@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef } from "react"
 import { GetStaticProps } from "next"
 import { css } from "@emotion/react"
-import Container from "../components/styled/Container"
+import Container from "../components/Container"
 import Background from "../components/Background"
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"

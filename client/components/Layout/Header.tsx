@@ -2,7 +2,7 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import anime from "animejs"
-import Container from "../styled/Container"
+import Container from "../Container"
 import Link from "next/link"
 import { useAppContext } from "../../lib/context"
 import { Animation } from "../../lib/animation"

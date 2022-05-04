@@ -2,7 +2,7 @@
 import React from "react"
 import { css } from "@emotion/react"
 import Background from "../Background"
-import Container from "../styled/Container"
+import Container from "../Container"
 import Header from "./Header"
 import Footer from "./Footer"
 

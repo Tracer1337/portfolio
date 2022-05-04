@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
-import Container from "../styled/Container"
+import Container from "../Container"
 import { useAppContext } from "../../lib/context"
 
 function Footer(props: React.ComponentProps<"div">) {
