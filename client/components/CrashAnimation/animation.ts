@@ -6,12 +6,10 @@ const explosionSrc = "/explosion.gif"
 const rotationStage2Begin = 0.6
 
 export function useCrashAnimation({
-    containerRef,
     spaceshipRef,
     moonRef,
     explosionRef
 }: {
-    containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
     moonRef: React.RefObject<HTMLImageElement>,
     explosionRef: React.RefObject<HTMLImageElement>
@@ -21,12 +19,11 @@ export function useCrashAnimation({
     useImagePreload([explosionSrc])
 
     const animation = useMemo(() => {
-        const container = containerRef.current
         const spaceship = spaceshipRef.current
         const moon = moonRef.current
         const explosion = explosionRef.current
 
-        if (!container || !spaceship || !moon || !explosion) return
+        if (!spaceship || !moon || !explosion) return
 
         const animatedValues = {
             scale: 1,

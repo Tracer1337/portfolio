@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { GetStaticProps } from "next"
 import { css } from "@emotion/react"
 import Container from "../components/styled/Container"

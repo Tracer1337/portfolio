@@ -2,21 +2,13 @@ import React, { useMemo } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
 
-export function useLandingAnimation({
-    containerRef,
-    spaceshipRef,
-    marsRef
-}: {
-    containerRef: React.RefObject<HTMLDivElement>,
-    spaceshipRef: React.RefObject<HTMLImageElement>,
-    marsRef: React.RefObject<HTMLImageElement>
+export function useLandingAnimation({ spaceshipRef }: {
+    spaceshipRef: React.RefObject<HTMLImageElement>
 }) {
     const animation = useMemo(() => {
-        const container = containerRef.current
         const spaceship = spaceshipRef.current
-        const mars = marsRef.current
 
-        if (!container || !spaceship || !mars) return
+        if (!spaceship) return
 
         return anime({
             targets: spaceship,
