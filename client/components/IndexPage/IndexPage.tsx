@@ -22,6 +22,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
     const headerContainerRef = useRef<HTMLDivElement>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
     const landingAnimationContainerRef = useRef<HTMLDivElement>(null)
+    const backgroundAnimationRef = useRef<Animation>(null)
     const headerAnimationRef = useRef<Animation>(null)
     const crashAnimationRef = useRef<Animation>(null)
     const landingAnimationRef = useRef<Animation>(null)
@@ -31,6 +32,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
         headerContainerRef,
         projectsSectionRef,
         landingAnimationContainerRef,
+        backgroundAnimationRef,
         headerAnimationRef,
         crashAnimationRef,
         landingAnimationRef
@@ -38,7 +40,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
 
     return (
         <>
-            <Background/>
+            <Background ref={backgroundAnimationRef}/>
             <Container ref={headerContainerRef}>
                 <Header ref={headerAnimationRef}/>
             </Container>

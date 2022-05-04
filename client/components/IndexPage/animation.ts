@@ -6,6 +6,7 @@ export function useAnimationController({
   headerContainerRef,
   projectsSectionRef,
   landingAnimationContainerRef,
+  backgroundAnimationRef,
   headerAnimationRef,
   crashAnimationRef,
   landingAnimationRef
@@ -14,6 +15,7 @@ export function useAnimationController({
   headerContainerRef: React.RefObject<HTMLDivElement>,
   projectsSectionRef: React.RefObject<HTMLDivElement>,
   landingAnimationContainerRef: React.RefObject<HTMLDivElement>,
+  backgroundAnimationRef: React.RefObject<Animation>,
   headerAnimationRef: React.RefObject<Animation>,
   crashAnimationRef: React.RefObject<Animation>,
   landingAnimationRef: React.RefObject<Animation>
@@ -25,6 +27,7 @@ export function useAnimationController({
       const headerContainer = headerContainerRef.current
       const projectsSection = projectsSectionRef.current
       const landingAnimationContainer = landingAnimationContainerRef.current
+      const backgroundAnimation = backgroundAnimationRef.current
       const headerAnimation = headerAnimationRef.current
       const crashAnimation = crashAnimationRef.current
       const landingAnimation = landingAnimationRef.current
@@ -34,10 +37,13 @@ export function useAnimationController({
           !headerContainer ||
           !projectsSection ||
           !landingAnimationContainer ||
+          !backgroundAnimation ||
           !headerAnimation ||
           !crashAnimation ||
           !landingAnimation
       ) return
+
+      animate(backgroundAnimation, 0, document.body.clientHeight)
 
       fix(headerContainer, 0, 1200)
       animate(headerAnimation, 1000, 1200)

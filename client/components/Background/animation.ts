@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useState } from "react"
 import anime from "animejs"
 
 export function useParallaxAnimation({ targetRefs }: {
@@ -7,39 +7,23 @@ export function useParallaxAnimation({ targetRefs }: {
       React.RefObject<HTMLDivElement>
   ]
 }) {
-  const isAnimating = useRef(false)
+    const [animation, setAnimation] = useState<anime.AnimeInstance>()
 
-  useEffect(() => {
-      if (isAnimating.current) return
+    useEffect(() => {
+        const targets = targetRefs.map((ref) => ref.current)
 
-      const targets = targetRefs.map((ref) => ref.current)
+        if (targets.some((target) => !target)) return
+        
+        const anim = anime({
+            targets,
+            easing: "linear",
+            translateY: -100,
+            duration: 1,
+            autoplay: false
+        })
 
-      if (targets.some((target) => !target)) return
+        setAnimation(anim)
+    }, [])
 
-      isAnimating.current = true
-
-      const duration = 1000
-
-      const animation = anime({
-          targets,
-          easing: "linear",
-          translateY: -100,
-          duration,
-          autoplay: false
-      })
-
-      const ScrollMagic = require("scrollmagic")
-
-      const controller = new ScrollMagic.Controller()
-
-      new ScrollMagic.Scene({
-          triggerElement: "body",
-          triggerHook: "onLeave",
-          duration: document.body.clientHeight * 2
-      })
-          .on("progress", (event: ScrollMagic.ProgressEvent) => {
-              animation.seek(event.progress * duration)
-          })
-          .addTo(controller)
-  }, [])
+    return animation
 }
