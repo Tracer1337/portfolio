@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useMemo, useRef } from "react"
 import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
 
@@ -9,24 +9,18 @@ export function useCrashAnimation({
     containerRef,
     spaceshipRef,
     moonRef,
-    explosionRef,
-    offset,
-    duration
+    explosionRef
 }: {
     containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
     moonRef: React.RefObject<HTMLImageElement>,
-    explosionRef: React.RefObject<HTMLImageElement>,
-    offset: number,
-    duration: number
+    explosionRef: React.RefObject<HTMLImageElement>
 }) {
     const explosionTimeoutRef = useRef<number>()
 
     useImagePreload([explosionSrc])
 
-    useEffect(() => {
-        if (duration <= 0) return
-
+    const animation = useMemo(() => {
         const container = containerRef.current
         const spaceship = spaceshipRef.current
         const moon = moonRef.current
@@ -44,20 +38,20 @@ export function useCrashAnimation({
             scale: 0.1,
             opacity: [1, 0.9, 0],
             easing: "easeInExpo",
-            duration,
+            duration: 1,
             autoplay: false
         })
 
-        const animation = anime({
+        return anime({
             targets: spaceship,
             easing: "linear",
-            duration,
+            duration: 1,
             autoplay: false,
             update: (anim) => {
                 const progress = anim.progress / 100
                 const target = anim.animatables[0].target
 
-                scaleAnimation.seek(progress * duration)
+                scaleAnimation.seek(progress)
                 
                 const translateX = Math.cos(progress * Math.PI / 2) * 300 - 300
                 const translateY = Math.sin(progress * Math.PI) * -200
@@ -85,23 +79,7 @@ export function useCrashAnimation({
                 }
             }
         })
+    }, [])
 
-        const controller = new window.ScrollMagic.Controller()
-
-        // @ts-ignore
-        new window.ScrollMagic.Scene({
-            triggerElement: container,
-            triggerHook: "onLeave",
-            offset,
-            duration
-        })
-            .on("progress", (event: ScrollMagic.ProgressEvent) => {
-                animation.seek(event.progress * duration)
-            })
-            .addIndicators()
-            .setPin(container)
-            .addTo(controller)
-        
-        return () => controller.destroy(false)
-    }, [offset, duration])
+    return animation
 }

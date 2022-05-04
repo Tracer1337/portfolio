@@ -1,12 +1,17 @@
 /** @jsxImportSource @emotion/react */
+import { useRef } from "react"
 import { GetStaticProps } from "next"
 import { css } from "@emotion/react"
+import Container from "../components/styled/Container"
+import Background from "../components/styled/Background"
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
 import CrashAnimation from "../components/CrashAnimation"
 import LandingAnimation from "../components/LandingAnimation"
 import Techstack from "../components/Techstack"
 import Projects from "../components/Projects"
 import { fetchAPI } from "../lib/api"
-import { useEffect, useRef, useState } from "react"
+import { Animation } from "../lib/animation"
 
 type Props = {
     projects: any[],
@@ -14,55 +19,46 @@ type Props = {
 }
 
 export default function Index({ projects, skills }: Props) {
-    const crashAnimationRef = useRef<HTMLDivElement>(null)
+    const crashAnimationRef = useRef<Animation>(null)
+    const landingAnimationRef = useRef<Animation>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
-
-    const [crashAnimationRect, setCrashAnimationRect] = useState<DOMRect>()
-    const [projectsSectionHeight, setProjectsSectionHeight] = useState(0)
-
-    useEffect(() => {
-        setCrashAnimationRect(
-            crashAnimationRef.current?.getBoundingClientRect()
-        )
-        setProjectsSectionHeight(
-            projectsSectionRef.current?.clientHeight || 0
-        )
-    }, [])
 
     return (
         <>
-            <CrashAnimation
-                ref={crashAnimationRef}
-                offset={crashAnimationRect ? -crashAnimationRect.y : 0}
-                duration={1500}
-                css={css`
-                    margin-top: 64px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-wrap: wrap;
-                `}
-            >
-                <Techstack
-                    skills={skills}
-                    css={css`flex-grow: 1;`}
-                />
-                <div ref={projectsSectionRef} css={css`
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-top: 300px;
-                    margin-bottom: 300px;
-                `}>
-                    <Projects projects={projects}/>
-                    <LandingAnimation
-                        offset={300}
-                        duration={projectsSectionHeight - 500}
-                        css={css`display: flex;`}
+            <Background/>
+            <Header/>
+            <Container>
+                <CrashAnimation
+                    ref={crashAnimationRef}
+                    css={css`
+                        margin-top: 64px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-wrap: wrap;
+                    `}
+                >
+                    <Techstack
+                        skills={skills}
+                        css={css`flex-grow: 1;`}
                     />
-                </div>
-            </CrashAnimation>
+                    <div ref={projectsSectionRef} css={css`
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        margin-top: 300px;
+                        margin-bottom: 300px;
+                    `}>
+                        <Projects projects={projects}/>
+                        <LandingAnimation
+                            ref={landingAnimationRef}
+                            css={css`display: flex;`}
+                        />
+                    </div>
+                </CrashAnimation>
+                <Footer/>
+            </Container>
         </>
     )
 }

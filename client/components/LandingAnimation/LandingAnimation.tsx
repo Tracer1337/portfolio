@@ -2,29 +2,25 @@
 import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { useLandingAnimation } from "./animation"
+import { Animation } from "../../lib/animation"
 
-function LandingAnimation({
-    offset,
-    duration,
-    ...props
-}: React.ComponentProps<"div"> & {
-    offset: number,
-    duration: number
-}, ref: React.ForwardedRef<HTMLDivElement>) {
+function LandingAnimation(
+    props: React.ComponentProps<"div">,
+    ref: React.ForwardedRef<Animation>
+) {
     const containerRef = useRef<HTMLDivElement>(null)
     const spaceshipRef = useRef<HTMLImageElement>(null)
     const marsRef = useRef<HTMLImageElement>(null)
 
-    useLandingAnimation({
+    const animation = useLandingAnimation({
         containerRef,
         spaceshipRef,
-        marsRef,
-        offset,
-        duration
+        marsRef
     })
 
-    // @ts-ignore
-    useImperativeHandle(ref, () => containerRef.current)
+    useImperativeHandle(ref, () => ({
+        update: (progress) => animation?.seek(progress)
+    }))
     
     return (
         <div ref={containerRef} {...props}>

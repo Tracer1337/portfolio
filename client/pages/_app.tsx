@@ -4,7 +4,6 @@ import App, { AppContext, AppProps } from "next/app"
 import Head from "next/head"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
-import Layout from "../components/Layout"
 import { AppContextProvider } from "../lib/context"
 import { fetchAPI } from "../lib/api"
 
@@ -47,9 +46,7 @@ export default function MyApp(props: CustomAppProps) {
                         }
                     `}
                 />
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
+                <Component {...pageProps} />
             </AppContextProvider>
         </CacheProvider>
     )

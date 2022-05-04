@@ -1,30 +1,24 @@
-import React, { useEffect } from "react"
+import React, { useMemo } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
 
 export function useLandingAnimation({
     containerRef,
     spaceshipRef,
-    marsRef,
-    offset,
-    duration
+    marsRef
 }: {
     containerRef: React.RefObject<HTMLDivElement>,
     spaceshipRef: React.RefObject<HTMLImageElement>,
-    marsRef: React.RefObject<HTMLImageElement>,
-    offset: number,
-    duration: number
+    marsRef: React.RefObject<HTMLImageElement>
 }) {
-    useEffect(() => {
-        if (duration <= 0) return
-
+    const animation = useMemo(() => {
         const container = containerRef.current
         const spaceship = spaceshipRef.current
         const mars = marsRef.current
 
         if (!container || !spaceship || !mars) return
 
-        const animation = anime({
+        return anime({
             targets: spaceship,
             translateX: 300,
             translateY: 150,
@@ -32,10 +26,10 @@ export function useLandingAnimation({
             rotate: {
                 value: ["120deg", "-50deg"],
                 easing: "linear",
-                duration: duration / 3
+                duration: 1 / 3
             },
             easing: "easeOutCubic",
-            duration,
+            duration: 1,
             autoplay: false,
             update: (anim) => {
                 if (anim.progress === 100) {
@@ -57,22 +51,7 @@ export function useLandingAnimation({
                 }
             }
         })
+    }, [])
 
-        const controller = new window.ScrollMagic.Controller()
-
-        // @ts-ignore
-        new window.ScrollMagic.Scene({
-            triggerElement: container,
-            offset,
-            duration,
-        })
-            .on("progress", (event: ScrollMagic.ProgressEvent) => {
-                animation.seek(event.progress * duration)
-            })
-            .setPin(container)
-            .addTo(controller)
-            .addIndicators()
-        
-        return () => controller.destroy(false)
-    }, [offset, duration])
+    return animation
 }

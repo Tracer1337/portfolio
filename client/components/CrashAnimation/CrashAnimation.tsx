@@ -1,32 +1,28 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useImperativeHandle, useRef } from "react"
+import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { useCrashAnimation } from "./animation"
+import { Animation } from "../../lib/animation"
 
-function CrashAnimation({
-    offset,
-    duration,
-    ...props
-}: React.ComponentProps<"div"> & {
-    offset: number,
-    duration: number
-}, ref: React.ForwardedRef<HTMLDivElement>) {
+function CrashAnimation(
+    props: React.ComponentProps<"div">,
+    ref: React.ForwardedRef<Animation>
+) {
     const containerRef = useRef<HTMLDivElement>(null)
     const spaceshipRef = useRef<HTMLImageElement>(null)
     const moonRef = useRef<HTMLImageElement>(null)
     const explosionRef = useRef<HTMLImageElement>(null)
 
-    useCrashAnimation({
+    const animation = useCrashAnimation({
         containerRef,
         spaceshipRef,
         moonRef,
-        explosionRef,
-        offset,
-        duration
+        explosionRef
     })
 
-    // @ts-ignore
-    useImperativeHandle(ref, () => containerRef.current)
+    useImperativeHandle(ref, () => ({
+        update: (progress) => animation?.seek(progress)
+    }))
     
     return (
         <div ref={containerRef} {...props}>
