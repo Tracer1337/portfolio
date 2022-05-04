@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { GetStaticProps } from "next"
 import { css } from "@emotion/react"
 import Container from "../components/styled/Container"
@@ -18,45 +18,89 @@ type Props = {
     skills: any[]
 }
 
+function useScrollAnimation({
+    containerRef,
+    headerAnimationRef,
+    crashAnimationRef,
+    landingAnimationRef
+}: {
+    containerRef: React.RefObject<HTMLDivElement>,
+    headerAnimationRef: React.RefObject<Animation>,
+    crashAnimationRef: React.RefObject<Animation>,
+    landingAnimationRef: React.RefObject<Animation>
+}) {
+    const handleScroll = useCallback(() => {
+        const container = containerRef.current
+        const headerAnimation = headerAnimationRef.current
+        const crashAnimation = crashAnimationRef.current
+        const landingAnimation = landingAnimationRef.current
+
+        if (
+            !container ||
+            !headerAnimation ||
+            !crashAnimation ||
+            !landingAnimation
+        ) return
+
+        container.style.paddingTop = `${Math.min(window.scrollY, 1000)}px`
+        container.style.paddingBottom = `${Math.max(1000 - window.scrollY, 0)}px`
+
+        headerAnimation.update(window.scrollY / 200)
+    }, [])
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [handleScroll])
+}
+
 export default function Index({ projects, skills }: Props) {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const headerAnimationRef = useRef<Animation>(null)
     const crashAnimationRef = useRef<Animation>(null)
     const landingAnimationRef = useRef<Animation>(null)
-    const projectsSectionRef = useRef<HTMLDivElement>(null)
+
+    useScrollAnimation({
+        containerRef,
+        headerAnimationRef,
+        crashAnimationRef,
+        landingAnimationRef
+    })
 
     return (
         <>
             <Background/>
-            <Header/>
-            <Container>
-                <CrashAnimation
-                    ref={crashAnimationRef}
-                    css={css`
-                        margin-top: 64px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        flex-wrap: wrap;
-                    `}
-                >
+            <Container ref={containerRef} css={css`
+                padding-bottom: 1000px;
+                position: relative;
+            `}>
+                <Header ref={headerAnimationRef}/>
+                <div css={css`
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 300px;
+                `}>
+                    <CrashAnimation ref={crashAnimationRef}/>
                     <Techstack
                         skills={skills}
                         css={css`flex-grow: 1;`}
                     />
-                    <div ref={projectsSectionRef} css={css`
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: flex-start;
-                        margin-top: 300px;
-                        margin-bottom: 300px;
-                    `}>
-                        <Projects projects={projects}/>
-                        <LandingAnimation
-                            ref={landingAnimationRef}
-                            css={css`display: flex;`}
-                        />
-                    </div>
-                </CrashAnimation>
+                </div>
+                <div css={css`
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 300px;
+                `}>
+                    <Projects projects={projects}/>
+                    <LandingAnimation
+                        ref={landingAnimationRef}
+                        css={css`display: flex;`}
+                    />
+                </div>
                 <Footer/>
             </Container>
         </>
