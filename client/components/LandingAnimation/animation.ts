@@ -1,16 +1,21 @@
-import React, { useMemo } from "react"
+import React, { useEffect, useState } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
+import { useDoneCallback } from "../../lib/animation"
 
 export function useLandingAnimation({ spaceshipRef }: {
     spaceshipRef: React.RefObject<HTMLImageElement>
 }) {
-    const animation = useMemo(() => {
+    const [animation, setAnimation] = useState<anime.AnimeInstance>()
+
+    const onDone = useDoneCallback()
+
+    useEffect(() => {
         const spaceship = spaceshipRef.current
 
         if (!spaceship) return
 
-        return anime({
+        const anim = anime({
             targets: spaceship,
             translateX: 300,
             translateY: 150,
@@ -24,7 +29,7 @@ export function useLandingAnimation({ spaceshipRef }: {
             duration: 1,
             autoplay: false,
             update: (anim) => {
-                if (anim.progress === 100) {
+                onDone(anim.progress / 100, () => {
                     const defaults: Partial<confetti.Options> = {
                         spread: 55,
                         startVelocity: 55,
@@ -40,9 +45,11 @@ export function useLandingAnimation({ spaceshipRef }: {
                         angle: 120,
                         ...defaults
                     })
-                }
+                })
             }
         })
+
+        setAnimation(anim)
     }, [])
 
     return animation

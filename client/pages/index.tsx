@@ -18,38 +18,51 @@ type Props = {
     skills: any[]
 }
 
-function fix(element: HTMLElement, duration: number) {
-    element.style.paddingTop = `${Math.min(window.scrollY, duration)}px`
-    element.style.paddingBottom = `${Math.max(duration - window.scrollY, 0)}px`
+function constrain(value: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, value))
 }
 
-function useScrollAnimation({
+function fix(element: HTMLElement, from: number, to: number) {
+    element.style.transform = `translateY(${constrain(window.scrollY - from, from, to - from)}px)`
+}
+
+function animate(animation: Animation, from: number, to: number) {
+    animation.update((constrain(window.scrollY, from, to) - from) / (to - from))
+}
+
+function useAnimationController({
     containerRef,
+    headerContainerRef,
     headerAnimationRef,
     crashAnimationRef,
     landingAnimationRef
 }: {
     containerRef: React.RefObject<HTMLDivElement>,
+    headerContainerRef: React.RefObject<HTMLDivElement>,
     headerAnimationRef: React.RefObject<Animation>,
     crashAnimationRef: React.RefObject<Animation>,
     landingAnimationRef: React.RefObject<Animation>
 }) {
     const handleScroll = useCallback(() => {
         const container = containerRef.current
+        const headerContainer = headerContainerRef.current
         const headerAnimation = headerAnimationRef.current
         const crashAnimation = crashAnimationRef.current
         const landingAnimation = landingAnimationRef.current
 
         if (
             !container ||
+            !headerContainer ||
             !headerAnimation ||
             !crashAnimation ||
             !landingAnimation
         ) return
 
-        fix(container, 200)
+        fix(headerContainer, 0, 1200)
+        animate(headerAnimation, 1000, 1200)
 
-        headerAnimation.update(window.scrollY / 200)
+        fix(container, 0, 1000)
+        animate(crashAnimation, 0, 1000)
     }, [])
 
     useEffect(() => {
@@ -62,12 +75,14 @@ function useScrollAnimation({
 
 export default function Index({ projects, skills }: Props) {
     const containerRef = useRef<HTMLDivElement>(null)
+    const headerContainerRef = useRef<HTMLDivElement>(null)
     const headerAnimationRef = useRef<Animation>(null)
     const crashAnimationRef = useRef<Animation>(null)
     const landingAnimationRef = useRef<Animation>(null)
 
-    useScrollAnimation({
+    useAnimationController({
         containerRef,
+        headerContainerRef,
         headerAnimationRef,
         crashAnimationRef,
         landingAnimationRef
@@ -76,11 +91,10 @@ export default function Index({ projects, skills }: Props) {
     return (
         <>
             <Background/>
-            <Container ref={containerRef} css={css`
-                padding-bottom: 1000px;
-                position: relative;
-            `}>
+            <Container ref={headerContainerRef}>
                 <Header ref={headerAnimationRef}/>
+            </Container>
+            <Container ref={containerRef} css={css`padding-bottom: 1000px;`}>
                 <div css={css`
                     display: flex;
                     justify-content: space-between;

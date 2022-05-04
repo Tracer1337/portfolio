@@ -1,6 +1,7 @@
-import React, { useMemo, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
+import { useDoneCallback } from "../../lib/animation"
 
 const explosionSrc = "/explosion.gif"
 const rotationStage2Begin = 0.6
@@ -14,11 +15,15 @@ export function useCrashAnimation({
     moonRef: React.RefObject<HTMLImageElement>,
     explosionRef: React.RefObject<HTMLImageElement>
 }) {
+    const [animation, setAnimation] = useState<anime.AnimeInstance>()
+
     const explosionTimeoutRef = useRef<number>()
+
+    const onDone = useDoneCallback()
 
     useImagePreload([explosionSrc])
 
-    const animation = useMemo(() => {
+    useEffect(() => {
         const spaceship = spaceshipRef.current
         const moon = moonRef.current
         const explosion = explosionRef.current
@@ -39,7 +44,7 @@ export function useCrashAnimation({
             autoplay: false
         })
 
-        return anime({
+        const anim = anime({
             targets: spaceship,
             easing: "linear",
             duration: 1,
@@ -63,19 +68,23 @@ export function useCrashAnimation({
                 `
                 target.style.opacity = animatedValues.opacity.toString()
 
-                if (progress === 1) {
+                if (progress < 1) {
+                    moon.style.display = ""
+                    explosion.src = ""
+                }
+
+                onDone(progress, () => {
                     moon.style.display = "none"
                     explosion.src = explosionSrc
                     clearTimeout(explosionTimeoutRef.current)
                     explosionTimeoutRef.current = setTimeout(() => {
                         explosion.src = ""
                     }, 800) as any as number
-                } else {
-                    moon.style.display = ""
-                    explosion.src = ""
-                }
+                })
             }
         })
+
+        setAnimation(anim)
     }, [])
 
     return animation
