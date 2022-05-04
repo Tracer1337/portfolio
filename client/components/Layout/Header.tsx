@@ -29,10 +29,12 @@ function useAnimation({
         })
         .add({
             targets: leftElement,
+            opacity: 0,
             translateX: -200
         })
         .add({
             targets: rightElement,
+            opacity: 0,
             translateX: 200
         }, "-=1")
         

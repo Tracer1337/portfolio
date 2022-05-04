@@ -18,6 +18,11 @@ type Props = {
     skills: any[]
 }
 
+function fix(element: HTMLElement, duration: number) {
+    element.style.paddingTop = `${Math.min(window.scrollY, duration)}px`
+    element.style.paddingBottom = `${Math.max(duration - window.scrollY, 0)}px`
+}
+
 function useScrollAnimation({
     containerRef,
     headerAnimationRef,
@@ -42,8 +47,7 @@ function useScrollAnimation({
             !landingAnimation
         ) return
 
-        container.style.paddingTop = `${Math.min(window.scrollY, 1000)}px`
-        container.style.paddingBottom = `${Math.max(1000 - window.scrollY, 0)}px`
+        fix(container, 200)
 
         headerAnimation.update(window.scrollY / 200)
     }, [])
