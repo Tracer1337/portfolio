@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { animate, Animation, fix } from "../../lib/animation"
 
 export function useAnimationController({
@@ -18,6 +18,8 @@ export function useAnimationController({
   crashAnimationRef: React.RefObject<Animation>,
   landingAnimationRef: React.RefObject<Animation>
 }) {
+  const hasSetContainerDimensions = useRef(false)
+
   const handleScroll = useCallback(() => {
       const container = containerRef.current
       const headerContainer = headerContainerRef.current
@@ -43,9 +45,21 @@ export function useAnimationController({
       fix(container, 0, 1000)
       animate(crashAnimation, 0, 1000)
 
-      const projectsSectionRect = projectsSection.getBoundingClientRect()
-      fix(landingAnimationContainer, 1500, 1500 + projectsSectionRect.height - 500)
-      animate(landingAnimation, 1500, 1500 + projectsSectionRect.height - 500)
+      fix(landingAnimationContainer, 1500, 1500 + projectsSection.clientHeight - 500)
+      animate(landingAnimation, 1500, 1500 + projectsSection.clientHeight - 500)
+  }, [])
+
+  useEffect(() => {
+    if (
+      !containerRef.current ||
+      hasSetContainerDimensions.current
+    ) return
+
+    hasSetContainerDimensions.current = true
+
+    containerRef.current.style.paddingBottom = `${
+      1000 - (document.body.clientHeight - innerHeight)
+    }px`
   }, [])
 
   useEffect(() => {

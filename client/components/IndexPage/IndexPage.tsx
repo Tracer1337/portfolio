@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useRef } from "react"
+import { useMemo, useRef } from "react"
 import { css } from "@emotion/react"
 import Container from "../Container"
 import Background from "../Background"
@@ -42,7 +42,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
             <Container ref={headerContainerRef}>
                 <Header ref={headerAnimationRef}/>
             </Container>
-            <Container ref={containerRef} css={css`padding-bottom: 1000px;`}>
+            <Container ref={containerRef}>
                 <div css={css`
                     display: flex;
                     justify-content: space-between;

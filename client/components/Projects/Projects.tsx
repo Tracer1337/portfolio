@@ -16,7 +16,6 @@ function Projects({ projects }: { projects: any[] }) {
             flex-direction: column;
             align-items: center;
             min-height: 1000px;
-            border: 1px solid white;
         `}>
             <h1 css={css`margin-bottom: 64px;`}>My Projects</h1>
             {projects.map((project, i) => (
