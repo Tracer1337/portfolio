@@ -6,6 +6,7 @@ import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
 import { AppContextProvider } from "../lib/context"
 import { fetchAPI } from "../lib/api"
+import { breakpoints } from "../lib/responsive"
 
 export type CustomAppProps = AppProps & {
     emotionCache: EmotionCache,
@@ -40,6 +41,10 @@ export default function MyApp(props: CustomAppProps) {
                             color: #fff;
                             font-family: 'Inter', sans-serif;
                             overflow-x: hidden;
+
+                            @media ${breakpoints.s} {
+                                font-size: 14px;
+                            }
                         }
 
                         a {

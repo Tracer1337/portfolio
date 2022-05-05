@@ -2,6 +2,7 @@
 import { css } from "@emotion/react"
 import React from "react"
 import { getStrapiUrl } from "../../lib/api"
+import { breakpoints } from "../../lib/responsive"
 
 function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
     skills: any[]
@@ -21,6 +22,11 @@ function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
             <div css={css`
                 display: flex;
                 flex-wrap: wrap;
+                @media ${breakpoints.s} {
+                    width: 100vw;
+                    flex-wrap: nowrap;
+                    overflow-x: scroll;
+                }
             `}>
                 {skills.map((skill, i) => (
                     <div

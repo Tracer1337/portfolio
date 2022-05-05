@@ -3,4 +3,3 @@ Rocket Game Selection Dropdown
 	Lasercat
 Contributions
 Random Explosion Animations
-Responsive Design

@@ -4,7 +4,7 @@ const Button = styled.button`
     background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
-    padding: 12px 16px;
+    padding: .8em 1em;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 150ms;

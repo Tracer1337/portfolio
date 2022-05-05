@@ -6,6 +6,7 @@ import Container from "../Container"
 import { useAppContext } from "../../lib/context"
 import { Animation } from "../../lib/animation"
 import { useHeaderAnimation } from "./animation"
+import { breakpoints } from "../../lib/responsive"
 
 function Header(
     props: React.ComponentProps<"div">,
@@ -38,6 +39,9 @@ function Header(
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                @media ${breakpoints.s} {
+                    height: 80px;
+                }
             `}
             {...props}
         >

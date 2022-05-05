@@ -2,6 +2,7 @@
 import { css } from "@emotion/react"
 import Button from "../Button"
 import { getStrapiUrl } from "../../lib/api"
+import { breakpoints } from "../../lib/responsive"
 
 function Projects({ projects }: { projects: any[] }) {
     const getThumbnailURL = (project: any) =>
@@ -16,6 +17,10 @@ function Projects({ projects }: { projects: any[] }) {
             flex-direction: column;
             align-items: center;
             min-height: 1000px;
+            @media ${breakpoints.m} {
+                width: 100vw;
+                min-height: 0;
+            }
         `}>
             <h1 css={css`margin-bottom: 64px;`}>My Projects</h1>
             {projects.map((project, i) => (
@@ -26,6 +31,13 @@ function Projects({ projects }: { projects: any[] }) {
                         margin-bottom: 48px;
                         display: flex;
                         justify-content: space-between;
+                        @media ${breakpoints.m} {
+                            width: 100%;
+                            max-width: 800px;
+                        }
+                        @media ${breakpoints.s} {
+                            width: calc(100% - 32px);
+                        }
                     `}
                 >
                     <div css={css`
@@ -43,8 +55,8 @@ function Projects({ projects }: { projects: any[] }) {
                         background-size: cover;
                         background-repeat: no-repeat;
                         background-position: center;
-                        width: 180px;
-                        height: 100px;
+                        width: 11.25em;
+                        height: 6.25em;
                     `}/>
                 </div>
             ))}

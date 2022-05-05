@@ -30,7 +30,10 @@ function Footer(props: React.ComponentProps<"div">) {
                     width: 150px;
                 `}/>
             ) : (
-                <span css={css`font-size: 14px; opacity: 0.75;`}>
+                <span css={css`
+                    font-size: .8em;
+                    opacity: 0.75;
+                `}>
                     Copyright &copy;&nbsp;
                     {footer.copyright.year}&nbsp;
                     {footer.copyright.name}.
