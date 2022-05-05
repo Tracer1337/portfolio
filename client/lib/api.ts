@@ -1,6 +1,6 @@
 import qs from "qs"
 
-const baseUrl = "https://v2202104145753149514.ultrasrv.de:3800"
+const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
 
 export function getStrapiUrl(path = "") {
     return `${baseUrl}${path}`
