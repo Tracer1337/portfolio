@@ -1,77 +1,86 @@
-import { useCallback, useEffect, useRef } from "react"
-import { animate, Animation, fix } from "../../lib/animation"
+import React, { useEffect } from "react"
+import { animate, Animation } from "../../lib/animation"
 
 export function useAnimationController({
-  containerRef,
-  headerContainerRef,
-  projectsSectionRef,
-  landingAnimationContainerRef,
-  backgroundAnimationRef,
-  headerAnimationRef,
-  crashAnimationRef,
-  landingAnimationRef
+    containerRef,
+    headerContainerRef,
+    techstackSectionRef,
+    projectsSectionRef,
+    landingAnimationContainerRef,
+    backgroundAnimationRef,
+    headerAnimationRef,
+    crashAnimationRef,
+    landingAnimationRef
 }: {
-  containerRef: React.RefObject<HTMLDivElement>,
-  headerContainerRef: React.RefObject<HTMLDivElement>,
-  projectsSectionRef: React.RefObject<HTMLDivElement>,
-  landingAnimationContainerRef: React.RefObject<HTMLDivElement>,
-  backgroundAnimationRef: React.RefObject<Animation>,
-  headerAnimationRef: React.RefObject<Animation>,
-  crashAnimationRef: React.RefObject<Animation>,
-  landingAnimationRef: React.RefObject<Animation>
+    containerRef: React.RefObject<HTMLDivElement>,
+    headerContainerRef: React.RefObject<HTMLDivElement>,
+    techstackSectionRef: React.RefObject<HTMLDivElement>,
+    projectsSectionRef: React.RefObject<HTMLDivElement>,
+    landingAnimationContainerRef: React.RefObject<HTMLDivElement>,
+    backgroundAnimationRef: React.RefObject<Animation>,
+    headerAnimationRef: React.RefObject<Animation>,
+    crashAnimationRef: React.RefObject<Animation>,
+    landingAnimationRef: React.RefObject<Animation>
 }) {
-  const hasSetContainerDimensions = useRef(false)
+    useEffect(() => {
+        const container = containerRef.current
+        const headerContainer = headerContainerRef.current
+        const projectsSection = projectsSectionRef.current
+        const landingAnimationContainer = landingAnimationContainerRef.current
+  
+        if (
+            !container ||
+            !headerContainer ||
+            !projectsSection ||
+            !landingAnimationContainer
+        ) return
 
-  const handleScroll = useCallback(() => {
-      const container = containerRef.current
-      const headerContainer = headerContainerRef.current
-      const projectsSection = projectsSectionRef.current
-      const landingAnimationContainer = landingAnimationContainerRef.current
-      const backgroundAnimation = backgroundAnimationRef.current
-      const headerAnimation = headerAnimationRef.current
-      const crashAnimation = crashAnimationRef.current
-      const landingAnimation = landingAnimationRef.current
+        const handleScroll = () => {
+            if (!headerAnimationRef.current) return
+            animate(headerAnimationRef.current, 1000, 1200)
+        }
 
-      if (
-          !container ||
-          !headerContainer ||
-          !projectsSection ||
-          !landingAnimationContainer ||
-          !backgroundAnimation ||
-          !headerAnimation ||
-          !crashAnimation ||
-          !landingAnimation
-      ) return
+        const controller = new window.ScrollMagic.Controller()
 
-      animate(backgroundAnimation, 0, document.body.clientHeight)
+        const scenes: ScrollMagic.Scene[] = []
 
-      fix(headerContainer, 0, 1200)
-      animate(headerAnimation, 1000, 1200)
+        scenes.push(
+            new window.ScrollMagic.Scene({
+                triggerElement: container,
+                triggerHook: "onLeave",
+                offset: -container.getBoundingClientRect().y,
+                duration: 1000
+            })
+                .on("progress", (event: ScrollMagic.ProgressEvent) => {
+                    crashAnimationRef.current?.update(event.progress)
+                })
+                .setPin(container)
+                .addTo(controller)
+        )
+        
+        scenes.push(
+            new window.ScrollMagic.Scene({
+                triggerElement: projectsSection,
+                triggerHook: "onLeave",
+                offset: -window.innerHeight / 4,
+                duration: projectsSection.clientHeight - 800
+            })
+                .on("progress", (event: ScrollMagic.ProgressEvent) => {
+                    landingAnimationRef.current?.update(event.progress)
+                })
+                .setPin(landingAnimationContainer)
+                .addTo(controller)
+        )
 
-      fix(container, 0, 1000)
-      animate(crashAnimation, 0, 1000)
+        if (process.env.NODE_ENV === "development") {
+            scenes.forEach((scene) => scene.addIndicators!())
+        }
 
-      fix(landingAnimationContainer, 1500, 1500 + projectsSection.clientHeight - 500)
-      animate(landingAnimation, 1500, 1500 + projectsSection.clientHeight - 500)
-  }, [])
+        window.addEventListener("scroll", handleScroll)
 
-  useEffect(() => {
-    if (
-      !containerRef.current ||
-      hasSetContainerDimensions.current
-    ) return
-
-    hasSetContainerDimensions.current = true
-
-    containerRef.current.style.paddingBottom = `${
-      1000 - (document.body.clientHeight - innerHeight)
-    }px`
-  }, [])
-
-  useEffect(() => {
-      window.addEventListener("scroll", handleScroll)
-      return () => {
-          window.removeEventListener("scroll", handleScroll)
-      }
-  }, [handleScroll])
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+            controller.destroy(false)
+        }
+    }, [])
 }

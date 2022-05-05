@@ -3,4 +3,4 @@ Rocket Game Selection Dropdown
 	Lasercat
 Contributions
 Random Explosion Animations
-Strapi Graphql Plugin + Graphql Codegen
+Responsive Design

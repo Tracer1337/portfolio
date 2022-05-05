@@ -20,6 +20,7 @@ export type IndexPageProps = {
 function IndexPage({ projects, skills }: IndexPageProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const headerContainerRef = useRef<HTMLDivElement>(null)
+    const techstackSectionRef = useRef<HTMLDivElement>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
     const landingAnimationContainerRef = useRef<HTMLDivElement>(null)
     const backgroundAnimationRef = useRef<Animation>(null)
@@ -30,6 +31,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
     useAnimationController({
         containerRef,
         headerContainerRef,
+        techstackSectionRef,
         projectsSectionRef,
         landingAnimationContainerRef,
         backgroundAnimationRef,
@@ -41,40 +43,53 @@ function IndexPage({ projects, skills }: IndexPageProps) {
     return (
         <>
             <Background ref={backgroundAnimationRef}/>
-            <Container ref={headerContainerRef}>
+            <Container ref={headerContainerRef} css={css`
+                position: sticky;
+                top: 0;
+            `}>
                 <Header ref={headerAnimationRef}/>
             </Container>
-            <Container ref={containerRef}>
-                <div css={css`
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 300px;
-                `}>
-                    <CrashAnimation ref={crashAnimationRef}/>
-                    <Techstack
-                        skills={skills}
-                        css={css`flex-grow: 1;`}
-                    />
-                </div>
-                <div
-                    ref={projectsSectionRef}
-                    css={css`
+            <Container>
+                <div ref={containerRef}>
+                    <div
+                        ref={techstackSectionRef}
+                        css={css`
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 300px;
+                        `}
+                    >
+                        <CrashAnimation ref={crashAnimationRef}/>
+                        <Techstack
+                            skills={skills}
+                            css={css`flex-grow: 1;`}
+                        />
+                    </div>
+                    <div css={css`
                         display: flex;
                         justify-content: space-between;
                         align-items: flex-start;
                         margin-bottom: 300px;
-                    `}
-                >
-                    <Projects projects={projects}/>
-                    <div ref={landingAnimationContainerRef}>
-                        <LandingAnimation
-                            ref={landingAnimationRef}
-                            css={css`display: flex;`}
-                        />
+                    `}>
+                        <div ref={projectsSectionRef}>
+                            <Projects projects={projects}/>
+                            <Footer css={css`
+                                margin-top: 300px;
+                                transform: translateX(50%);
+                            `}/>
+                        </div>
+                        <div
+                            ref={landingAnimationContainerRef}
+                            css={css`width: 500px;`}
+                        >
+                            <LandingAnimation
+                                ref={landingAnimationRef}
+                                css={css`display: flex;`}
+                            />
+                        </div>
                     </div>
                 </div>
-                <Footer/>
             </Container>
         </>
     )

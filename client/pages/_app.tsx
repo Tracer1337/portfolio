@@ -27,6 +27,10 @@ export default function MyApp(props: CustomAppProps) {
             <AppContextProvider value={{ layout }}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+                    {process.env.NODE_ENV === "development" && (
+                        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+                    )}
                 </Head>
                 <Global
                     styles={css`

@@ -1,48 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react"
+import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
-import anime from "animejs"
-import Container from "../Container"
 import Link from "next/link"
+import Container from "../Container"
 import { useAppContext } from "../../lib/context"
 import { Animation } from "../../lib/animation"
-
-function useAnimation({
-    leftElementRef,
-    rightElementRef
-}: {
-    leftElementRef: React.RefObject<HTMLDivElement>,
-    rightElementRef: React.RefObject<HTMLDivElement>
-}) {
-    const [animation, setAnimation] = useState<anime.AnimeInstance>()
-
-    useEffect(() => {
-        const leftElement = leftElementRef.current
-        const rightElement = rightElementRef.current
-        
-        if (!leftElement || !rightElement) return
-
-        const anim = anime.timeline({
-            easing: "linear",
-            duration: 1,
-            autoplay: false
-        })
-        .add({
-            targets: leftElement,
-            opacity: 0,
-            translateX: -200
-        })
-        .add({
-            targets: rightElement,
-            opacity: 0,
-            translateX: 200
-        }, "-=1")
-        
-        setAnimation(anim)
-    }, [])
-
-    return animation
-}
+import { useHeaderAnimation } from "./animation"
 
 function Header(
     props: React.ComponentProps<"div">,
@@ -53,7 +16,7 @@ function Header(
     const leftElementRef = useRef<HTMLDivElement>(null)
     const rightElementRef = useRef<HTMLDivElement>(null)
 
-    const animation = useAnimation({
+    const animation = useHeaderAnimation({
         leftElementRef,
         rightElementRef
     })
