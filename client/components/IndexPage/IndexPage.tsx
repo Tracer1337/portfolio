@@ -9,9 +9,10 @@ import CrashAnimation from "../CrashAnimation"
 import LandingAnimation from "../LandingAnimation"
 import Techstack from "../Techstack"
 import Projects from "../Projects"
+import { useAnimationController } from "./animation"
 import { Animation } from "../../lib/animation"
 import { breakpoints } from "../../lib/responsive"
-import { useAnimationController } from "./animation"
+import { ScrollMagicScript } from "../../lib/scrollmagic"
 
 export type IndexPageProps = {
     projects: any[],
@@ -39,6 +40,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
 
     return (
         <>
+            <ScrollMagicScript/>
             <Background ref={backgroundAnimationRef}/>
             <div css={css`                
                 position: sticky;

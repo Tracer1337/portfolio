@@ -16,6 +16,7 @@ function MyDocument(props: React.ComponentProps<typeof Document> & {
     return (
         <Html lang="en">
             <Head>
+                <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet" />

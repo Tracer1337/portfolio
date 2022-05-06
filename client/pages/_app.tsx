@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { CacheProvider, css, Global } from "@emotion/react"
 import App, { AppContext, AppProps } from "next/app"
-import Head from "next/head"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
 import { AppContextProvider } from "../lib/context"
@@ -28,13 +27,6 @@ export default function MyApp(props: CustomAppProps) {
     return (
         <CacheProvider value={emotionCache}>
             <AppContextProvider value={{ layout, defaultSEO }}>
-                <Head>
-                    <meta name="viewport" content="initial-scale=1, width=device-width"/>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-                    {process.env.NODE_ENV === "development" && (
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-                    )}
-                </Head>
                 <Global
                     styles={css`
                         body {
