@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_seo_twitters",
+  "info": {
+    "displayName": "Twitter",
+    "icon": "align-justify",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "card": {
+      "type": "string",
+      "required": false,
+      "default": "summary_large_image"
+    },
+    "title": {
+      "type": "string",
+      "default": "Merlin Moelter - Cool Website"
+    },
+    "description": {
+      "type": "text",
+      "default": "There is nothing to see here"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "site": {
+      "type": "string",
+      "default": "@0815Merli"
+    },
+    "creator": {
+      "type": "string",
+      "default": "@0815Merli"
+    }
+  }
+}

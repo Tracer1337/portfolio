@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_seo_open_graphs",
+  "info": {
+    "displayName": "Open Graph",
+    "icon": "align-center"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "OMG YOU WON'T BELIEVE HOW COOL THIS WEBSITE IS!!1!!11"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "site_name": {
+      "type": "string",
+      "default": "Merlin Moelter - Cool Website"
+    },
+    "type": {
+      "type": "string",
+      "default": "website"
+    },
+    "description": {
+      "type": "text",
+      "default": "There is nothing to see here"
+    }
+  }
+}
