@@ -22,6 +22,9 @@ export const getStaticProps: GetStaticProps<
         populate: {
             seo: {
                 populate: {
+                    favicon: {
+                        populate: "*"
+                    },
                     open_graph: {
                         populate: "*"
                     },

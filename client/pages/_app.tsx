@@ -77,6 +77,9 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
         populate: {
             seo: {
                 populate: {
+                    favicon: {
+                        populate: "*"
+                    },
                     open_graph: {
                         populate: "*"
                     },
