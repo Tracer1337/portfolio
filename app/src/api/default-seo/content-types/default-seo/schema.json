@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "seos",
+  "collectionName": "default_seos",
   "info": {
-    "singularName": "seo",
-    "pluralName": "seos",
-    "displayName": "Default SEO",
-    "description": ""
+    "singularName": "default-seo",
+    "pluralName": "default-seos",
+    "displayName": "Default SEO"
   },
   "options": {
     "draftAndPublish": false

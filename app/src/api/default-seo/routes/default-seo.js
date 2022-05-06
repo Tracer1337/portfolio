@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * seo router.
+ * default-seo router.
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::seo.seo');
+module.exports = createCoreRouter('api::default-seo.default-seo');

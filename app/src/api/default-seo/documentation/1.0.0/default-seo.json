@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/seo": {
+    "/default-seo": {
       "get": {
         "responses": {
           "200": {
@@ -1666,7 +1666,7 @@
           }
         },
         "tags": [
-          "Seo"
+          "Default-seo"
         ],
         "parameters": [
           {
@@ -1750,7 +1750,7 @@
             }
           }
         ],
-        "operationId": "get/seo"
+        "operationId": "get/default-seo"
       },
       "put": {
         "responses": {
@@ -3394,10 +3394,10 @@
           }
         },
         "tags": [
-          "Seo"
+          "Default-seo"
         ],
         "parameters": [],
-        "operationId": "put/seo",
+        "operationId": "put/default-seo",
         "requestBody": {
           "required": true,
           "content": {
@@ -3692,10 +3692,10 @@
           }
         },
         "tags": [
-          "Seo"
+          "Default-seo"
         ],
         "parameters": [],
-        "operationId": "delete/seo"
+        "operationId": "delete/default-seo"
       }
     }
   }
