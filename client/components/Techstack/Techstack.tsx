@@ -30,27 +30,17 @@ function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
                 }
             `}>
                 {skills.map((skill, i) => (
-                    <div
+                    <Image
                         key={i}
+                        src={getStrapiUrl(skill.attributes.icon.data.attributes.url)}
+                        alt={skill.attributes.name}
+                        width={40}
+                        height={40}
                         css={css`
-                            width: 64px;
-                            height: 88px;
+                            min-width: 40px;
                             margin: 16px;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
                         `}
-                    >
-                        <Image
-                            src={getStrapiUrl(skill.attributes.icon.data.attributes.url)}
-                            alt={skill.attributes.name}
-                            width={40}
-                            height={40}
-                            css={css`margin-bottom: 8px;`}
-                        />
-                        <span>{skill.attributes.name}</span>
-                    </div>
+                    />
                 ))}
             </div>
         </div>
