@@ -10,7 +10,8 @@ import { breakpoints } from "../lib/responsive"
 
 export type CustomAppProps = AppProps & {
     emotionCache: EmotionCache,
-    layout: any
+    layout: any,
+    defaultSEO: any
 }
 
 const clientSideEmotionCache = createEmotionCache()
@@ -20,12 +21,13 @@ export default function MyApp(props: CustomAppProps) {
         Component,
         emotionCache = clientSideEmotionCache,
         layout,
+        defaultSEO,
         pageProps
     } = props
 
     return (
         <CacheProvider value={emotionCache}>
-            <AppContextProvider value={{ layout }}>
+            <AppContextProvider value={{ layout, defaultSEO }}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
@@ -71,8 +73,23 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
             }
         }
     })
+    const defaultSEO = await fetchAPI("/default-seo", {
+        populate: {
+            seo: {
+                populate: {
+                    open_graph: {
+                        populate: "*"
+                    },
+                    twitter: {
+                        populate: "*"
+                    }
+                }
+            }
+        }
+    })
     return {
         ...props,
-        layout: layout.data
+        layout: layout.data,
+        defaultSEO: defaultSEO.data
     }
 }

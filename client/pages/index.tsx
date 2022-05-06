@@ -2,12 +2,36 @@
 import { GetStaticProps } from "next"
 import { fetchAPI } from "../lib/api"
 import IndexPage, { IndexPageProps } from "../components/IndexPage/IndexPage"
+import SEO from "../components/SEO"
 
-export default function Index(props: IndexPageProps) {
-    return <IndexPage {...props}/>
+export default function Index({ seo, ...props }: IndexPageProps & {
+    seo: any
+}) {
+    return (
+        <>
+            <SEO seo={seo}/>
+            <IndexPage {...props}/>
+        </>
+    )
 }
 
-export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
+export const getStaticProps: GetStaticProps<
+    IndexPageProps & { seo: any }
+> = async () => {
+    const seo = await fetchAPI("/index-page", {
+        populate: {
+            seo: {
+                populate: {
+                    open_graph: {
+                        populate: "*"
+                    },
+                    twitter: {
+                        populate: "*"
+                    }
+                }
+            }
+        }
+    })
     const projects = await fetchAPI("/projects", {
         populate: {
             thumbnail: "*"
@@ -27,6 +51,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
     })
     return {
         props: {
+            seo: seo.data,
             projects: projects.data,
             skills: skills.data
         }

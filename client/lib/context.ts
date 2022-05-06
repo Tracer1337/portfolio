@@ -1,6 +1,11 @@
 import React, { createContext, useContext } from "react"
 
-const AppContext = createContext<any>({})
+type AppContextValue = {
+    layout: any,
+    defaultSEO: any
+}
+
+const AppContext = createContext<AppContextValue>({} as any)
 
 export function useAppContext() {
     return useContext(AppContext)
@@ -9,7 +14,7 @@ export function useAppContext() {
 export function AppContextProvider({
     children,
     value
-}: React.PropsWithChildren<{ value: any }>) {
+}: React.PropsWithChildren<{ value: AppContextValue }>) {
     return React.createElement(
         AppContext.Provider,
         { value },
