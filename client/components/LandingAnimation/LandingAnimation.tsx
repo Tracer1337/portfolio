@@ -27,6 +27,7 @@ function LandingAnimation(
         >
             <img
                 src="/mars.png"
+                alt="Mars"
                 css={css`
                     position: absolute;
                     right: 0;
@@ -38,6 +39,7 @@ function LandingAnimation(
             />
             <img
                 src="/spacex-rocket.png"
+                alt="SpaceX Rocket"
                 ref={spaceshipRef}
                 css={css`
                     position: absolute;

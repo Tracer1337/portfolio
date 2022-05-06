@@ -33,6 +33,7 @@ function CrashAnimation(
         >
             <img
                 src="/moon.png"
+                alt="Moon"
                 ref={moonRef}
                 css={css`
                     position: absolute;
@@ -43,6 +44,7 @@ function CrashAnimation(
             />
             <img
                 ref={explosionRef}
+                alt="Explosion"
                 css={css`
                     position: absolute;
                     bottom: 0;
@@ -50,6 +52,7 @@ function CrashAnimation(
             />
             <img
                 src="/nasa-rocket.png"
+                alt="NASA Rocket"
                 ref={spaceshipRef}
                 css={css`
                     position: absolute;
