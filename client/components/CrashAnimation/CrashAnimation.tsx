@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
+import Image from "../Image"
 import { useCrashAnimation } from "./animation"
 import { Animation } from "../../lib/animation"
+import moonImage from "../../assets/moon.png"
+import spaceshipImage from "../../assets/nasa-rocket.png"
 
 function CrashAnimation(
     props: React.ComponentProps<"div">,
@@ -31,15 +34,15 @@ function CrashAnimation(
             `}
             {...props}
         >
-            <img
-                src="/moon.png"
-                alt="Moon"
+            <Image
                 ref={moonRef}
+                src={moonImage}
+                alt="Moon"
+                width={200}
+                height={200}
                 css={css`
                     position: absolute;
                     bottom: 0;
-                    width: 200px;
-                    height: 200px;
                 `}
             />
             <img
@@ -48,18 +51,19 @@ function CrashAnimation(
                 css={css`
                     position: absolute;
                     bottom: 0;
+                    display: none;
                 `}
             />
-            <img
-                src="/nasa-rocket.png"
-                alt="NASA Rocket"
+            <Image
                 ref={spaceshipRef}
+                src={spaceshipImage}
+                alt="NASA Rocket"
+                width={98}
+                height={102}
                 css={css`
                     position: absolute;
                     left: 400px;
                     bottom: 100px;
-                    width: 98px;
-                    height: 102px;
                     transform: rotate(-80deg);
                 `}
             />

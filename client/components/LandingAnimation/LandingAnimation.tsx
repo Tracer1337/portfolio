@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
+import Image from "../Image"
 import { useLandingAnimation } from "./animation"
 import { Animation } from "../../lib/animation"
+import marsImage from "../../assets/mars.png"
+import spaceshipImage from "../../assets/spacex-rocket.png"
 
 function LandingAnimation(
     props: React.ComponentProps<"div">,
@@ -25,22 +28,24 @@ function LandingAnimation(
             `}
             {...props}
         >
-            <img
-                src="/mars.png"
+            <Image
+                src={marsImage}
                 alt="Mars"
+                width={400}
+                height={400}
                 css={css`
                     position: absolute;
                     right: 0;
                     bottom: 0;
-                    width: 400px;
-                    height: 400px;
                     transform: rotate(-45deg);
                 `}
             />
-            <img
-                src="/spacex-rocket.png"
-                alt="SpaceX Rocket"
+            <Image
                 ref={spaceshipRef}
+                src={spaceshipImage}
+                alt="SpaceX Rocket"
+                width={130}
+                height={173}
                 css={css`
                     position: absolute;
                     right: 600px;

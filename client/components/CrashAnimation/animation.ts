@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import anime from "animejs"
 import { useImagePreload } from "../../lib/preload"
 import { useDoneCallback } from "../../lib/animation"
+import explosionImage from "../../assets/explosion.gif"
 
-const explosionSrc = "/explosion.gif"
 const rotationStage2Begin = 0.6
 
 export function useCrashAnimation({
@@ -21,7 +21,7 @@ export function useCrashAnimation({
 
     const onDone = useDoneCallback()
 
-    useImagePreload([explosionSrc])
+    useImagePreload([explosionImage.src])
 
     useEffect(() => {
         const spaceship = spaceshipRef.current
@@ -71,14 +71,17 @@ export function useCrashAnimation({
                 if (progress < 1) {
                     moon.style.display = ""
                     explosion.src = ""
+                    explosion.style.display = "none"
                 }
 
                 onDone(progress, () => {
                     moon.style.display = "none"
-                    explosion.src = explosionSrc
+                    explosion.src = explosionImage.src
+                    explosion.style.display = "block"
                     clearTimeout(explosionTimeoutRef.current)
                     explosionTimeoutRef.current = setTimeout(() => {
                         explosion.src = ""
+                        explosion.style.display = "none"
                     }, 800) as any as number
                 })
             }

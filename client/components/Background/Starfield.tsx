@@ -1,12 +1,27 @@
 /** @jsxImportSource @emotion/react */
-import styled from "@emotion/styled"
+import React from "react"
+import { css } from "@emotion/react"
+import Image from "../Image"
+import starfieldImage from "../../assets/starfield.png"
 
-const Starfield = styled.div`
-    background-image: url("/starfield.png");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-`
+function Starfield(
+    { className }: React.ComponentProps<"div">,
+    ref: React.ForwardedRef<HTMLDivElement>
+) {
+    return (
+        <Image
+            ref={ref}
+            src={starfieldImage}
+            layout="fill"
+            className={className}
+            css={css`
+                height: 100%;
+                & img {
+                    object-fit: cover;
+                }
+            `}
+        />
+    )
+}
 
-export default Starfield
+export default React.forwardRef(Starfield)
