@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react"
 import React from "react"
+import { css } from "@emotion/react"
+import Image from "../Image"
 import { getStrapiUrl } from "../../lib/api"
 import { breakpoints } from "../../lib/responsive"
 
@@ -41,10 +42,12 @@ function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
                             justify-content: center;
                         `}
                     >
-                        <img
+                        <Image
                             src={getStrapiUrl(skill.attributes.icon.data.attributes.url)}
                             alt={skill.attributes.name}
-                            css={css`width: 40px; margin-bottom: 8px;`}
+                            width={40}
+                            height={40}
+                            css={css`margin-bottom: 8px;`}
                         />
                         <span>{skill.attributes.name}</span>
                     </div>

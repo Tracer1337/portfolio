@@ -3,6 +3,7 @@ import { css } from "@emotion/react"
 import Button from "../Button"
 import { getStrapiUrl } from "../../lib/api"
 import { breakpoints } from "../../lib/responsive"
+import Image from "../Image"
 
 function Projects({ projects }: { projects: any[] }) {
     const getThumbnailURL = (project: any) =>
@@ -50,14 +51,19 @@ function Projects({ projects }: { projects: any[] }) {
                             <Button>Open Project</Button>
                         </a>
                     </div>
-                    <div css={css`
-                        background-image: url("${getThumbnailURL(project)}");
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width: 11.25em;
-                        height: 6.25em;
-                    `}/>
+                    <Image
+                        src={getThumbnailURL(project)}
+                        alt={project.attributes.name}
+                        width={180}
+                        height={100}
+                        css={css`
+                            width: 11.25em;
+                            height: 6.25em;
+                            & img {
+                                object-fit: cover;
+                            }
+                        `}
+                    />
                 </div>
             ))}
         </div>
