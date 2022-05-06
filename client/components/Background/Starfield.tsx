@@ -12,6 +12,7 @@ function Starfield(
         <Image
             ref={ref}
             src={starfieldImage}
+            alt="Starfield"
             layout="fill"
             className={className}
             css={css`
