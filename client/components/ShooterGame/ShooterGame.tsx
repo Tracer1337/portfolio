@@ -4,7 +4,7 @@ import Spaceship from "./Spaceship"
 import SpaceshipSelector from "./SpaceshipSelector"
 import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
-import { Sprite, sprites } from "./sprites"
+import { spaceships, Spaceship as SpaceshipType } from "./spaceships"
 import { useAppContext } from "../../lib/context"
 
 enum Stage {
@@ -18,11 +18,11 @@ function ShooterGame() {
     const context = useAppContext()
 
     const [stage, setStage] = useState<Stage>(Stage.SELECTION)
-    const [sprite, setSprite] = useState<Sprite>()
+    const [spaceship, setSpaceship] = useState<SpaceshipType>()
 
     useEffect(() => {
-        context.set({ isGameRunning: !!sprite })
-    }, [sprite])
+        context.set({ isGameRunning: !!spaceship })
+    }, [spaceship])
 
     return (
         <>
@@ -34,15 +34,15 @@ function ShooterGame() {
             )}
             {stage === Stage.SELECTION && (
                 <SpaceshipSelector onSelect={(selection) => {
-                    setSprite(sprites[selection])
+                    setSpaceship(spaceships[selection])
                     setStage(Stage.GAMEPLAY)
                 }}/>
             )}
             {stage === Stage.CONTROLS && (
                 <ControlsModal onClose={() => setStage(Stage.GAMEPLAY)}/>
             )}
-            {stage === Stage.GAMEPLAY && sprite && (
-                <Spaceship sprite={sprite}/>
+            {stage === Stage.GAMEPLAY && spaceship && (
+                <Spaceship spaceship={spaceship}/>
             )}
         </>
     )

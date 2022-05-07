@@ -4,7 +4,7 @@ import Icon from "@mdi/react"
 import { mdiArrowUpThin } from '@mdi/js'
 import Backdrop from "../Backdrop"
 import { useSelection } from "./selection"
-import { sprites } from "./sprites"
+import { spaceships } from "./spaceships"
 
 const bounce = keyframes`
     0% { transform: translateY(0) }
@@ -16,7 +16,7 @@ function SpaceshipSelector({ onSelect }: {
     onSelect: (selection: number) => void
 }) {
     const selectionIndicatorRef = useSelection({
-        length: sprites.length,
+        length: spaceships.length,
         onSelect
     })
 
@@ -38,7 +38,7 @@ function SpaceshipSelector({ onSelect }: {
             <div css={css`
                 display: flex;
             `}>
-                {sprites.map((sprite, i) => (
+                {spaceships.map((spaceship, i) => (
                     <div key={i} css={css`
                         width: 250px;
                         height: 250px;
@@ -49,7 +49,7 @@ function SpaceshipSelector({ onSelect }: {
                         margin: 8px;
                     `}>
                         <img
-                            src={sprite.url}
+                            src={spaceship.sprite.url}
                             alt="Sprite"
                             css={css`
                                 max-width: 100%;

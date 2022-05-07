@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
-import { Sprite } from "./sprites"
-import { usePlayerControls } from "./game"
+import { Spaceship as SpaceshipType } from "./spaceships"
+import { usePlayerControls } from "./player"
 
-function Spaceship({ sprite }: { sprite: Sprite }) {
+function Spaceship({ spaceship }: { spaceship: SpaceshipType }) {
     const spriteRef = useRef<HTMLImageElement>(null)
 
     usePlayerControls({ spriteRef })
@@ -16,7 +16,7 @@ function Spaceship({ sprite }: { sprite: Sprite }) {
     return (
         <img
             ref={spriteRef}
-            src={sprite.url}
+            src={spaceship.sprite.url}
             alt="Spaceship"
             css={css`
                 position: absolute;
