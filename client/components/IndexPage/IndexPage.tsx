@@ -9,10 +9,12 @@ import CrashAnimation from "../CrashAnimation"
 import LandingAnimation from "../LandingAnimation"
 import Techstack from "../Techstack"
 import Projects from "../Projects"
+import ShooterGame from "../ShooterGame"
 import { useAnimationController } from "./animation"
 import { Animation } from "../../lib/animation"
 import { breakpoints } from "../../lib/responsive"
 import { ScrollMagicScript } from "../../lib/scrollmagic"
+import { useAppContext } from "../../lib/context"
 
 export type IndexPageProps = {
     projects: any[],
@@ -20,6 +22,8 @@ export type IndexPageProps = {
 }
 
 function IndexPage({ projects, skills }: IndexPageProps) {
+    const context = useAppContext()
+    
     const containerRef = useRef<HTMLDivElement>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
     const landingAnimationContainerRef = useRef<HTMLDivElement>(null)
@@ -117,6 +121,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
                     </div>
                 </div>
             </Container>
+            {context.isGameVisible && <ShooterGame/>}
         </>
     )
 }

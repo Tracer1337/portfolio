@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { animate, Animation } from "../../lib/animation"
+import { useAppContext } from "../../lib/context"
 import { breakpoints, useMediaQuery } from "../../lib/responsive"
 
 export function useAnimationController({
@@ -19,6 +20,8 @@ export function useAnimationController({
     crashAnimationRef: React.RefObject<Animation>,
     landingAnimationRef: React.RefObject<Animation>
 }) {    
+    const context = useAppContext()
+    
     const isLargeScreen = !useMediaQuery(breakpoints.m)
 
     useEffect(() => {
@@ -63,6 +66,11 @@ export function useAnimationController({
             })
                 .on("progress", (event: ScrollMagic.ProgressEvent) => {
                     landingAnimationRef.current?.update(event.progress)
+                })
+                .on("end", (event: any) => {
+                    if (event.scrollDirection === "FORWARD") {
+                        context.set({ isGameVisible: true })
+                    }
                 })
                 .setPin(landingAnimationContainer)
                 .addTo(controller)

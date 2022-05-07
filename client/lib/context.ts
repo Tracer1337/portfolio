@@ -1,8 +1,10 @@
-import React, { createContext, useContext } from "react"
+import React, { createContext, useContext, useState } from "react"
 
 type AppContextValue = {
     layout: any,
-    defaultSEO: any
+    defaultSEO: any,
+    isGameVisible: boolean,
+    set: (partial: Partial<AppContextValue>) => void
 }
 
 const AppContext = createContext<AppContextValue>({} as any)
@@ -13,11 +15,19 @@ export function useAppContext() {
 
 export function AppContextProvider({
     children,
-    value
-}: React.PropsWithChildren<{ value: AppContextValue }>) {
+    initialValue
+}: React.PropsWithChildren<{
+    initialValue: Omit<AppContextValue, "set">
+}>) {
+    const [value, setValue] = useState(initialValue)
+
+    const set: AppContextValue["set"] = (partial) => {
+        setValue((value) => ({ ...value, ...partial }))
+    }
+
     return React.createElement(
         AppContext.Provider,
-        { value },
+        { value: { ...value, set } },
         children
     )
 }

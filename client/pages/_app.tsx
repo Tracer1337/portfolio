@@ -27,7 +27,11 @@ export default function MyApp(props: CustomAppProps) {
 
     return (
         <CacheProvider value={emotionCache}>
-            <AppContextProvider value={{ layout, defaultSEO }}>
+            <AppContextProvider initialValue={{
+                layout,
+                defaultSEO,
+                isGameVisible: false
+            }}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 </Head>
