@@ -38,8 +38,6 @@ export function useGame({ spriteRef }: {
                 dir.rotateDeg(deltaTime / 2)
             }
 
-            // pos.add(vel)
-            // vel.add(new Vector(0, 0).copy(acc).rotateBy(dir.angle()))
             pos.add(new Vector(0, 0).copy(vel).rotateBy(dir.angle()))
             vel.add(acc)
             vel.multiplyScalar(drag)

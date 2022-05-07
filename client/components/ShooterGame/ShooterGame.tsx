@@ -7,12 +7,17 @@ import ControlsModal from "./ControlsModal"
 import { Sprite, sprites } from "./sprites"
 import { useAppContext } from "../../lib/context"
 
-type Stage = "closed" | "selection" | "controls" | "gameplay"
+enum Stage {
+    CLOSED,
+    SELECTION,
+    CONTROLS,
+    GAMEPLAY
+}
 
 function ShooterGame() {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>("selection")
+    const [stage, setStage] = useState<Stage>(Stage.SELECTION)
     const [sprite, setSprite] = useState<Sprite>()
 
     useEffect(() => {
@@ -21,22 +26,22 @@ function ShooterGame() {
 
     return (
         <>
-            {stage === "closed" && (
+            {stage === Stage.CLOSED && (
                 <StartButton onClick={(event) => {
-                    setStage("selection")
+                    setStage(Stage.SELECTION)
                     event.currentTarget.blur()
                 }}/>
             )}
-            {stage === "selection" && (
+            {stage === Stage.SELECTION && (
                 <SpaceshipSelector onSelect={(selection) => {
                     setSprite(sprites[selection])
-                    setStage("gameplay")
+                    setStage(Stage.GAMEPLAY)
                 }}/>
             )}
-            {stage === "controls" && (
-                <ControlsModal onClose={() => setStage("gameplay")}/>
+            {stage === Stage.CONTROLS && (
+                <ControlsModal onClose={() => setStage(Stage.GAMEPLAY)}/>
             )}
-            {stage === "gameplay" && sprite && (
+            {stage === Stage.GAMEPLAY && sprite && (
                 <Spaceship sprite={sprite}/>
             )}
         </>
