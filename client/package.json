@@ -22,7 +22,8 @@
     "qs": "^6.10.3",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "scrollmagic": "^2.0.8"
+    "scrollmagic": "^2.0.8",
+    "victor": "^1.1.0"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.4",
@@ -31,6 +32,7 @@
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",
     "@types/scrollmagic": "^2.0.2",
+    "@types/victor": "^1.1.0",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
     "typescript": "4.6.4"

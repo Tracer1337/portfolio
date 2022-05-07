@@ -12,7 +12,7 @@ type Stage = "closed" | "selection" | "controls" | "gameplay"
 function ShooterGame() {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>("closed")
+    const [stage, setStage] = useState<Stage>("selection")
     const [sprite, setSprite] = useState<Sprite>()
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function ShooterGame() {
             {stage === "selection" && (
                 <SpaceshipSelector onSelect={(selection) => {
                     setSprite(sprites[selection])
-                    setStage("controls")
+                    setStage("gameplay")
                 }}/>
             )}
             {stage === "controls" && (

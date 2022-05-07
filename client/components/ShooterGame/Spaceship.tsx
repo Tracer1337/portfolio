@@ -2,9 +2,12 @@
 import { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
 import { Sprite } from "./sprites"
+import { useGame } from "./game"
 
 function Spaceship({ sprite }: { sprite: Sprite }) {
     const spriteRef = useRef<HTMLImageElement>(null)
+
+    useGame({ spriteRef })
 
     useEffect(() => {
         window.scrollTo(0, 0)

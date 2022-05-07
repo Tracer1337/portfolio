@@ -30,7 +30,7 @@ export default function MyApp(props: CustomAppProps) {
             <AppContextProvider initialValue={{
                 layout,
                 defaultSEO,
-                isGameVisible: false,
+                isGameVisible: true,
                 isGameRunning: false
             }}>
                 <Head>
