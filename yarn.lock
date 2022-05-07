@@ -1301,6 +1301,18 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
+"@mdi/js@^6.6.96":
+  version "6.6.96"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-6.6.96.tgz#119f79fa9327359421167a7d4b8bde26e84702ce"
+  integrity sha512-ke9PN5DjPCOlMfhioxeZYADz8Yiz6v47W0IYRza01SSJD7y1EwESVpwFnnFUso+eCoWtE1CO9cTIvQF6sEreuA==
+
+"@mdi/react@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@mdi/react/-/react-1.6.0.tgz#09b470c6b444a626206a1bd8901abcecf56bb3eb"
+  integrity sha512-FdeJ3Ee+m9nbBkZXW0XgSkDvevgOCloLRFrBlF6pRGWgT8v2U1M2aeXi8+uRM5FZ58o3dfVFduAtmCq7quclNA==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@next/env@12.1.5":
   version "12.1.5"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.1.5.tgz#a21ba6708022d630402ca2b340316e69a0296dfc"

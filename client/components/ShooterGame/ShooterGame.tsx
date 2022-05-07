@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Spaceship from "./Spaceship"
 import SpaceshipSelector from "./SpaceshipSelector"
 import StartButton from "./StartButton"
-import Controls from "./Controls"
+import ControlsModal from "./ControlsModal"
 import { Sprite, sprites } from "./sprites"
 import { useAppContext } from "../../lib/context"
 
@@ -34,7 +34,7 @@ function ShooterGame() {
                 }}/>
             )}
             {stage === "controls" && (
-                <Controls/>
+                <ControlsModal onClose={() => setStage("gameplay")}/>
             )}
             {stage === "gameplay" && sprite && (
                 <Spaceship sprite={sprite}/>

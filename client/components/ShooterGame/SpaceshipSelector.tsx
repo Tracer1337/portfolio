@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react"
+import Icon from "@mdi/react"
+import { mdiArrowUpThin } from '@mdi/js'
 import Backdrop from "../Backdrop"
 import { useSelection } from "./selection"
 import { sprites } from "./sprites"
 
 const bounce = keyframes`
-    0% { transform: rotate(-45deg) translate(0, 0) }
-    50% { transform: rotate(-45deg) translate(-20px, 20px) }
-    100% { transform: rotate(-45deg) translate(0, 0) }
+    0% { transform: translateY(0) }
+    50% { transform: translateY(20px) }
+    100% { transform: translateY(0) }
 `
 
 function SpaceshipSelector({ onSelect }: {
@@ -67,14 +69,10 @@ function SpaceshipSelector({ onSelect }: {
                     transition: all 250ms;
                 `}
             >
-                <img
-                    src="/arrow.svg"
-                    alt="Selection"
-                    css={css`
-                        width: 32px;
-                        height: 32px;
-                        animation: ${bounce} 1s infinite;
-                    `}
+                <Icon
+                    path={mdiArrowUpThin}
+                    size="32px"
+                    css={css`animation: ${bounce} 1s infinite;`}
                 />
             </div>
         </Backdrop>
