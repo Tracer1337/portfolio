@@ -7,7 +7,7 @@ const fadeIn = keyframes`
     to { opacity: 1; }
 `
 
-function Modal(props: React.ComponentProps<"div">) {
+function Backdrop(props: React.ComponentProps<"div">) {
     useEffect(() => {
         document.body.style.overflow = "hidden"
         return () => {
@@ -38,4 +38,4 @@ function Modal(props: React.ComponentProps<"div">) {
     )
 }
 
-export default Modal
+export default Backdrop

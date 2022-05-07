@@ -1,23 +1,43 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import Spaceship from "./Spaceship"
 import SpaceshipSelector from "./SpaceshipSelector"
 import StartButton from "./StartButton"
+import Controls from "./Controls"
+import { Sprite, sprites } from "./sprites"
+import { useAppContext } from "../../lib/context"
+
+type Stage = "closed" | "selection" | "controls" | "gameplay"
 
 function ShooterGame() {
-    const [isSelectionOpen, setIsSelectionOpen] = useState(false)
-    const [spaceship, setSpaceship] = useState<string>()
+    const context = useAppContext()
+
+    const [stage, setStage] = useState<Stage>("closed")
+    const [sprite, setSprite] = useState<Sprite>()
+
+    useEffect(() => {
+        context.set({ isGameRunning: !!sprite })
+    }, [sprite])
 
     return (
         <>
-            <StartButton onClick={(event) => {
-                setIsSelectionOpen(true)
-                event.currentTarget.blur()
-            }}/>
-            {isSelectionOpen && (
-                <SpaceshipSelector onSelect={(sprite) => {
-                    setSpaceship(sprite.url)
-                    setIsSelectionOpen(false)
+            {stage === "closed" && (
+                <StartButton onClick={(event) => {
+                    setStage("selection")
+                    event.currentTarget.blur()
                 }}/>
+            )}
+            {stage === "selection" && (
+                <SpaceshipSelector onSelect={(selection) => {
+                    setSprite(sprites[selection])
+                    setStage("controls")
+                }}/>
+            )}
+            {stage === "controls" && (
+                <Controls/>
+            )}
+            {stage === "gameplay" && sprite && (
+                <Spaceship sprite={sprite}/>
             )}
         </>
     )

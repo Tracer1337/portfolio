@@ -30,7 +30,8 @@ export default function MyApp(props: CustomAppProps) {
             <AppContextProvider initialValue={{
                 layout,
                 defaultSEO,
-                isGameVisible: false
+                isGameVisible: false,
+                isGameRunning: false
             }}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>

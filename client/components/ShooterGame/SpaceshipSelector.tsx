@@ -1,13 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react"
-import Modal from "../Modal/Modal"
+import Backdrop from "../Backdrop"
 import { useSelection } from "./selection"
-
-const sprites = [
-    { url: "/x-wing.png" },
-    { url: "/millennium-falcon.png" },
-    { url: "/enterprise.png" }
-]
+import { sprites } from "./sprites"
 
 const bounce = keyframes`
     0% { transform: rotate(-45deg) translate(0, 0) }
@@ -16,15 +11,15 @@ const bounce = keyframes`
 `
 
 function SpaceshipSelector({ onSelect }: {
-    onSelect: (sprite: { url: string }) => void
+    onSelect: (selection: number) => void
 }) {
     const selectionIndicatorRef = useSelection({
         length: sprites.length,
-        onSelect: (selection) => onSelect(sprites[selection])
+        onSelect
     })
 
     return (
-        <Modal css={css`
+        <Backdrop css={css`
             display: flex;
             flex-direction: column;
         `}>
@@ -82,7 +77,7 @@ function SpaceshipSelector({ onSelect }: {
                     `}
                 />
             </div>
-        </Modal>
+        </Backdrop>
     )
 }
 

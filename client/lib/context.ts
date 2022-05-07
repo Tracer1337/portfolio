@@ -4,6 +4,7 @@ type AppContextValue = {
     layout: any,
     defaultSEO: any,
     isGameVisible: boolean,
+    isGameRunning: boolean,
     set: (partial: Partial<AppContextValue>) => void
 }
 

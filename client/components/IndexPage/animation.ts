@@ -29,8 +29,10 @@ export function useAnimationController({
         const projectsSection = projectsSectionRef.current
         const landingAnimationContainer = landingAnimationContainerRef.current
 
+        const shouldAnimate = isLargeScreen && !context.isGameRunning
+
         const handleScroll = () => {
-            if (headerAnimationRef.current && isLargeScreen) {
+            if (headerAnimationRef.current && shouldAnimate) {
                 animate(headerAnimationRef.current, 1000, 1200)
             }
             if (backgroundAnimationRef.current) {
@@ -42,7 +44,7 @@ export function useAnimationController({
 
         const scenes: ScrollMagic.Scene[] = []
 
-        if (container && isLargeScreen) {
+        if (container && shouldAnimate) {
             const scene = new window.ScrollMagic.Scene({
                 triggerElement: container,
                 triggerHook: "onLeave",
@@ -57,7 +59,7 @@ export function useAnimationController({
             scenes.push(scene)
         }
         
-        if (projectsSection && isLargeScreen) {
+        if (projectsSection && shouldAnimate) {
             const scene = new window.ScrollMagic.Scene({
                 triggerElement: projectsSection,
                 triggerHook: "onLeave",
@@ -85,7 +87,10 @@ export function useAnimationController({
 
         return () => {
             window.removeEventListener("scroll", handleScroll)
-            controller.destroy(false)
+            controller.destroy(true)
+            headerAnimationRef.current?.update(0)
+            crashAnimationRef.current?.update(0)
+            landingAnimationRef.current?.update(0)
         }
-    }, [isLargeScreen])
+    }, [isLargeScreen, context.isGameRunning])
 }
