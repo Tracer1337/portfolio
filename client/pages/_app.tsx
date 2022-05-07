@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { CacheProvider, css, Global } from "@emotion/react"
+import Head from "next/head"
 import App, { AppContext, AppProps } from "next/app"
 import { EmotionCache } from "@emotion/cache"
 import { createEmotionCache } from "../lib/emotion"
@@ -27,6 +28,9 @@ export default function MyApp(props: CustomAppProps) {
     return (
         <CacheProvider value={emotionCache}>
             <AppContextProvider value={{ layout, defaultSEO }}>
+                <Head>
+                    <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                </Head>
                 <Global
                     styles={css`
                         body {
