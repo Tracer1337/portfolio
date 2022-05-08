@@ -63,6 +63,7 @@ export function usePlayerControls({
                 window.scrollY,
                 window.innerHeight + window.scrollY
             )
+            pos.y = constrain(pos.y, 0, document.body.clientHeight)
 
             if (vel.magnitude() > SCROLL_VELOCITY_THRESHOLD) {
                 const margin = window.innerHeight * SCROLL_MARGIN
@@ -84,7 +85,7 @@ export function usePlayerControls({
             `
 
             if (isShootKeyPressed) {
-                bulletManager?.requestBullet({ currentTime, pos, dir })
+                bulletManager?.requestBullet({ currentTime, pos, dir, vel })
             }
         }
 
