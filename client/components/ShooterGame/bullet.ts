@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Vector from "victor"
 import { UpdateFunction } from "./game"
 import { Spaceship } from "./spaceships"
+import { TargetManager } from "./target"
 
 const SPEED = 20
 
@@ -20,22 +21,23 @@ export type BulletManager = {
     update: UpdateFunction
 }
 
-type Bullet = {
+export type Bullet = {
     element: HTMLDivElement,
     pos: Vector,
     vel: Vector,
     dir: Vector,
     pierce: number,
-    damage: number,
-    hits: Set<Element>
+    damage: number
 }
 
 export function useBulletManager({
     spaceship,
-    spriteRef
+    spriteRef,
+    targetManager
 }: {
     spaceship: Spaceship,
-    spriteRef: React.RefObject<HTMLImageElement>
+    spriteRef: React.RefObject<HTMLImageElement>,
+    targetManager?: TargetManager
 }) {
     const [bulletManager, setBulletManager] = useState<BulletManager>()
 
@@ -44,10 +46,6 @@ export function useBulletManager({
 
         const bullets: Bullet[] = []
 
-        const targets = Array.from(
-            document.querySelectorAll("[data-shootable]")
-        )
-        
         let lastShotTime: number
         let shootIndex = 0
 
@@ -75,7 +73,6 @@ export function useBulletManager({
             return {
                 pierce: spaceship.bullet.pierce,
                 damage: spaceship.bullet.damage,
-                hits: new Set(),
                 element: createElement(),
                 pos: new Vector(0, 0)
                     .add(spritePos.clone().multiplyScalar(-0.5))
@@ -124,7 +121,7 @@ export function useBulletManager({
         const update: UpdateFunction = ({ deltaTime }) => {
             outer:
             for (let i = bullets.length - 1; i >= 0; i--) {
-                const { element, pos, vel, dir, hits } = bullets[i]
+                const { element, pos, vel, dir } = bullets[i]
 
                 pos.add(vel)
 
@@ -133,21 +130,12 @@ export function useBulletManager({
                     rotate(${dir.angle()-Math.PI/2}rad)
                 `
 
-                for (let target of targets) {
-                    if (hits.has(target)) continue
-                    const rect = target.getBoundingClientRect()
-                    const x = rect.x + window.scrollX
-                    const y = rect.y + window.scrollY
-                    if (
-                        pos.x >= x && pos.x <= x + rect.width &&
-                        pos.y >= y && pos.y <= y + rect.height
-                    ) {
-                        hits.add(target)
-                        if (--bullets[i].pierce <= 0) {
-                            removeBullet(i)
-                        }
-                        continue outer
-                    }
+                if (
+                    targetManager?.detect(bullets[i]) &&
+                    --bullets[i].pierce <= 0
+                ) {
+                    removeBullet(i)
+                    continue outer
                 }
 
                 if (
@@ -165,7 +153,7 @@ export function useBulletManager({
             spawn,
             update
         })
-    }, [])
+    }, [targetManager])
 
     return bulletManager
 }

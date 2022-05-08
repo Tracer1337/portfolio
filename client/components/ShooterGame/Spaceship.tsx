@@ -5,13 +5,17 @@ import { Spaceship as SpaceshipType } from "./spaceships"
 import { useBulletManager } from "./bullet"
 import { usePlayerControls } from "./player"
 import { useGameLoop } from "./game"
+import { useTargetManager } from "./target"
 
 function Spaceship({ spaceship }: { spaceship: SpaceshipType }) {
     const spriteRef = useRef<HTMLImageElement>(null)
 
+    const targetManager = useTargetManager()
+
     const bulletManager = useBulletManager({
         spaceship,
-        spriteRef
+        spriteRef,
+        targetManager
     })
 
     const playerControls = usePlayerControls({

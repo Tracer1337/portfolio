@@ -23,7 +23,7 @@ export const spaceships: Spaceship [] = [
         bullet: {
             frequency: 10,
             color: "red",
-            damage: 1,
+            damage: 2,
             pierce: 1
         },
         getBulletOrigins: () => [
@@ -38,7 +38,7 @@ export const spaceships: Spaceship [] = [
         bullet: {
             frequency: 5,
             color: "red",
-            damage: 1,
+            damage: 2,
             pierce: 2
         },
         getBulletOrigins: () => [new Vector(0, 0)]
