@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 import type { Bullet } from "./bullet"
+import { useImagePreload } from "../../lib/preload"
+import explosionImage from "../../assets/explosion.gif"
 
 const SHOOTABLE_ATTR = "data-shootable"
+const DESTROYED_ATTR = "data-destroyed"
+const EXPLOSION_ANIM_DURATION = 800
 const HEALTHBAR_HEALTH_WIDTH = 10
 const HEALTHBAR_HEIGHT = 10
 const HEALTHBAR_COLOR = "rgba(255, 0, 0, 0.3)"
@@ -23,6 +27,8 @@ export type Target = {
 
 export function useTargetManager() {
     const [targetManager, setTargetManager] = useState<TargetManager>()
+
+    useImagePreload([explosionImage.src])
 
     useEffect(() => {
         const createTarget = (element: Element): Target => {
@@ -75,8 +81,38 @@ export function useTargetManager() {
 
         const hits = new Map<Bullet, Set<Target>>()
 
-        const kill = (target: Target) => {
-            console.log("Kill", target)
+        const createExplosion = (target: Target) => {
+            return new Promise<HTMLImageElement>((resolve) => {
+                const rect = target.element.getBoundingClientRect()
+                const element = document.createElement("img")
+                element.src = explosionImage.src
+                element.onload = () => {
+                    const ratio = element.naturalHeight / element.naturalWidth
+                    const width = target.element.clientWidth
+                    const height = width * ratio
+                    element.style.width = `${target.element.clientWidth}px`
+                    element.style.position = "absolute"
+                    element.style.top = "0"
+                    element.style.transform = `translate(
+                        ${rect.x + rect.width / 2 - width / 2 + window.scrollX}px,
+                        ${rect.y + rect.height / 2 - height / 2 + window.scrollY}px
+                    )`
+                    resolve(element)
+                }
+            })
+        }
+
+        const destroy = (target: Target) => {
+            target.element.setAttribute(DESTROYED_ATTR, "true")
+            target.healthbar.style.opacity = "0"
+            targets.delete(target.element)
+            createExplosion(target).then((explosion) => {
+                document.body.appendChild(explosion)
+                setTimeout(
+                    () => document.body.removeChild(explosion),
+                    EXPLOSION_ANIM_DURATION
+                )
+            })
         }
 
         const drawHealth = (target: Target, damage: number) => {
@@ -97,7 +133,7 @@ export function useTargetManager() {
         const hit = (target: Target, bullet: Bullet) => {
             drawHealth(target, bullet.damage)
             if (target.health <= 0) {
-                kill(target)
+                destroy(target)
             }
         }
 

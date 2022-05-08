@@ -54,6 +54,10 @@ export default function MyApp(props: CustomAppProps) {
                             color: #fff;
                             text-decoration: none;
                         }
+
+                        [data-destroyed] {
+                            opacity: 0 !important;
+                        }
                     `}
                 />
                 <Component {...pageProps} />
