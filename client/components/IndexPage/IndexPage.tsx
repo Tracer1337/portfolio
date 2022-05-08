@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useRef } from "react"
+import dynamic from "next/dynamic"
 import { css } from "@emotion/react"
 import Container from "@components/Container"
 import Background from "@components/Background"
@@ -9,12 +10,13 @@ import CrashAnimation from "@components/CrashAnimation"
 import LandingAnimation from "@components/LandingAnimation"
 import Techstack from "@components/Techstack"
 import Projects from "@components/Projects"
-import ShooterGame from "@components/ShooterGame"
 import { useAnimationController } from "./animation"
 import { Animation } from "@lib/animation"
 import { breakpoints } from "@lib/responsive"
 import { ScrollMagicScript } from "@lib/scrollmagic"
 import { useAppContext } from "@lib/context"
+
+const ShooterGame = dynamic(() => import("@components/ShooterGame"))
 
 export type IndexPageProps = {
     projects: any[],
