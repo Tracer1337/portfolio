@@ -17,7 +17,7 @@ enum Stage {
 function ShooterGame() {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>(Stage.SELECTION)
+    const [stage, setStage] = useState<Stage>(Stage.CLOSED)
     const [spaceship, setSpaceship] = useState<SpaceshipType>()
 
     useEffect(() => {
