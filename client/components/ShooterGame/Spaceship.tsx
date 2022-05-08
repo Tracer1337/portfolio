@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
-import { Spaceship as SpaceshipType } from "./spaceships"
-import { useBulletManager } from "./bullet"
-import { usePlayerControls } from "./player"
-import { useGameLoop } from "./game"
-import { useTargetManager } from "./target"
+import { Spaceship as SpaceshipType } from "./utils/spaceships"
+import { useBulletManager } from "./utils/bullet"
+import { usePlayerControls } from "./utils/player"
+import { useGameLoop } from "./utils/game"
+import { useTargetManager } from "./utils/target"
 
 function Spaceship({ spaceship }: { spaceship: SpaceshipType }) {
     const spriteRef = useRef<HTMLImageElement>(null)

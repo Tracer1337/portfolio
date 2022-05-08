@@ -1,7 +1,7 @@
 import Vector from "victor"
-import xwingImage from "../../assets/x-wing.png"
-import falconImage from "../../assets/millennium-falcon.png"
-import enterpriseImage from "../../assets/enterprise.png"
+import xwingImage from "../../../assets/x-wing.png"
+import falconImage from "../../../assets/millennium-falcon.png"
+import enterpriseImage from "../../../assets/enterprise.png"
 
 export type Sprite = {
     url: string

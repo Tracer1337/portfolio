@@ -3,8 +3,8 @@ import { css, keyframes } from "@emotion/react"
 import Icon from "@mdi/react"
 import { mdiArrowUpThin } from '@mdi/js'
 import Backdrop from "../Backdrop"
-import { useSelection } from "./selection"
-import { spaceships } from "./spaceships"
+import { useSelection } from "./utils/selection"
+import { spaceships } from "./utils/spaceships"
 
 const bounce = keyframes`
     0% { transform: translateY(0) }

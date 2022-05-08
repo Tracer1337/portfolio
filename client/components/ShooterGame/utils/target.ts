@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import type { Bullet } from "./bullet"
-import { useImagePreload } from "../../lib/preload"
-import explosionImage from "../../assets/explosion.gif"
+import { useImagePreload } from "../../../lib/preload"
+import explosionImage from "../../../assets/explosion.gif"
 
 const SHOOTABLE_ATTR = "data-shootable"
 const DESTROYED_ATTR = "data-destroyed"
