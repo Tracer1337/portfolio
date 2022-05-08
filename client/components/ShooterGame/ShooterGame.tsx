@@ -35,7 +35,7 @@ function ShooterGame() {
             {stage === Stage.SELECTION && (
                 <SpaceshipSelector onSelect={(selection) => {
                     setSpaceship(spaceships[selection])
-                    setStage(Stage.GAMEPLAY)
+                    setStage(Stage.CONTROLS)
                 }}/>
             )}
             {stage === Stage.CONTROLS && (
