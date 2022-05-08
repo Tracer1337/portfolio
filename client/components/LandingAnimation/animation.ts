@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import anime from "animejs"
 import confetti from "canvas-confetti"
-import { useDoneCallback } from "../../lib/animation"
+import { useDoneCallback } from "@lib/animation"
 
 export function useLandingAnimation({ spaceshipRef }: {
     spaceshipRef: React.RefObject<HTMLImageElement>

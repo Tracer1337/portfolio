@@ -2,11 +2,11 @@
 import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import Link from "next/link"
-import Container from "../Container"
-import { useAppContext } from "../../lib/context"
-import { Animation } from "../../lib/animation"
+import Container from "@components/Container"
+import { useAppContext } from "@lib/context"
+import { Animation } from "@lib/animation"
 import { useHeaderAnimation } from "./animation"
-import { breakpoints } from "../../lib/responsive"
+import { breakpoints } from "@lib/responsive"
 
 function Header(
     props: React.ComponentProps<"div">,

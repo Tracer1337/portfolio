@@ -8,7 +8,7 @@ import Document, {
     DocumentContext
 } from "next/document"
 import createEmotionServer from "@emotion/server/create-instance"
-import { createEmotionCache } from "../lib/emotion"
+import { createEmotionCache } from "@lib/emotion"
 
 function MyDocument(props: React.ComponentProps<typeof Document> & {
     emotionStyleTags: JSX.Element[]

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Vector from "victor"
 import { BulletManager } from "./bullet"
-import { constrain } from "../../../lib/animation"
 import { UpdateFunction } from "./game"
+import { constrain } from "@lib/animation"
 
 const INITIAL_VEL = 20
 const DRAG = 0.95

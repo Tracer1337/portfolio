@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
-import Image from "../Image"
+import Image from "@components/Image"
 import { useCrashAnimation } from "./animation"
-import { Animation } from "../../lib/animation"
-import moonImage from "../../assets/moon.png"
-import spaceshipImage from "../../assets/nasa-rocket.png"
+import { Animation } from "@lib/animation"
+import moonImage from "@assets/moon.png"
+import spaceshipImage from "@assets/nasa-rocket.png"
 
 function CrashAnimation(
     props: React.ComponentProps<"div">,

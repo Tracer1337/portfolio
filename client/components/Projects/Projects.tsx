@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
-import Button from "../Button"
-import { getStrapiUrl } from "../../lib/api"
-import { breakpoints } from "../../lib/responsive"
-import Image from "../Image"
+import Button from "@components/Button"
+import Image from "@components/Image"
+import { getStrapiUrl } from "@lib/api"
+import { breakpoints } from "@lib/responsive"
 
 function Projects({ projects }: { projects: any[] }) {
     const getThumbnailURL = (project: any) =>

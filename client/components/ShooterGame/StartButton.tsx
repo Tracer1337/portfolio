@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css, keyframes } from "@emotion/react"
-import Button from "../Button"
+import Button from "@components/Button"
 
 const fadeIn = keyframes`
     from { right: -100px; }

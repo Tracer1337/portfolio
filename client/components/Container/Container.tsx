@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { breakpoints } from "../../lib/responsive"
+import { breakpoints } from "@lib/responsive"
 
 const Container = styled.div`
     max-width: 1200px;

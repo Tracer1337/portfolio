@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
-import Image from "../Image"
-import starfieldImage from "../../assets/starfield.png"
+import Image from "@components/Image"
+import starfieldImage from "@assets/starfield.png"
 
 function Starfield(
     { className }: React.ComponentProps<"div">,

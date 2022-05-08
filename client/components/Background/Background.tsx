@@ -3,7 +3,7 @@ import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import Starfield from "./Starfield"
 import { useParallaxAnimation } from "./animation"
-import { Animation } from "../../lib/animation"
+import { Animation } from "@lib/animation"
 
 function Background(
     props: React.ComponentProps<"div">,

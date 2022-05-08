@@ -4,8 +4,8 @@ import Spaceship from "./Spaceship"
 import SpaceshipSelector from "./SpaceshipSelector"
 import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
-import { spaceships, Spaceship as SpaceshipType } from "./spaceships"
-import { useAppContext } from "../../lib/context"
+import { spaceships, Spaceship as SpaceshipType } from "./utils/spaceships"
+import { useAppContext } from "@lib/context"
 
 enum Stage {
     CLOSED,

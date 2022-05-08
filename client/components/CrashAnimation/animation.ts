@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import anime from "animejs"
-import { useImagePreload } from "../../lib/preload"
-import { useDoneCallback } from "../../lib/animation"
-import explosionImage from "../../assets/explosion.gif"
+import { useImagePreload } from "@lib/preload"
+import { useDoneCallback } from "@lib/animation"
+import explosionImage from "@assets/explosion.gif"
 
 const rotationStage2Begin = 0.6
 

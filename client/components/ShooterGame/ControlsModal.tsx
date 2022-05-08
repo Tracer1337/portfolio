@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
-import React from "react"
 import {
     mdiArrowUp,
     mdiArrowLeft,
     mdiArrowRight,
     mdiKeyboardSpace
 } from "@mdi/js"
-import Backdrop from "../Backdrop"
+import Backdrop from "@components/Backdrop"
+import Button from "@components/Button"
 import Key from "./Key"
-import Button from "../Button"
 
 function ControlsModal({ onClose }: {
     onClose: () => void

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
-import { animate, Animation } from "../../lib/animation"
-import { useAppContext } from "../../lib/context"
-import { breakpoints, useMediaQuery } from "../../lib/responsive"
+import { animate, Animation } from "@lib/animation"
+import { useAppContext } from "@lib/context"
+import { breakpoints, useMediaQuery } from "@lib/responsive"
 
 export function useAnimationController({
     containerRef,

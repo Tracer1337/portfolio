@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
-import Background from "../Background"
-import Container from "../Container"
+import Background from "@components/Background"
+import Container from "@components/Container"
 import Header from "./Header"
 import Footer from "./Footer"
 

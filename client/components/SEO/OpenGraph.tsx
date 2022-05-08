@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import Head from "next/head"
-import { useAppContext } from "../../lib/context"
-import { getStrapiUrl } from "../../lib/api"
+import { useAppContext } from "@lib/context"
+import { getStrapiUrl } from "@lib/api"
 
 function OpenGraph({ data }: { data?: any }) {
     const context = useAppContext()

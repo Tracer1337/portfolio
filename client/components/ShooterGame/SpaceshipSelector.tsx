@@ -2,7 +2,7 @@
 import { css, keyframes } from "@emotion/react"
 import Icon from "@mdi/react"
 import { mdiArrowUpThin } from '@mdi/js'
-import Backdrop from "../Backdrop"
+import Backdrop from "@components/Backdrop"
 import { useSelection } from "./utils/selection"
 import { spaceships } from "./utils/spaceships"
 

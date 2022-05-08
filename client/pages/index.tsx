@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { GetStaticProps } from "next"
-import { fetchAPI } from "../lib/api"
-import IndexPage, { IndexPageProps } from "../components/IndexPage/IndexPage"
-import SEO from "../components/SEO"
+import { fetchAPI } from "@lib/api"
+import IndexPage, { IndexPageProps } from "@components/IndexPage/IndexPage"
+import SEO from "@components/SEO"
 
 export default function Index({ seo, ...props }: IndexPageProps & {
     seo: any

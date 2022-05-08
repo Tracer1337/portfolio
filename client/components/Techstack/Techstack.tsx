@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
-import Image from "../Image"
-import { getStrapiUrl } from "../../lib/api"
-import { breakpoints } from "../../lib/responsive"
+import Image from "@components/Image"
+import { getStrapiUrl } from "@lib/api"
+import { breakpoints } from "@lib/responsive"
 
 function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
     skills: any[]

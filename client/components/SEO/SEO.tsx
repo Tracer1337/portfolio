@@ -2,8 +2,8 @@
 import Head from "next/head"
 import OpenGraph from "./OpenGraph"
 import Twitter from "./Twitter"
-import { useAppContext } from "../../lib/context"
-import { getStrapiUrl } from "../../lib/api"
+import { useAppContext } from "@lib/context"
+import { getStrapiUrl } from "@lib/api"
 
 function SEO({ seo }: { seo?: any }) {
     const context = useAppContext()

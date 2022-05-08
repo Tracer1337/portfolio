@@ -3,10 +3,10 @@ import { CacheProvider, css, Global } from "@emotion/react"
 import Head from "next/head"
 import App, { AppContext, AppProps } from "next/app"
 import { EmotionCache } from "@emotion/cache"
-import { createEmotionCache } from "../lib/emotion"
-import { AppContextProvider } from "../lib/context"
-import { fetchAPI } from "../lib/api"
-import { breakpoints } from "../lib/responsive"
+import { createEmotionCache } from "@lib/emotion"
+import { AppContextProvider } from "@lib/context"
+import { fetchAPI } from "@lib/api"
+import { breakpoints } from "@lib/responsive"
 
 export type CustomAppProps = AppProps & {
     emotionCache: EmotionCache,
