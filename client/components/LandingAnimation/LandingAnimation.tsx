@@ -33,6 +33,7 @@ function LandingAnimation(
                 alt="Mars"
                 width={400}
                 height={400}
+                data-shootable
                 css={css`
                     position: absolute;
                     right: 0;
@@ -46,6 +47,7 @@ function LandingAnimation(
                 alt="SpaceX Rocket"
                 width={130}
                 height={173}
+                data-shootable
                 css={css`
                     position: absolute;
                     right: 600px;

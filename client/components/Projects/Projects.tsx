@@ -23,7 +23,9 @@ function Projects({ projects }: { projects: any[] }) {
                 min-height: 0;
             }
         `}>
-            <h1 css={css`margin-bottom: 64px;`}>My Projects</h1>
+            <h1 data-shootable css={css`margin-bottom: 64px;`}>
+                My Projects
+            </h1>
             {projects.map((project, i) => (
                 <div
                     key={i}
@@ -46,9 +48,11 @@ function Projects({ projects }: { projects: any[] }) {
                         flex-direction: column;
                         justify-content: space-between;
                     `}>
-                        <h3 css={css`margin: 0;`}>{project.attributes.name}</h3>
+                        <h3 data-shootable css={css`margin: 0;`}>
+                            {project.attributes.name}
+                        </h3>
                         <a href={project.attributes.url} target="_blank">
-                            <Button>Open Project</Button>
+                            <Button data-shootable>Open Project</Button>
                         </a>
                     </div>
                     <Image
@@ -56,6 +60,7 @@ function Projects({ projects }: { projects: any[] }) {
                         alt={project.attributes.name}
                         width={180}
                         height={100}
+                        data-shootable
                         css={css`
                             width: 11.25em;
                             height: 6.25em;

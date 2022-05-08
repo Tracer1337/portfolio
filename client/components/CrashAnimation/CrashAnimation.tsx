@@ -40,6 +40,7 @@ function CrashAnimation(
                 alt="Moon"
                 width={200}
                 height={200}
+                data-shootable
                 css={css`
                     position: absolute;
                     bottom: 0;
@@ -60,6 +61,7 @@ function CrashAnimation(
                 alt="NASA Rocket"
                 width={98}
                 height={102}
+                data-shootable
                 css={css`
                     position: absolute;
                     left: 400px;

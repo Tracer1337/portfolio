@@ -24,13 +24,13 @@ function Footer(props: React.ComponentProps<"div">) {
             {...props}
         >
             {!footer.copyright ? (
-                <div css={css`
+                <div data-shootable css={css`
                     background-color: #fff;
                     height: 1px;
                     width: 150px;
                 `}/>
             ) : (
-                <span css={css`
+                <span data-shootable css={css`
                     font-size: .8em;
                     opacity: 0.75;
                 `}>

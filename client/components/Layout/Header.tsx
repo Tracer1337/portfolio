@@ -49,6 +49,7 @@ function Header(
                 <Link href="/">
                     <h3
                         ref={leftElementRef}
+                        data-shootable
                         css={css`
                             margin: 0;
                             cursor: pointer;
@@ -62,6 +63,7 @@ function Header(
                 <a href={header.action.url} target="_blank">
                     <h4
                         ref={rightElementRef}
+                        data-shootable
                         css={css`
                             margin: 0;
                             cursor: pointer;

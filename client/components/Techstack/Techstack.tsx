@@ -19,7 +19,7 @@ function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
             `}
             {...props}
         >
-            <h1>My Techstack</h1>
+            <h1 data-shootable>My Techstack</h1>
             <div css={css`
                 display: flex;
                 flex-wrap: wrap;
@@ -36,6 +36,7 @@ function Techstack({ skills, ...props }: React.ComponentProps<"div"> & {
                         alt={skill.attributes.name}
                         width={40}
                         height={40}
+                        data-shootable
                         css={css`
                             min-width: 40px;
                             margin: 16px;
