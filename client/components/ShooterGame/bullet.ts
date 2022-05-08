@@ -52,7 +52,7 @@ export function useBulletManager({
         const createElement = () => {
             const element = document.createElement("div")
             element.style.width = "2px"
-            element.style.height = "10px"
+            element.style.height = `${spaceship.bullet.length}px`
             element.style.position = "absolute"
             element.style.top = "0"
             element.style.backgroundColor = spaceship.bullet.color
