@@ -1,6 +1,8 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Vector from "victor"
+import { BulletManager } from "./bullet"
 import { constrain } from "../../lib/animation"
+import { UpdateFunction } from "./game"
 
 const INITIAL_VEL = 20
 const DRAG = 0.95
@@ -9,9 +11,17 @@ const ROTATION_SPEED = 5
 const SCROLL_MARGIN = 0.25
 const SCROLL_VELOCITY_THRESHOLD = 0.5
 
-export function usePlayerControls({ spriteRef }: {
-    spriteRef: React.RefObject<HTMLImageElement>
+export function usePlayerControls({
+    spriteRef,
+    bulletManager
+}: {
+    spriteRef: React.RefObject<HTMLImageElement>,
+    bulletManager?: BulletManager
 }) {
+    const [playerControls, setPlayerControls] = useState<{
+        update: UpdateFunction
+    }>()
+
     useEffect(() => {
         const sprite = spriteRef.current
 
@@ -28,24 +38,22 @@ export function usePlayerControls({ spriteRef }: {
         let isUpKeyPressed = false
         let isLeftKeyPressed = false
         let isRightKeyPressed = false
+        let isShootKeyPressed = false
 
-        let lastTime = performance.now()
-
-        const update = () => {
-            const currentTime = performance.now()
-            const deltaTime = currentTime - lastTime
-            lastTime = currentTime
-
-            acc.y = isUpKeyPressed ? deltaTime / (1/SPEED*100) : 0
+        const update: UpdateFunction = ({
+            currentTime,
+            deltaTime
+        }) => {
+            acc.y = isUpKeyPressed ? deltaTime / (100/SPEED) : 0
 
             if (isLeftKeyPressed) {
-                dir.rotateDeg(deltaTime / -(1/ROTATION_SPEED*10))
+                dir.rotateDeg(deltaTime / -(10/ROTATION_SPEED))
             }
             if (isRightKeyPressed) {
-                dir.rotateDeg(deltaTime / (1/ROTATION_SPEED*10))
+                dir.rotateDeg(deltaTime / (10/ROTATION_SPEED))
             }
 
-            pos.add(new Vector(0, 0).copy(vel).rotateBy(dir.angle()))
+            pos.add(vel.clone().rotateBy(dir.angle()))
             vel.add(acc)
             vel.multiplyScalar(DRAG)
 
@@ -72,13 +80,13 @@ export function usePlayerControls({ spriteRef }: {
                     ${pos.x - sprite.clientWidth / 2}px,
                     ${pos.y - sprite.clientHeight / 2}px
                 )
-                rotate(${dir.horizontalAngleDeg()-90}deg)
+                rotate(${dir.horizontalAngle()-Math.PI/2}rad)
             `
-            
-            requestAnimationFrame(update)
-        }
 
-        requestAnimationFrame(update)
+            if (isShootKeyPressed) {
+                bulletManager?.requestBullet({ currentTime, pos, dir })
+            }
+        }
 
         const handleKeyDown = (event: KeyboardEvent) => {
             switch (event.key) {
@@ -94,6 +102,10 @@ export function usePlayerControls({ spriteRef }: {
                     event.preventDefault()
                     isRightKeyPressed = true
                     break
+                case " ":
+                    event.preventDefault()
+                    isShootKeyPressed = true
+                    break
             }
         }
 
@@ -108,15 +120,22 @@ export function usePlayerControls({ spriteRef }: {
                 case "ArrowRight":
                     isRightKeyPressed = false
                     break
+                case " ":
+                    isShootKeyPressed = false
+                    break
             }
         }
 
         window.addEventListener("keydown", handleKeyDown)
         window.addEventListener("keyup", handleKeyUp)
+
+        setPlayerControls({ update })
         
         return () => {
             window.removeEventListener("keydown", handleKeyDown)
             window.removeEventListener("keyup", handleKeyUp)
         }
-    }, [])
+    }, [bulletManager])
+
+    return playerControls
 }

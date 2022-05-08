@@ -2,12 +2,27 @@
 import { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
 import { Spaceship as SpaceshipType } from "./spaceships"
+import { useBulletManager } from "./bullet"
 import { usePlayerControls } from "./player"
+import { useGameLoop } from "./game"
 
 function Spaceship({ spaceship }: { spaceship: SpaceshipType }) {
     const spriteRef = useRef<HTMLImageElement>(null)
 
-    usePlayerControls({ spriteRef })
+    const bulletManager = useBulletManager({
+        spaceship,
+        spriteRef
+    })
+
+    const playerControls = usePlayerControls({
+        spriteRef,
+        bulletManager
+    })
+
+    useGameLoop((args) => {
+        playerControls?.update?.(args)
+        bulletManager?.update?.(args)
+    })
 
     useEffect(() => {
         window.scrollTo(0, 0)
