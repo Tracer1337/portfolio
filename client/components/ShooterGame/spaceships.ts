@@ -1,4 +1,7 @@
 import Vector from "victor"
+import xwingImage from "../../assets/x-wing.png"
+import falconImage from "../../assets/millennium-falcon.png"
+import enterpriseImage from "../../assets/enterprise.png"
 
 export type Sprite = {
     url: string
@@ -19,7 +22,7 @@ export type Spaceship = {
 export const spaceships: Spaceship [] = [
     {
         sprite: {
-            url: "/x-wing.png"
+            url: xwingImage.src
         },
         bullet: {
             frequency: 16,
@@ -34,7 +37,7 @@ export const spaceships: Spaceship [] = [
     },
     {
         sprite: {
-            url: "/millennium-falcon.png"
+            url: falconImage.src
         },
         bullet: {
             frequency: 5,
@@ -50,7 +53,7 @@ export const spaceships: Spaceship [] = [
     },
     {
         sprite: {
-            url: "/enterprise.png" 
+            url: enterpriseImage.src
         },
         bullet: {
             frequency: 1,
