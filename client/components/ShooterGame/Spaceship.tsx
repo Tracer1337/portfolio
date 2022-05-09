@@ -10,7 +10,8 @@ import { useTargetManager } from "./utils/target"
 import { useScoreManager } from "./utils/score"
 
 export type SpaceshipRef = {
-    getScore: () => number
+    getScore: () => number,
+    destroy: () => void
 }
 
 function Spaceship(
@@ -51,7 +52,11 @@ function Spaceship(
     }, [])
 
     useImperativeHandle(ref, () => ({
-        getScore: () => scoreManager?.getScore() || 0
+        getScore: () => scoreManager?.getScore() || 0,
+        destroy: () => {
+            targetManager?.destroy()
+            bulletManager?.destroy()
+        }
     }))
     
     return (

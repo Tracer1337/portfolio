@@ -18,7 +18,8 @@ export type BulletManager = {
         vel: Vector,
         dir: Vector
     }) => void,
-    update: UpdateFunction
+    update: UpdateFunction,
+    destroy: () => void
 }
 
 export type Bullet = {
@@ -148,11 +149,22 @@ export function useBulletManager({
             }
         }
 
+        const destroy: BulletManager["destroy"] = () => {
+            bullets.forEach((bullet) => {
+                try {
+                    document.body.removeChild(bullet.element)
+                } catch {}
+            })
+        }
+
         setBulletManager({
             requestBullet,
             spawn,
-            update
+            update,
+            destroy
         })
+
+        return destroy
     }, [targetManager])
 
     return bulletManager

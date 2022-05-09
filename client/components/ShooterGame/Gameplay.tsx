@@ -25,9 +25,11 @@ function Gameplay({ spaceship, onDone }: {
                 <Scoreboard ref={scoreboardRef}/>
                 <Timer
                     duration={3}
-                    onDone={() => onDone(
-                        spaceshipRef.current?.getScore() || 0
-                    )}
+                    onDone={() => {
+                        const score = spaceshipRef.current?.getScore()
+                        spaceshipRef.current?.destroy()
+                        onDone(score || 0)
+                    }}
                 />
             </div>
             <Spaceship

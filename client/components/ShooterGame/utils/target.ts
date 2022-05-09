@@ -15,7 +15,8 @@ const HEALTHBAR_TRANSITION_DURATION = 200
 const HEALTHBAR_ON_SCREEN_DURATION = 500
 
 export type TargetManager = {
-    detect(bullet: Bullet): boolean
+    detect(bullet: Bullet): boolean,
+    destroy: () => void
 }
 
 export type Target = {
@@ -24,7 +25,8 @@ export type Target = {
     health: number,
     healthbar: HTMLDivElement,
     healthbarIndicator: HTMLDivElement,
-    healthbarTimeout?: number
+    healthbarTimeout?: number,
+    isDestroyed: boolean
 }
 
 export function useTargetManager({ scoreManager }: {
@@ -71,7 +73,8 @@ export function useTargetManager({ scoreManager }: {
                 initialHealth: health,
                 health,
                 healthbar,
-                healthbarIndicator
+                healthbarIndicator,
+                isDestroyed: false
             }
         }
 
@@ -107,11 +110,11 @@ export function useTargetManager({ scoreManager }: {
             })
         }
 
-        const destroy = (target: Target) => {
+        const destroyTarget = (target: Target) => {
             scoreManager?.addScore(target.initialHealth)
             target.element.setAttribute(DESTROYED_ATTR, "true")
             target.healthbar.style.opacity = "0"
-            targets.delete(target.element)
+            target.isDestroyed = true
             createExplosion(target).then((explosion) => {
                 document.body.appendChild(explosion)
                 setTimeout(
@@ -138,7 +141,7 @@ export function useTargetManager({ scoreManager }: {
         const hit = (target: Target, bullet: Bullet) => {
             drawHealth(target, bullet.damage)
             if (target.health <= 0) {
-                destroy(target)
+                destroyTarget(target)
             }
         }
 
@@ -150,7 +153,10 @@ export function useTargetManager({ scoreManager }: {
             }
 
             for (let target of Array.from(targets.values())) {
-                if (hits.get(bullet)!.has(target)) {
+                if (
+                    target.isDestroyed ||
+                    hits.get(bullet)!.has(target)
+                ) {
                     continue
                 }
 
@@ -171,7 +177,17 @@ export function useTargetManager({ scoreManager }: {
             return false
         }
 
-        setTargetManager({ detect })
+        const destroy: TargetManager["destroy"] = () => {
+            targets.forEach((target) => {
+                try {
+                    document.body.removeChild(target.healthbar)
+                } catch {}
+            })
+        }
+
+        setTargetManager({ detect, destroy })
+
+        return destroy
     }, [scoreManager])
 
     return targetManager

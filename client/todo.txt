@@ -1,5 +1,3 @@
-Rocket Game Selection Dropdown
-	Death Star
-	Lasercat
 Contributions
 Random Explosion Animations
+Multiply drag / velocity with deltatime
