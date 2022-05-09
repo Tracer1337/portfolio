@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { ScoreboardRef } from "../Scoreboard"
 
 export type ScoreManager = {
-    addScore: (score: number) => void
+    addScore: (score: number) => void,
+    getScore: () => number
 }
 
 export function useScoreManager({ scoreboardRef }: {
@@ -13,12 +14,16 @@ export function useScoreManager({ scoreboardRef }: {
     useEffect(() => {
         let score = 0
 
+        scoreboardRef.current?.reset(score)
+
         const addScore: ScoreManager["addScore"] = (value) => {
             score += value
             scoreboardRef.current?.setScore(score)
         }
 
-        setScoreManager({ addScore })
+        const getScore: ScoreManager["getScore"] = () => score
+
+        setScoreManager({ addScore, getScore })
     }, [])
 
     return scoreManager

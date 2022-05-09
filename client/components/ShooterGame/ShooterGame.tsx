@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import SpaceshipSelector from "./SpaceshipSelector"
-import Spaceship from "./Spaceship"
-import Scoreboard, { ScoreboardRef } from "./Scoreboard"
 import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
 import { spaceships, Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useAppContext } from "@lib/context"
+import Gameplay from "./Gameplay"
 
 enum Stage {
     CLOSED,
@@ -18,10 +17,9 @@ enum Stage {
 function ShooterGame() {
     const context = useAppContext()
 
-    const scoreboardRef = useRef<ScoreboardRef>(null)
-
     const [stage, setStage] = useState<Stage>(Stage.CLOSED)
     const [spaceship, setSpaceship] = useState<SpaceshipType>()
+    const [score, setScore] = useState<number>()
 
     useEffect(() => {
         context.set({ isGameRunning: stage === Stage.GAMEPLAY })
@@ -48,13 +46,14 @@ function ShooterGame() {
             )}
 
             {stage === Stage.GAMEPLAY && spaceship && (
-                <>
-                    <Spaceship
-                        spaceship={spaceship}
-                        scoreboardRef={scoreboardRef}
-                    />
-                    <Scoreboard ref={scoreboardRef}/>
-                </>
+                <Gameplay
+                    spaceship={spaceship}
+                    onDone={(score) => {
+                        console.log({ score })
+                        setScore(score)
+                        setStage(Stage.CLOSED)
+                    }}
+                />
             )}
         </>
     )

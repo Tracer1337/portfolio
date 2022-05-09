@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import anime from "animejs"
-import React, { useImperativeHandle, useRef, useState } from "react"
 
 export type ScoreboardRef = {
+    reset: (score: number) => void,
     setScore: (score: number) => void
 }
 
@@ -14,12 +15,17 @@ function Scoreboard(
     const containerRef = useRef<HTMLDivElement>(null)
     const animation = useRef<anime.AnimeInstance>()
     const currentIteration = useRef(0)
-    
-    const [score, setScore] = useState(0)
 
     useImperativeHandle(ref, () => ({
+        reset: (value) => {
+            if (!containerRef.current) return
+            containerRef.current.textContent = value.toString()
+        },
+
         setScore: (value) => {
-            setScore(value)
+            if (!containerRef.current) return
+
+            containerRef.current.textContent = value.toString()
 
             const isActiveAnimation = !!animation.current
 
@@ -51,18 +57,11 @@ function Scoreboard(
             css={css`
                 min-width: 64px;
                 text-align: center;
-                position: fixed;
-                top: 32px;
-                right: 50%;
-                transform: translateX(50%);
                 padding: 16px;
                 border: 1px solid #fff;
-                background-color: rgba(0, 0, 0, .87);
             `}
             {...props}
-        >
-            {score}
-        </div>
+        />
     )
 }
 

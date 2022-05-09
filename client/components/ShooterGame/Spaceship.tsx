@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useRef } from "react"
+import React, { useEffect, useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { ScoreboardRef } from "./Scoreboard"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
@@ -9,10 +9,17 @@ import { useGameLoop } from "./utils/game"
 import { useTargetManager } from "./utils/target"
 import { useScoreManager } from "./utils/score"
 
-function Spaceship({ spaceship, scoreboardRef }: {
-    spaceship: SpaceshipType,
-    scoreboardRef: React.RefObject<ScoreboardRef>
-}) {
+export type SpaceshipRef = {
+    getScore: () => number
+}
+
+function Spaceship(
+    { spaceship, scoreboardRef }: {
+        spaceship: SpaceshipType,
+        scoreboardRef: React.RefObject<ScoreboardRef>
+    },
+    ref: React.ForwardedRef<SpaceshipRef>
+) {
     const spriteRef = useRef<HTMLImageElement>(null)
 
     const scoreManager = useScoreManager({
@@ -42,6 +49,10 @@ function Spaceship({ spaceship, scoreboardRef }: {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
+    useImperativeHandle(ref, () => ({
+        getScore: () => scoreManager?.getScore() || 0
+    }))
     
     return (
         <img
@@ -59,4 +70,4 @@ function Spaceship({ spaceship, scoreboardRef }: {
     )
 }
 
-export default Spaceship
+export default React.forwardRef(Spaceship)
