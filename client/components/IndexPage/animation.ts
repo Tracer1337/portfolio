@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { animate, Animation } from "@lib/animation"
 import { useAppContext } from "@lib/context"
 import { breakpoints, useMediaQuery } from "@lib/responsive"
+import { setListeners } from "@lib/events"
 
 export function useAnimationController({
     containerRef,
@@ -83,10 +84,12 @@ export function useAnimationController({
             scenes.forEach((scene) => scene.addIndicators!())
         }
 
-        window.addEventListener("scroll", handleScroll)
+        const removeListeners = setListeners(window, [
+            ["scroll", handleScroll]
+        ])
 
         return () => {
-            window.removeEventListener("scroll", handleScroll)
+            removeListeners()
             controller.destroy(true)
             headerAnimationRef.current?.update(0)
             crashAnimationRef.current?.update(0)

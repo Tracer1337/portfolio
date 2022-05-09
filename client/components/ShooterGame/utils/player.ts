@@ -3,6 +3,7 @@ import Vector from "victor"
 import { BulletManager } from "./bullet"
 import { UpdateFunction } from "./game"
 import { constrain } from "@lib/animation"
+import { setListeners } from "@lib/events"
 
 const INITIAL_VEL = 20
 const DRAG = 0.95
@@ -127,15 +128,12 @@ export function usePlayerControls({
             }
         }
 
-        window.addEventListener("keydown", handleKeyDown)
-        window.addEventListener("keyup", handleKeyUp)
-
         setPlayerControls({ update })
         
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown)
-            window.removeEventListener("keyup", handleKeyUp)
-        }
+        return setListeners(window, [
+            ["keydown", handleKeyDown],
+            ["keyup", handleKeyUp]
+        ])
     }, [bulletManager])
 
     return playerControls

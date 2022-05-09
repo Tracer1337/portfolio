@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect } from "react"
 import { css } from "@emotion/react"
 import {
     mdiArrowUp,
@@ -8,24 +9,16 @@ import {
 } from "@mdi/js"
 import Backdrop from "@components/Backdrop"
 import Key from "./Key"
-import { useEffect } from "react"
+import { setListeners } from "@lib/events"
 
 function ControlsModal({ onClose }: {
     onClose: () => void
 }) {
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Enter") {
-                onClose()
-            }
-        }
-
-        window.addEventListener("keydown", handleKeyDown)
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown)
-        }
-    }, [onClose])
+    useEffect(() => setListeners(window, [
+        ["keydown", (event: KeyboardEvent) => {
+            if (event.key === "Enter") onClose()
+        }]
+    ]), [onClose])
 
     return (
         <Backdrop>

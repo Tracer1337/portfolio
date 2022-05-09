@@ -1,3 +1,4 @@
+import { setListeners } from "@lib/events"
 import { useEffect, useRef, useState } from "react"
 
 export function useSelection({ length, onSelect }: {
@@ -26,12 +27,10 @@ export function useSelection({ length, onSelect }: {
                 onSelect(selection)
             }
         }
-        
-        window.addEventListener("keydown", handleKeyDown)
 
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown)
-        }
+        return setListeners(window, [
+            ["keydown", handleKeyDown]
+        ])
     }, [selection, setSelection])
 
     return selectionIndicatorRef

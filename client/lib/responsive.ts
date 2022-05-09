@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { setListeners } from "./events"
 
 export const breakpoints = {
     m: "(max-width: 1200px)",
@@ -17,13 +18,12 @@ export function useMediaQuery(mediaQueryString: string) {
     const handleChange = useCallback((event: MediaQueryListEvent) => {
         setMatches(event.matches)
     }, [])
-    
-    useEffect(() => {
-        mediaQueryList?.addEventListener("change", handleChange)
-        return () => {
-            mediaQueryList?.removeEventListener("change", handleChange)
-        }
-    }, [handleChange])
+
+    useEffect(() => mediaQueryList && (
+        setListeners(mediaQueryList, [
+            ["change", handleChange]
+        ])
+    ), [handleChange])
 
     return matches
 }
