@@ -68,6 +68,7 @@ function ControlsModal({ onClose }: {
             <div css={css`
                 width: 450px;
                 margin-bottom: -52px;
+                opacity: .87;
             `}>
                 <div css={css`text-align: center;`}>
                     <p>Press <strong>ENTER</strong> to start</p>

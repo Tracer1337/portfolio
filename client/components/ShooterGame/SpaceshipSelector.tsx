@@ -68,6 +68,7 @@ function SpaceshipSelector({ onSelect }: {
             <div css={css`
                 text-align: center;
                 margin-bottom: -88px;
+                opacity: .87;
             `}>
                 <p>Press <strong>ARROW KEYS</strong> to select a spaceship</p>
                 <p>Press <strong>ENTER</strong> to confirm</p>

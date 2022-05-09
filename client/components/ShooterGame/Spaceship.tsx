@@ -1,16 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useRef } from "react"
 import { css } from "@emotion/react"
+import { ScoreboardRef } from "./Scoreboard"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useBulletManager } from "./utils/bullet"
 import { usePlayerControls } from "./utils/player"
 import { useGameLoop } from "./utils/game"
 import { useTargetManager } from "./utils/target"
+import { useScoreManager } from "./utils/score"
 
-function Spaceship({ spaceship }: { spaceship: SpaceshipType }) {
+function Spaceship({ spaceship, scoreboardRef }: {
+    spaceship: SpaceshipType,
+    scoreboardRef: React.RefObject<ScoreboardRef>
+}) {
     const spriteRef = useRef<HTMLImageElement>(null)
 
-    const targetManager = useTargetManager()
+    const scoreManager = useScoreManager({
+        scoreboardRef
+    })
+
+    const targetManager = useTargetManager({
+        scoreManager
+    })
 
     const bulletManager = useBulletManager({
         spaceship,

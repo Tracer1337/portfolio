@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import type { Bullet } from "./bullet"
+import type { ScoreManager } from "./score"
 import { useImagePreload } from "@lib/preload"
 import explosionImage from "@assets/explosion.gif"
 
@@ -19,13 +20,16 @@ export type TargetManager = {
 
 export type Target = {
     element: Element,
+    initialHealth: number,
     health: number,
     healthbar: HTMLDivElement,
     healthbarIndicator: HTMLDivElement,
     healthbarTimeout?: number
 }
 
-export function useTargetManager() {
+export function useTargetManager({ scoreManager }: {
+    scoreManager?: ScoreManager
+}) {
     const [targetManager, setTargetManager] = useState<TargetManager>()
 
     useImagePreload([explosionImage.src])
@@ -64,6 +68,7 @@ export function useTargetManager() {
         
             return {
                 element,
+                initialHealth: health,
                 health,
                 healthbar,
                 healthbarIndicator
@@ -103,6 +108,7 @@ export function useTargetManager() {
         }
 
         const destroy = (target: Target) => {
+            scoreManager?.addScore(target.initialHealth)
             target.element.setAttribute(DESTROYED_ATTR, "true")
             target.healthbar.style.opacity = "0"
             targets.delete(target.element)
@@ -117,13 +123,12 @@ export function useTargetManager() {
 
         const drawHealth = (target: Target, damage: number) => {
             clearTimeout(target.healthbarTimeout)
-
+            scoreManager?.addScore(Math.min(damage, target.health))
             target.health -= damage
             target.healthbar.style.opacity = "1"
             target.healthbarIndicator.style.width = `${
                 Math.max(target.health * HEALTHBAR_HEALTH_WIDTH, 0)
             }px`
-
             target.healthbarTimeout = setTimeout(
                 () => target.healthbar.style.opacity = "0",
                 HEALTHBAR_ON_SCREEN_DURATION
@@ -167,7 +172,7 @@ export function useTargetManager() {
         }
 
         setTargetManager({ detect })
-    }, [])
+    }, [scoreManager])
 
     return targetManager
 }
