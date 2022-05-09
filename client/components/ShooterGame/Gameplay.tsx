@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useRef } from "react"
+import React, { useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import Spaceship, { SpaceshipRef } from "./Spaceship"
 import Scoreboard, { ScoreboardRef } from "./Scoreboard"
@@ -41,4 +41,4 @@ function Gameplay({ spaceship, onDone }: {
     )
 }
 
-export default Gameplay
+export default React.forwardRef(Gameplay)

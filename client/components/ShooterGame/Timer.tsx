@@ -11,19 +11,22 @@ function Timer({
     onDone: () => void
 }) {
     const [displayTime, setDisplayTime] = useState(duration)
+    const [isRunning, setIsRunning] = useState(true)
 
     useEffect(() => {
         if (displayTime <= 0) {
+            setIsRunning(false)
             onDone()
         }
     }, [displayTime])
 
     useEffect(() => {
+        if (!isRunning) return
         const id = setTimeout(() => {
             setDisplayTime(displayTime - 1)
         }, 1000)
         return () => clearTimeout(id)
-    }, [displayTime])
+    }, [displayTime, isRunning])
     
     return (
         <div

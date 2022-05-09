@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useImperativeHandle, useRef } from "react"
+import React, { useCallback, useEffect, useImperativeHandle, useRef } from "react"
 import { css } from "@emotion/react"
 import { ScoreboardRef } from "./Scoreboard"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useBulletManager } from "./utils/bullet"
 import { usePlayerControls } from "./utils/player"
-import { useGameLoop } from "./utils/game"
+import { UpdateFunction, useGameLoop } from "./utils/game"
 import { useTargetManager } from "./utils/target"
 import { useScoreManager } from "./utils/score"
 
@@ -22,6 +22,7 @@ function Spaceship(
     ref: React.ForwardedRef<SpaceshipRef>
 ) {
     const spriteRef = useRef<HTMLImageElement>(null)
+    const isRunning = useRef(true)
 
     const scoreManager = useScoreManager({
         scoreboardRef
@@ -42,10 +43,13 @@ function Spaceship(
         bulletManager
     })
 
-    useGameLoop((args) => {
+    const update = useCallback<UpdateFunction>((args) => {
+        if (!isRunning.current) return
         playerControls?.update?.(args)
         bulletManager?.update?.(args)
-    })
+    }, [playerControls, bulletManager])
+    
+    useGameLoop(update)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -54,6 +58,7 @@ function Spaceship(
     useImperativeHandle(ref, () => ({
         getScore: () => scoreManager?.getScore() || 0,
         destroy: () => {
+            isRunning.current = false
             targetManager?.destroy()
             bulletManager?.destroy()
         }

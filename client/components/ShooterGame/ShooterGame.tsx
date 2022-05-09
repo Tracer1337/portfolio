@@ -3,15 +3,17 @@ import { useEffect, useState } from "react"
 import SpaceshipSelector from "./SpaceshipSelector"
 import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
+import Gameplay from "./Gameplay"
+import SubmitScoreModal from "./SubmitScoreModal"
 import { spaceships, Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useAppContext } from "@lib/context"
-import Gameplay from "./Gameplay"
 
 enum Stage {
     CLOSED,
     SELECTION,
     CONTROLS,
-    GAMEPLAY
+    GAMEPLAY,
+    SUBMIT
 }
 
 function ShooterGame() {
@@ -49,11 +51,14 @@ function ShooterGame() {
                 <Gameplay
                     spaceship={spaceship}
                     onDone={(score) => {
-                        console.log({ score })
                         setScore(score)
-                        setStage(Stage.CLOSED)
+                        setStage(Stage.SUBMIT)
                     }}
                 />
+            )}
+
+            {stage === Stage.SUBMIT && (
+                <SubmitScoreModal score={score || 0}/>
             )}
         </>
     )

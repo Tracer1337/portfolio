@@ -179,6 +179,7 @@ export function useTargetManager({ scoreManager }: {
 
         const destroy: TargetManager["destroy"] = () => {
             targets.forEach((target) => {
+                target.element.removeAttribute(DESTROYED_ATTR)
                 try {
                     document.body.removeChild(target.healthbar)
                 } catch {}
