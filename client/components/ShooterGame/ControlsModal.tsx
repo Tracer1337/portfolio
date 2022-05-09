@@ -7,17 +7,32 @@ import {
     mdiKeyboardSpace
 } from "@mdi/js"
 import Backdrop from "@components/Backdrop"
-import Button from "@components/Button"
 import Key from "./Key"
+import { useEffect } from "react"
 
 function ControlsModal({ onClose }: {
     onClose: () => void
 }) {
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Enter") {
+                onClose()
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [onClose])
+
     return (
         <Backdrop>
             <div css={css`
                 width: 450px;
                 display: flex;
+                margin-bottom: -16px;
                 & > div {
                     width: 50%;
                     display: flex;
@@ -57,13 +72,13 @@ function ControlsModal({ onClose }: {
                     <h3>Shoot</h3>
                 </div>
             </div>
-            <div css={css`width: 450px;`}>
-                <Button
-                    css={css`width: 100%`}
-                    onClick={onClose}
-                >
-                    Start
-                </Button>
+            <div css={css`
+                width: 450px;
+                margin-bottom: -52px;
+            `}>
+                <div css={css`text-align: center;`}>
+                    <p>Press <strong>ENTER</strong> to start</p>
+                </div>
             </div>
         </Backdrop>
     )

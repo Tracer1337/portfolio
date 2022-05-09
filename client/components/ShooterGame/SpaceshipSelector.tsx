@@ -25,19 +25,7 @@ function SpaceshipSelector({ onSelect }: {
             display: flex;
             flex-direction: column;
         `}>
-            <div css={css`
-                margin-bottom: 64px;
-                margin-top: -64px;
-                & p {
-                    opacity: .87;
-                }
-            `}>
-                <p>Use <strong>ARROW KEYS</strong> to select a spaceship</p>
-                <p>Confirm with <strong>ENTER</strong></p>
-            </div>
-            <div css={css`
-                display: flex;
-            `}>
+            <div css={css`display: flex;`}>
                 {spaceships.map((spaceship, i) => (
                     <div key={i} css={css`
                         width: 250px;
@@ -63,9 +51,11 @@ function SpaceshipSelector({ onSelect }: {
                 ref={selectionIndicatorRef}
                 css={css`
                     width: 300px;
+                    height: 64px;
                     margin-top: 8px;
                     display: flex;
                     justify-content: center;
+                    align-items: flex-start;
                     transition: all 250ms;
                 `}
             >
@@ -74,6 +64,13 @@ function SpaceshipSelector({ onSelect }: {
                     size="32px"
                     css={css`animation: ${bounce} 1s infinite;`}
                 />
+            </div>
+            <div css={css`
+                text-align: center;
+                margin-bottom: -88px;
+            `}>
+                <p>Press <strong>ARROW KEYS</strong> to select a spaceship</p>
+                <p>Press <strong>ENTER</strong> to confirm</p>
             </div>
         </Backdrop>
     )
