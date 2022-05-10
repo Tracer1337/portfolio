@@ -16,8 +16,9 @@ function TextField(
             <input
                 css={css`
                     width: 100%;
-                    height: 38px;
-                    display: block;
+                    height: 44px;
+                    padding: 8px;
+                    box-sizing: border-box;
                     background-color: transparent;
                     outline: none;
                     border: 1px solid #fff;

@@ -21,9 +21,9 @@ enum Stage {
 function ShooterGame() {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>(Stage.SUBMIT)
-    const [spaceship, setSpaceship] = useState<SpaceshipType>(spaceships[0])
-    const [score, setScore] = useState<number>(100)
+    const [stage, setStage] = useState<Stage>(Stage.CLOSED)
+    const [spaceship, setSpaceship] = useState<SpaceshipType>()
+    const [score, setScore] = useState<number>()
 
     useEffect(() => {
         context.set({ isGameRunning: stage === Stage.GAMEPLAY })
