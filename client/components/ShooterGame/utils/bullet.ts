@@ -4,7 +4,7 @@ import { UpdateFunction } from "./game"
 import { Spaceship } from "./spaceships"
 import { TargetManager } from "./target"
 
-const SPEED = 20
+const SPEED = 3
 
 export type BulletManager = {
     requestBullet: (args: {
@@ -124,7 +124,7 @@ export function useBulletManager({
             for (let i = bullets.length - 1; i >= 0; i--) {
                 const { element, pos, vel, dir } = bullets[i]
 
-                pos.add(vel)
+                pos.add(vel.clone().multiplyScalar(deltaTime))
 
                 element.style.transform = `
                     translate(${pos.x}px, ${pos.y}px)

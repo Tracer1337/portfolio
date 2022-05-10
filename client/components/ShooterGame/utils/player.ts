@@ -6,7 +6,7 @@ import { constrain } from "@lib/animation"
 import { setListeners } from "@lib/events"
 
 const INITIAL_VEL = 20
-const DRAG = 0.95
+const DRAG = 0.05
 const SPEED = 10
 const ROTATION_SPEED = 5
 const SCROLL_MARGIN = 0.25
@@ -45,18 +45,18 @@ export function usePlayerControls({
             currentTime,
             deltaTime
         }) => {
-            acc.y = isUpKeyPressed ? deltaTime / (100/SPEED) : 0
+            acc.y = isUpKeyPressed ? (SPEED/100) * deltaTime : 0
 
             if (isLeftKeyPressed) {
-                dir.rotateDeg(deltaTime / -(10/ROTATION_SPEED))
+                dir.rotateDeg(-ROTATION_SPEED/10*deltaTime)
             }
             if (isRightKeyPressed) {
-                dir.rotateDeg(deltaTime / (10/ROTATION_SPEED))
+                dir.rotateDeg(ROTATION_SPEED/10*deltaTime)
             }
 
             pos.add(vel.clone().rotateBy(dir.angle()))
             vel.add(acc)
-            vel.multiplyScalar(DRAG)
+            vel.multiplyScalar(1 - DRAG)
 
             pos.x = constrain(pos.x, 0, window.innerWidth)
             pos.y = constrain(
