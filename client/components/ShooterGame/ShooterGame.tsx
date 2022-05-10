@@ -5,6 +5,7 @@ import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
 import Gameplay from "./Gameplay"
 import SubmitScoreModal from "./SubmitScoreModal"
+import Leaderboard from "./Leaderboard"
 import { spaceships, Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useAppContext } from "@lib/context"
 
@@ -13,13 +14,14 @@ enum Stage {
     SELECTION,
     CONTROLS,
     GAMEPLAY,
-    SUBMIT
+    SUBMIT,
+    LEADERBOARD
 }
 
 function ShooterGame() {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>(Stage.CLOSED)
+    const [stage, setStage] = useState<Stage>(Stage.LEADERBOARD)
     const [spaceship, setSpaceship] = useState<SpaceshipType>()
     const [score, setScore] = useState<number>()
 
@@ -61,8 +63,12 @@ function ShooterGame() {
                 <SubmitScoreModal
                     score={score || 0}
                     spaceship={spaceship}
-                    onDone={() => setStage(Stage.CLOSED)}
+                    onClose={() => setStage(Stage.LEADERBOARD)}
                 />
+            )}
+
+            {stage === Stage.LEADERBOARD && (
+                <Leaderboard onClose={() => setStage(Stage.CLOSED)}/>
             )}
         </>
     )

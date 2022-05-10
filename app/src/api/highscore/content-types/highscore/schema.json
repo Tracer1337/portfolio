@@ -14,7 +14,9 @@
   "attributes": {
     "nickname": {
       "type": "string",
-      "required": true
+      "required": true,
+      "maxLength": 20,
+      "minLength": 1
     },
     "score": {
       "type": "integer",

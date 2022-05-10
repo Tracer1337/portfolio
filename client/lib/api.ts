@@ -33,6 +33,3 @@ export async function fetchAPI(
 
     return await res.json()
 }
-
-export const fetcher = (path: string, options: RequestInit) =>
-    fetch(getStrapiUrl(path), options).then((res) => res.json())

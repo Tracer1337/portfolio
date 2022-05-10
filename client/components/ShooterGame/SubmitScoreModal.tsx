@@ -8,10 +8,10 @@ import TextField from "@components/TextField"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
 import { getStrapiUrl } from "@lib/api"
 
-function SubmitScoreModal({ score, spaceship, onDone }: {
+function SubmitScoreModal({ score, spaceship, onClose }: {
     score: number,
     spaceship: SpaceshipType,
-    onDone: () => void
+    onClose: () => void
 }) {
     const { mutate } = useSWRConfig()
     
@@ -35,7 +35,7 @@ function SubmitScoreModal({ score, spaceship, onDone }: {
             })
         })
             .then(() => mutate("/api/highscores"))
-            .finally(onDone)
+            .finally(onClose)
     }
 
     return (

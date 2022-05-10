@@ -69,3 +69,7 @@ export const spaceships: Spaceship [] = [
         getBulletOrigins: () => [new Vector(0.5, 0)]
     }
 ]
+
+export function getSpaceshipByKey(key: string) {
+    return spaceships.find((spaceship) => spaceship.key === key)
+}
