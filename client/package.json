@@ -23,6 +23,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "scrollmagic": "^2.0.8",
+    "swr": "^1.3.0",
     "victor": "^1.1.0"
   },
   "devDependencies": {
