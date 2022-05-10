@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { useSWRConfig } from "swr"
 import { css } from "@emotion/react"
 import Backdrop from "@components/Backdrop"
@@ -33,7 +33,8 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
         return true
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault()
         if (!validate()) {
             return
         }
@@ -67,25 +68,24 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
                 `}>
                     Score: <u>{score}</u>
                 </h1>
-                <TextField
-                    type="text"
-                    placeholder="Enter Nickname..."
-                    error={errors.nickname}
-                    value={nickname}
-                    onChange={(event) => {
-                        setNickname(event.currentTarget.value)
-                    }}
-                    css={css`
-                        width: 300px;
-                        margin-bottom: 32px;
-                    `}
-                />
-                <Button
-                    css={css`width: 100%;`}
-                    onClick={handleSubmit}
-                >
-                    Submit
-                </Button>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        type="text"
+                        placeholder="Enter Nickname..."
+                        error={errors.nickname}
+                        value={nickname}
+                        onChange={(event) => {
+                            setNickname(event.currentTarget.value)
+                        }}
+                        css={css`
+                            width: 300px;
+                            margin-bottom: 32px;
+                        `}
+                    />
+                    <Button css={css`width: 100%;`} type="submit">
+                        Submit
+                    </Button>
+                </form>
             </div>
         </Backdrop>
     )

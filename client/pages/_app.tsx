@@ -30,7 +30,6 @@ export default function MyApp(props: CustomAppProps) {
             <AppContextProvider initialValue={{
                 layout,
                 defaultSEO,
-                isGameVisible: process.env.NODE_ENV === "development",
                 isGameRunning: false
             }}>
                 <Head>

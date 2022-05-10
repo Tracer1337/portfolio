@@ -70,11 +70,6 @@ export function useAnimationController({
                 .on("progress", (event: ScrollMagic.ProgressEvent) => {
                     landingAnimationRef.current?.update(event.progress)
                 })
-                .on("end", (event: any) => {
-                    if (event.scrollDirection === "FORWARD") {
-                        context.set({ isGameVisible: true })
-                    }
-                })
                 .setPin(landingAnimationContainer)
                 .addTo(controller)
             scenes.push(scene)

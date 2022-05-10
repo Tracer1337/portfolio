@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react"
 import SpaceshipSelector from "./SpaceshipSelector"
-import StartButton from "./StartButton"
 import ControlsModal from "./ControlsModal"
 import Gameplay from "./Gameplay"
 import SubmitScoreModal from "./SubmitScoreModal"
@@ -10,7 +9,6 @@ import { spaceships, Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useAppContext } from "@lib/context"
 
 enum Stage {
-    CLOSED,
     SELECTION,
     CONTROLS,
     GAMEPLAY,
@@ -18,10 +16,10 @@ enum Stage {
     LEADERBOARD
 }
 
-function ShooterGame() {
+function ShooterGame({ onClose }: { onClose: () => void }) {
     const context = useAppContext()
 
-    const [stage, setStage] = useState<Stage>(Stage.CLOSED)
+    const [stage, setStage] = useState<Stage>(Stage.SELECTION)
     const [spaceship, setSpaceship] = useState<SpaceshipType>()
     const [score, setScore] = useState<number>()
 
@@ -31,13 +29,6 @@ function ShooterGame() {
 
     return (
         <>
-            {stage === Stage.CLOSED && (
-                <StartButton onClick={(event) => {
-                    setStage(Stage.SELECTION)
-                    event.currentTarget.blur()
-                }}/>
-            )}
-
             {stage === Stage.SELECTION && (
                 <SpaceshipSelector onSelect={(selection) => {
                     setSpaceship(spaceships[selection])
@@ -68,7 +59,7 @@ function ShooterGame() {
             )}
 
             {stage === Stage.LEADERBOARD && (
-                <Leaderboard onClose={() => setStage(Stage.CLOSED)}/>
+                <Leaderboard onClose={onClose}/>
             )}
         </>
     )

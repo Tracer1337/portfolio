@@ -1,22 +1,25 @@
 /** @jsxImportSource @emotion/react */
-import { useRef } from "react"
+import { Suspense, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import { css } from "@emotion/react"
 import Container from "@components/Container"
 import Background from "@components/Background"
+import Backdrop from "@components/Backdrop"
 import Header from "@components/Layout/Header"
 import Footer from "@components/Layout/Footer"
 import CrashAnimation from "@components/CrashAnimation"
 import LandingAnimation from "@components/LandingAnimation"
 import Techstack from "@components/Techstack"
 import Projects from "@components/Projects"
+import StartButton from "@components/ShooterGame/StartButton"
 import { useAnimationController } from "./animation"
 import { Animation } from "@lib/animation"
 import { breakpoints } from "@lib/responsive"
 import { ScrollMagicScript } from "@lib/scrollmagic"
-import { useAppContext } from "@lib/context"
 
-const ShooterGame = dynamic(() => import("@components/ShooterGame"))
+const ShooterGame = dynamic(() => import("@components/ShooterGame"), {
+    suspense: true
+})
 
 export type IndexPageProps = {
     projects: any[],
@@ -24,8 +27,8 @@ export type IndexPageProps = {
 }
 
 function IndexPage({ projects, skills }: IndexPageProps) {
-    const context = useAppContext()
-    
+    const [isGameOpen, setIsGameOpen] = useState(false)
+
     const containerRef = useRef<HTMLDivElement>(null)
     const projectsSectionRef = useRef<HTMLDivElement>(null)
     const landingAnimationContainerRef = useRef<HTMLDivElement>(null)
@@ -123,7 +126,17 @@ function IndexPage({ projects, skills }: IndexPageProps) {
                     </div>
                 </div>
             </Container>
-            {context.isGameVisible && <ShooterGame/>}
+            <StartButton onClick={(event) => {
+                event.currentTarget.blur()
+                setIsGameOpen(true)
+            }}/>
+            {isGameOpen && (
+                <Suspense fallback={
+                    <Backdrop><div>Loading...</div></Backdrop>
+                }>
+                    <ShooterGame onClose={() => setIsGameOpen(false)}/>
+                </Suspense>
+            )}
         </>
     )
 }
