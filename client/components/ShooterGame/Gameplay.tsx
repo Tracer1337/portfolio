@@ -24,7 +24,7 @@ function Gameplay({ spaceship, onDone }: {
             `}>
                 <Scoreboard ref={scoreboardRef}/>
                 <Timer
-                    duration={3}
+                    duration={15}
                     onDone={() => {
                         const score = spaceshipRef.current?.getScore()
                         spaceshipRef.current?.destroy()
