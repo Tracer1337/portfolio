@@ -12,6 +12,7 @@ import LandingAnimation from "@components/LandingAnimation"
 import Techstack from "@components/Techstack"
 import Projects from "@components/Projects"
 import StartButton from "@components/ShooterGame/StartButton"
+import LoadingIndicator from "@components/LoadingIndicator"
 import { useAnimationController } from "./animation"
 import { Animation } from "@lib/animation"
 import { breakpoints } from "@lib/responsive"
@@ -132,7 +133,7 @@ function IndexPage({ projects, skills }: IndexPageProps) {
             }}/>
             {isGameOpen && (
                 <Suspense fallback={
-                    <Backdrop><div>Loading...</div></Backdrop>
+                    <Backdrop><LoadingIndicator/></Backdrop>
                 }>
                     <ShooterGame onClose={() => setIsGameOpen(false)}/>
                 </Suspense>

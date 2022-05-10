@@ -17,6 +17,7 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
     
     const [nickname, setNickname] = useState("")
     const [errors, setErrors] = useState<Record<string, string>>({})
+    const [isLoading, setIsLoading] = useState(false)
 
     const validate = () => {
         if (!nickname) {
@@ -38,6 +39,7 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
         if (!validate()) {
             return
         }
+        setIsLoading(true)
         fetch(getStrapiUrl("/api/highscores"), {
             method: "POST",
             headers: {
@@ -52,7 +54,10 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
             })
         })
             .then(() => mutate("/api/highscores"))
-            .finally(onClose)
+            .finally(() => {
+                setIsLoading(false)
+                onClose()
+            })
     }
 
     return (
@@ -82,7 +87,11 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
                             margin-bottom: 32px;
                         `}
                     />
-                    <Button css={css`width: 100%;`} type="submit">
+                    <Button
+                        isLoading={isLoading}
+                        css={css`width: 100%;`}
+                        type="submit"
+                    >
                         Submit
                     </Button>
                 </form>

@@ -1,6 +1,9 @@
+/** @jsxImportSource @emotion/react */
+import React from "react"
 import styled from "@emotion/styled"
+import LoadingIndicator from "@components/LoadingIndicator"
 
-const Button = styled.button<{
+const ButtonBase = styled.button<{
     discrete?: boolean
 }>`
     background-color: transparent;
@@ -18,5 +21,21 @@ const Button = styled.button<{
         }
     `}
 `
+
+function Button(
+    {
+        isLoading,
+        children,
+        ...props
+    }: React.ComponentProps<typeof ButtonBase> & {
+        isLoading?: boolean
+    }
+) {
+    return (
+        <ButtonBase {...props}>
+            {isLoading ? <LoadingIndicator/> : children}
+        </ButtonBase>
+    )
+}
 
 export default Button

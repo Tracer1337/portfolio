@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
+import React, { useMemo } from "react"
 import useSWR from "swr"
 import { css } from "@emotion/react"
 import Backdrop from "@components/Backdrop"
+import Button from "@components/Button"
+import LoadingIndicator from "@components/LoadingIndicator"
 import { getSpaceshipByKey } from "./utils/spaceships"
 import { fetchAPI } from "@lib/api"
-import Button from "@components/Button"
-import React, { useMemo } from "react"
 
 function Item({ highscore, index }: {
     highscore: any,
@@ -76,7 +77,7 @@ function Leaderboard({ onClose }: { onClose: () => void }) {
     )
 
     if (error) return <Parent>Could not load highscores</Parent>
-    if (!data) return <Parent>Loading...</Parent>
+    if (!data) return <Parent><LoadingIndicator/></Parent>
     
     return (
         <Parent>
