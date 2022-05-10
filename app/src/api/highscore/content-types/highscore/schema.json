@@ -23,7 +23,12 @@
       "required": true
     },
     "spaceship": {
-      "type": "string",
+      "type": "enumeration",
+      "enum": [
+        "x-wing",
+        "falcon",
+        "enterprise"
+      ],
       "required": true
     }
   }

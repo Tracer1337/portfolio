@@ -27,7 +27,12 @@
                                 "type": "integer"
                               },
                               "spaceship": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                  "x-wing",
+                                  "falcon",
+                                  "enterprise"
+                                ]
                               },
                               "createdAt": {
                                 "type": "string",
@@ -612,7 +617,12 @@
                               "type": "integer"
                             },
                             "spaceship": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "x-wing",
+                                "falcon",
+                                "enterprise"
+                              ]
                             },
                             "createdAt": {
                               "type": "string",
@@ -1086,7 +1096,12 @@
                         "type": "integer"
                       },
                       "spaceship": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "x-wing",
+                          "falcon",
+                          "enterprise"
+                        ]
                       }
                     }
                   }
@@ -1122,7 +1137,12 @@
                               "type": "integer"
                             },
                             "spaceship": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "x-wing",
+                                "falcon",
+                                "enterprise"
+                              ]
                             },
                             "createdAt": {
                               "type": "string",
@@ -1616,7 +1636,12 @@
                               "type": "integer"
                             },
                             "spaceship": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "x-wing",
+                                "falcon",
+                                "enterprise"
+                              ]
                             },
                             "createdAt": {
                               "type": "string",
@@ -2101,7 +2126,12 @@
                         "type": "integer"
                       },
                       "spaceship": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "x-wing",
+                          "falcon",
+                          "enterprise"
+                        ]
                       },
                       "createdAt": {
                         "type": "string",
