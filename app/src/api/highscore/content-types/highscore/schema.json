@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "highscores",
+  "info": {
+    "singularName": "highscore",
+    "pluralName": "highscores",
+    "displayName": "Highscore"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "score": {
+      "type": "integer",
+      "required": true
+    },
+    "spaceship": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
