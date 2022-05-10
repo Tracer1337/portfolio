@@ -57,8 +57,12 @@ function ShooterGame() {
                 />
             )}
 
-            {stage === Stage.SUBMIT && (
-                <SubmitScoreModal score={score || 0}/>
+            {stage === Stage.SUBMIT && spaceship && (
+                <SubmitScoreModal
+                    score={score || 0}
+                    spaceship={spaceship}
+                    onDone={() => setStage(Stage.CLOSED)}
+                />
             )}
         </>
     )

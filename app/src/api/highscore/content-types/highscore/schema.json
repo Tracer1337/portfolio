@@ -4,14 +4,15 @@
   "info": {
     "singularName": "highscore",
     "pluralName": "highscores",
-    "displayName": "Highscore"
+    "displayName": "Highscore",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "username": {
+    "nickname": {
       "type": "string",
       "required": true
     },

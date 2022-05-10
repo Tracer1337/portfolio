@@ -1,14 +1,42 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react"
+import { useSWRConfig } from "swr"
 import { css } from "@emotion/react"
 import Backdrop from "@components/Backdrop"
 import Button from "@components/Button"
 import TextField from "@components/TextField"
+import { Spaceship as SpaceshipType } from "./utils/spaceships"
+import { getStrapiUrl } from "@lib/api"
 
-function SubmitScoreModal({ score }: {
-    score: number
+function SubmitScoreModal({ score, spaceship, onDone }: {
+    score: number,
+    spaceship: SpaceshipType,
+    onDone: () => void
 }) {
+    const { mutate } = useSWRConfig()
+    
     const [nickname, setNickname] = useState("")
+
+    const handleSubmit = () => {
+        if (!nickname) {
+            return
+        }
+        fetch(getStrapiUrl("/api/highscores"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                data: {
+                    nickname,
+                    score,
+                    spaceship: spaceship.key
+                }
+            })
+        })
+            .then(() => mutate("/api/highscores"))
+            .finally(onDone)
+    }
 
     return (
         <Backdrop>
@@ -36,7 +64,12 @@ function SubmitScoreModal({ score }: {
                         margin-bottom: 32px;
                     `}
                 />
-                <Button css={css`width: 100%;`}>Submit</Button>
+                <Button
+                    css={css`width: 100%;`}
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </Button>
             </div>
         </Backdrop>
     )

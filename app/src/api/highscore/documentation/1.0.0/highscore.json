@@ -20,7 +20,7 @@
                           "attributes": {
                             "type": "object",
                             "properties": {
-                              "username": {
+                              "nickname": {
                                 "type": "string"
                               },
                               "score": {
@@ -605,7 +605,7 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "username": {
+                            "nickname": {
                               "type": "string"
                             },
                             "score": {
@@ -1079,7 +1079,7 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "username": {
+                      "nickname": {
                         "type": "string"
                       },
                       "score": {
@@ -1115,7 +1115,7 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "username": {
+                            "nickname": {
                               "type": "string"
                             },
                             "score": {
@@ -1609,7 +1609,7 @@
                         "attributes": {
                           "type": "object",
                           "properties": {
-                            "username": {
+                            "nickname": {
                               "type": "string"
                             },
                             "score": {
@@ -2094,7 +2094,7 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "username": {
+                      "nickname": {
                         "type": "string"
                       },
                       "score": {

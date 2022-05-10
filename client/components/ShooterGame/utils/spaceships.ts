@@ -8,6 +8,7 @@ export type Sprite = {
 }
 
 export type Spaceship = {
+    key: string,
     sprite: Sprite,
     bullet: {
         frequency: number,
@@ -21,6 +22,7 @@ export type Spaceship = {
 
 export const spaceships: Spaceship [] = [
     {
+        key: "x-wing",
         sprite: {
             url: xwingImage.src
         },
@@ -36,6 +38,7 @@ export const spaceships: Spaceship [] = [
             : [new Vector(0.95, 0.5)]
     },
     {
+        key: "falcon",
         sprite: {
             url: falconImage.src
         },
@@ -52,6 +55,7 @@ export const spaceships: Spaceship [] = [
         ]
     },
     {
+        key: "enterprise",
         sprite: {
             url: enterpriseImage.src
         },
