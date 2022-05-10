@@ -16,9 +16,25 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
     const { mutate } = useSWRConfig()
     
     const [nickname, setNickname] = useState("")
+    const [errors, setErrors] = useState<Record<string, string>>({})
+
+    const validate = () => {
+        if (!nickname) {
+            setErrors({ nickname: "Required" })
+            return false
+        }
+
+        if (nickname.length > 20) {
+            setErrors({ nickname: "Max 20 characters" })
+            return false
+        }
+
+        setErrors({})
+        return true
+    }
 
     const handleSubmit = () => {
-        if (!nickname) {
+        if (!validate()) {
             return
         }
         fetch(getStrapiUrl("/api/highscores"), {
@@ -43,7 +59,6 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
             <div css={css`
                 max-width: 500px;
                 padding: 32px;
-                border: 1px solid #fff;
             `}>
                 <h1 css={css`
                     text-align: center;
@@ -55,12 +70,13 @@ function SubmitScoreModal({ score, spaceship, onClose }: {
                 <TextField
                     type="text"
                     placeholder="Enter Nickname..."
+                    error={errors.nickname}
                     value={nickname}
                     onChange={(event) => {
                         setNickname(event.currentTarget.value)
                     }}
                     css={css`
-                        width: 100%;
+                        width: 300px;
                         margin-bottom: 32px;
                     `}
                 />
