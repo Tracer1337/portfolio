@@ -41,4 +41,4 @@ function Gameplay({ spaceship, onDone }: {
     )
 }
 
-export default React.forwardRef(Gameplay)
+export default Gameplay
