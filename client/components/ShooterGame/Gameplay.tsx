@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useImperativeHandle, useRef } from "react"
+import { useRef } from "react"
 import { css } from "@emotion/react"
 import Spaceship, { SpaceshipRef } from "./Spaceship"
 import Scoreboard, { ScoreboardRef } from "./Scoreboard"
