@@ -27,11 +27,11 @@ const Spinner = styled.div`
             margin-right: 0;
         }
 
-        &:nth-child(1) {
+        &:nth-of-type(1) {
             animation-delay: -0.32s;
         }
 
-        &:nth-child(2) {
+        &:nth-of-type(2) {
             animation-delay: -0.16s;
         }
     }
