@@ -127,10 +127,17 @@ function IndexPage({ projects, skills }: IndexPageProps) {
                     </div>
                 </div>
             </Container>
-            <StartButton onClick={(event) => {
-                event.currentTarget.blur()
-                setIsGameOpen(true)
-            }}/>
+            <StartButton
+                onClick={(event) => {
+                    event.currentTarget.blur()
+                    setIsGameOpen(true)
+                }}
+                css={css`
+                    @media ${breakpoints.m} {
+                        display: none;
+                    }
+                `}
+            />
             {isGameOpen && (
                 <Suspense fallback={
                     <Backdrop><LoadingIndicator/></Backdrop>
