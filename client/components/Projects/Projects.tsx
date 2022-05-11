@@ -60,13 +60,11 @@ function Projects({ projects }: { projects: any[] }) {
                         alt={project.attributes.name}
                         width={180}
                         height={100}
+                        objectFit="cover"
                         data-shootable
                         css={css`
                             width: 11.25em;
                             height: 6.25em;
-                            & img {
-                                object-fit: cover;
-                            }
                         `}
                     />
                 </div>

@@ -4,7 +4,9 @@ const strapiAPIUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [new URL(strapiAPIUrl).hostname]
+    domains: [new URL(strapiAPIUrl).hostname],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   }
 }
 

@@ -3,6 +3,7 @@ import { css, keyframes } from "@emotion/react"
 import Icon from "@mdi/react"
 import { mdiArrowUpThin } from '@mdi/js'
 import Backdrop from "@components/Backdrop"
+import Image from "@components/Image"
 import { useSelection } from "./utils/selection"
 import { spaceships } from "./utils/spaceships"
 
@@ -27,21 +28,17 @@ function SpaceshipSelector({ onSelect }: {
         `}>
             <div css={css`display: flex;`}>
                 {spaceships.map((spaceship, i) => (
-                    <div key={i} css={css`
-                        width: 250px;
-                        height: 250px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 16px;
-                        margin: 8px;
-                    `}>
-                        <img
+                    <div css={css`padding: 16px; margin: 8px`}>
+                        <Image
+                            key={i}
                             src={spaceship.sprite.url}
-                            alt="Sprite"
+                            alt={spaceship.key}
+                            layout="fill"
+                            objectFit="contain"
                             css={css`
-                                max-width: 100%;
-                                max-height: 100%;
+                                width: 250px;
+                                height: 250px;
+                                position: relative;
                             `}
                         />
                     </div>

@@ -4,6 +4,7 @@ import useSWR from "swr"
 import { css } from "@emotion/react"
 import Backdrop from "@components/Backdrop"
 import Button from "@components/Button"
+import Image from "@components/Image"
 import LoadingIndicator from "@components/LoadingIndicator"
 import { getSpaceshipByKey } from "./utils/spaceships"
 import { fetchAPI } from "@lib/api"
@@ -31,24 +32,19 @@ function Item({ highscore, index }: {
                 <h3 css={css`margin-right: 24px;`}>
                     {highscore.attributes.score}
                 </h3>
-                <div css={css`
-                    width: 40px;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                `}>
-                    {spaceship && (
-                        <img
-                            src={spaceship.sprite.url}
-                            alt={spaceship.key}
-                            css={css`
-                                max-width: 100%;
-                                max-height: 100%;
-                            `}
-                        />
-                    )}
-                </div>
+                {spaceship && (
+                    <Image
+                        src={spaceship.sprite.url}
+                        alt={spaceship.key}
+                        layout="fill"
+                        objectFit="contain"
+                        css={css`
+                            width: 40px;
+                            height: 40px;
+                            position: relative;
+                        `}
+                    />
+                )}
             </div>
         </div>
     )

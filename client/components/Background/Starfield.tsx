@@ -15,12 +15,8 @@ function Starfield(
             alt="Starfield"
             layout="fill"
             className={className}
-            css={css`
-                height: 100%;
-                & img {
-                    object-fit: cover;
-                }
-            `}
+            objectFit="cover"
+            css={css`height: 100%;`}
         />
     )
 }

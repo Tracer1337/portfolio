@@ -1,6 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React, { useCallback, useEffect, useImperativeHandle, useRef } from "react"
+import React, {
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+    useRef
+} from "react"
 import { css } from "@emotion/react"
+import Image from "@components/Image"
 import { ScoreboardRef } from "./Scoreboard"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
 import { useBulletManager } from "./utils/bullet"
@@ -65,16 +71,18 @@ function Spaceship(
     }))
     
     return (
-        <img
+        <Image
             ref={spriteRef}
             src={spaceship.sprite.url}
             alt="Spaceship"
+            layout="fill"
+            objectFit="contain"
             css={css`
+                width: 100px;
+                height: 100px;
                 position: absolute;
                 top: 0;
                 left: 0;
-                max-width: 100px;
-                max-height: 100px;
             `}
         />
     )
