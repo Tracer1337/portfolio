@@ -7,8 +7,8 @@ import { setListeners } from "@lib/events"
 
 const INITIAL_VEL = 3
 const DRAG = 0.007
-const SPEED = 14 / 1000
-const ROTATION_SPEED = 5 / 10
+const SPEED = 15 / 1000
+const ROTATION_SPEED = 4.5 / 10
 const SCROLL_MARGIN = 0.25
 const SCROLL_VELOCITY_THRESHOLD = 0.05
 

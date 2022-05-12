@@ -27,7 +27,7 @@ export const spaceships: Spaceship [] = [
             url: xwingImage.src
         },
         bullet: {
-            frequency: 16,
+            frequency: 20,
             color: "red",
             length: 10,
             damage: 2,
@@ -47,7 +47,7 @@ export const spaceships: Spaceship [] = [
             color: "red",
             length: 15,
             damage: 2,
-            pierce: 2
+            pierce: 3
         },
         getBulletOrigins: () => [
             new Vector(0.47, 0.5),
@@ -63,7 +63,7 @@ export const spaceships: Spaceship [] = [
             frequency: 1,
             color: "#29b6f6",
             length: 30,
-            damage: 20,
+            damage: 30,
             pierce: Infinity
         },
         getBulletOrigins: () => [new Vector(0.5, 0)]
