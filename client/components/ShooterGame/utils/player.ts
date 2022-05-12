@@ -87,7 +87,7 @@ export function usePlayerControls({
             `
 
             if (isShootKeyPressed) {
-                bulletManager?.requestBullet({ currentTime, pos, dir, vel })
+                bulletManager?.request({ currentTime, pos, dir, vel })
             }
         }
 

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import Vector from "victor"
 import type { Bullet } from "./bullet"
 import type { ScoreManager } from "./score"
 import { useImagePreload } from "@lib/preload"
+import { Raycaster, Wall } from "./raycaster"
 import explosionImage from "@assets/explosion.gif"
+import { UpdateFunction } from "./game"
 
 const SHOOTABLE_ATTR = "data-shootable"
 const DESTROYED_ATTR = "data-destroyed"
@@ -15,12 +18,20 @@ const HEALTHBAR_TRANSITION_DURATION = 200
 const HEALTHBAR_ON_SCREEN_DURATION = 500
 
 export type TargetManager = {
-    detect(bullet: Bullet): boolean,
+    update: UpdateFunction,
+    scheduleHit: (
+        target: Target,
+        bullet: Bullet,
+        dist: number
+    ) => void,
+    getTargetFromWall: (wall: Wall) => Target | undefined,
     destroy: () => void
 }
 
 export type Target = {
     element: Element,
+    pos: Vector,
+    dim: Vector,
     initialHealth: number,
     health: number,
     healthbar: HTMLDivElement,
@@ -29,8 +40,9 @@ export type Target = {
     isDestroyed: boolean
 }
 
-export function useTargetManager({ scoreManager }: {
-    scoreManager?: ScoreManager
+export function useTargetManager({ scoreManager, raycaster }: {
+    scoreManager?: ScoreManager,
+    raycaster?: Raycaster
 }) {
     const [targetManager, setTargetManager] = useState<TargetManager>()
 
@@ -44,6 +56,9 @@ export function useTargetManager({ scoreManager }: {
         
             const rect = element.getBoundingClientRect()
 
+            const pos = new Vector(rect.x + window.scrollX, rect.y + window.scrollY)
+            const dim = new Vector(rect.width, rect.height)
+
             const healthbarWidth = health * HEALTHBAR_HEALTH_WIDTH
         
             const healthbar = document.createElement("div")
@@ -55,8 +70,8 @@ export function useTargetManager({ scoreManager }: {
             healthbar.style.position = "absolute"
             healthbar.style.top = "0"
             healthbar.style.transform = `translate(
-                ${rect.x + rect.width / 2 - healthbarWidth / 2 + window.scrollX}px,
-                ${rect.y + rect.height + window.scrollY}px
+                ${pos.x + rect.width / 2 - healthbarWidth / 2}px,
+                ${pos.y + rect.height}px
             )`
 
             const healthbarIndicator = document.createElement("div")
@@ -70,6 +85,8 @@ export function useTargetManager({ scoreManager }: {
         
             return {
                 element,
+                pos,
+                dim,
                 initialHealth: health,
                 health,
                 healthbar,
@@ -87,7 +104,35 @@ export function useTargetManager({ scoreManager }: {
                 createTarget(element)
             ))
 
-        const hits = new Map<Bullet, Set<Target>>()
+        const walls = new Map<Wall, Target>()
+
+        targets.forEach((target) => {
+            const { x, y, width, height } = target.element.getBoundingClientRect()
+            walls.set({
+                a: new Vector(x, y),
+                b: new Vector(x + width, y)
+            }, target)
+            walls.set({
+                a: new Vector(x + width, y),
+                b: new Vector(x + width, y + height)
+            }, target)
+            walls.set({
+                a: new Vector(x + width, y + height),
+                b: new Vector(x, y + height)
+            }, target)
+            walls.set({
+                a: new Vector(x, y + height),
+                b: new Vector(x, y)
+            }, target)
+        })
+
+        raycaster?.setWalls(Array.from(walls.keys()))
+
+        const scheduledHits: {
+            bullet: Bullet,
+            target: Target,
+            dist: number
+        }[] = []
 
         const createExplosion = (target: Target) => {
             return new Promise<HTMLImageElement>((resolve) => {
@@ -139,42 +184,19 @@ export function useTargetManager({ scoreManager }: {
         }
 
         const hit = (target: Target, bullet: Bullet) => {
+            if (target.isDestroyed) return
             drawHealth(target, bullet.damage)
             if (target.health <= 0) {
                 destroyTarget(target)
             }
         }
 
-        const detect: TargetManager["detect"] = (bullet) => {            
-            const { pos } = bullet
-
-            if (!hits.has(bullet)) {
-                hits.set(bullet, new Set())
-            }
-
-            for (let target of Array.from(targets.values())) {
-                if (
-                    target.isDestroyed ||
-                    hits.get(bullet)!.has(target)
-                ) {
-                    continue
-                }
-
-                const rect = target.element.getBoundingClientRect()
-                const x = rect.x + window.scrollX
-                const y = rect.y + window.scrollY
-
-                if (
-                    pos.x >= x && pos.x <= x + rect.width &&
-                    pos.y >= y && pos.y <= y + rect.height
-                ) {
-                    hits.get(bullet)!.add(target)
-                    hit(target, bullet)
-                    return true
-                }
-            }
-
-            return false
+        const scheduleHit: TargetManager["scheduleHit"] = (
+            target,
+            bullet,
+            dist
+        ) => {
+            scheduledHits.push({ bullet, target, dist })
         }
 
         const destroy: TargetManager["destroy"] = () => {
@@ -186,7 +208,26 @@ export function useTargetManager({ scoreManager }: {
             })
         }
 
-        setTargetManager({ detect, destroy })
+        const update: UpdateFunction = ({ deltaTime }) => {
+            for (let i = scheduledHits.length - 1; i >= 0; i--) {
+                const { target, bullet } = scheduledHits[i]
+                scheduledHits[i].dist -= bullet.vel
+                    .clone()
+                    .multiplyScalar(deltaTime)
+                    .magnitude()
+                if (scheduledHits[i].dist <= 0) {
+                    scheduledHits.splice(i, 1)
+                    hit(target, bullet)
+                }
+            }
+        }
+
+        setTargetManager({
+            update,
+            destroy,
+            scheduleHit,
+            getTargetFromWall: walls.get.bind(walls)
+        })
 
         return destroy
     }, [scoreManager])

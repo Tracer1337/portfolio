@@ -28,7 +28,7 @@ function SpaceshipSelector({ onSelect }: {
         `}>
             <div css={css`display: flex;`}>
                 {spaceships.map((spaceship, i) => (
-                    <div css={css`padding: 16px; margin: 8px`}>
+                    <div key={i} css={css`padding: 16px; margin: 8px`}>
                         <Image
                             key={i}
                             src={spaceship.sprite.url}

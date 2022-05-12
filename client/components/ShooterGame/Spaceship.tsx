@@ -14,6 +14,7 @@ import { usePlayerControls } from "./utils/player"
 import { UpdateFunction, useGameLoop } from "./utils/game"
 import { useTargetManager } from "./utils/target"
 import { useScoreManager } from "./utils/score"
+import { useRaycaster } from "./utils/raycaster"
 
 export type SpaceshipRef = {
     getScore: () => number,
@@ -34,14 +35,18 @@ function Spaceship(
         scoreboardRef
     })
 
+    const raycaster = useRaycaster()
+
     const targetManager = useTargetManager({
-        scoreManager
+        scoreManager,
+        raycaster
     })
 
     const bulletManager = useBulletManager({
         spaceship,
         spriteRef,
-        targetManager
+        targetManager,
+        raycaster
     })
 
     const playerControls = usePlayerControls({
@@ -53,6 +58,7 @@ function Spaceship(
         if (!isRunning.current) return
         playerControls?.update?.(args)
         bulletManager?.update?.(args)
+        targetManager?.update(args)
     }, [playerControls, bulletManager])
     
     useGameLoop(update)
