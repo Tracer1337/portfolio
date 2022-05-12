@@ -1,84 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import React, {
-    useCallback,
-    useEffect,
-    useImperativeHandle,
-    useRef
-} from "react"
+import React from "react"
 import { css } from "@emotion/react"
 import Image from "@components/Image"
-import { ScoreboardRef } from "./Scoreboard"
 import { Spaceship as SpaceshipType } from "./utils/spaceships"
-import { useBulletManager } from "./utils/bullet"
-import { usePlayerControls } from "./utils/player"
-import { UpdateFunction, useGameLoop } from "./utils/game"
-import { useTargetManager } from "./utils/target"
-import { useScoreManager } from "./utils/score"
-import { useRaycaster } from "./utils/raycaster"
-
-export type SpaceshipRef = {
-    getScore: () => number,
-    destroy: () => void
-}
 
 function Spaceship(
-    { spaceship, scoreboardRef }: {
-        spaceship: SpaceshipType,
-        scoreboardRef: React.RefObject<ScoreboardRef>
-    },
-    ref: React.ForwardedRef<SpaceshipRef>
-) {
-    const spriteRef = useRef<HTMLImageElement>(null)
-    const isRunning = useRef(true)
-
-    const scoreManager = useScoreManager({
-        scoreboardRef
-    })
-
-    const raycaster = useRaycaster()
-
-    const targetManager = useTargetManager({
-        scoreManager,
-        raycaster
-    })
-
-    const bulletManager = useBulletManager({
-        spaceship,
-        spriteRef,
-        targetManager,
-        raycaster
-    })
-
-    const playerControls = usePlayerControls({
-        spriteRef,
-        bulletManager
-    })
-
-    const update = useCallback<UpdateFunction>((args) => {
-        if (!isRunning.current) return
-        playerControls?.update?.(args)
-        bulletManager?.update?.(args)
-        targetManager?.update(args)
-    }, [playerControls, bulletManager])
-    
-    useGameLoop(update)
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
-
-    useImperativeHandle(ref, () => ({
-        getScore: () => scoreManager?.getScore() || 0,
-        destroy: () => {
-            isRunning.current = false
-            targetManager?.destroy()
-            bulletManager?.destroy()
-        }
-    }))
-    
+    { spaceship }: { spaceship: SpaceshipType },
+    ref: React.ForwardedRef<HTMLImageElement>
+) { 
     return (
         <Image
-            ref={spriteRef}
+            ref={ref}
             src={spaceship.sprite.url}
             alt="Spaceship"
             layout="fill"

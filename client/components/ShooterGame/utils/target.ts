@@ -200,6 +200,7 @@ export function useTargetManager({ scoreManager, raycaster }: {
         }
 
         const destroy: TargetManager["destroy"] = () => {
+            scheduledHits.length = 0
             targets.forEach((target) => {
                 target.element.removeAttribute(DESTROYED_ATTR)
                 try {
